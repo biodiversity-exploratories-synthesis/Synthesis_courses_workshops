@@ -21,7 +21,7 @@ setwd("N:/R/2018_Intro_stats/")
 ##### Data exploration #####
 #read arthropod - plant dataset
 #dat <- read.xlsx("Datasets_StatCourse/Plant_herb_carn/04_SEMData_2008.xlsx", sheetName="2008") #if you want to read directly the xlsx
-dat <- read.csv("Datasets_StatCourse/Plant_herb_carn/04_SEMData_2008.csv", h=T, sep=";")
+dat <- read.table("Datasets_StatCourse/Plant_herb_carn/04_SEMData_2008.txt", h=T, sep=";")
 
 #have a look at the data
 dim(dat)
