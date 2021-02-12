@@ -107,7 +107,7 @@ example$abundance
 #
 # good names reduce comments
 time_tolerance <- 60 # seconds
-60 <- time_tolerance_in_seconds
+time_tolerance_in_seconds <- 60
 
 
 ###
