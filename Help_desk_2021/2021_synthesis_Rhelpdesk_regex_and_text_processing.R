@@ -19,6 +19,7 @@
 # install.packages("stringr")
 require(stringr)
 
+
 ###
 # REGULAR EXPRESSIONS
 x <- c("why", "video", "cross", "extra", "deal", "authority")
@@ -74,4 +75,9 @@ str_match_all(text2, "here.{1,40}there") # gives you the line of  all occurrence
 str_match_all(text2, "here.{1,40}there|there{1,40}here")
 
 
-
+x <- c("species 1 (*), species 2 (**), c, d, e")
+y <- str_split(x, ",")
+y <- y[[1]]
+str_split("species 1 (*)", "\\(")
+#TODO escape character
+data.table::data.table(first_column = y)
