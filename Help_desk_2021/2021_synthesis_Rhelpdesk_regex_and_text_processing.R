@@ -20,6 +20,7 @@
 require(stringr)
 
 
+
 ###
 # REGULAR EXPRESSIONS
 x <- c("why", "video", "cross", "extra", "deal", "authority")
