@@ -10,7 +10,7 @@
 # readability of your code.
 
 ###
-# EXAMPLE - KEEP IT SIMPLE!
+# EXAMPLE - KEEP IT SIMPLE!  ####
 #
 # bad example : all in one line
 info_data <- data.table::fread(paste(pathtodata, "/data_assembly/helper_data/info_data.csv", sep = ""), header=T)
@@ -22,9 +22,12 @@ info_data <- data.table::fread(
         sep = ""), 
   header=T)
 
+# add structure to your file ####
+# if you add four "#" in the end of the title, RStudio will allow
+#   you to fold in and out the section
 
 ###
-# EXAMPLE - COMMENT YOUR CODE
+# EXAMPLE - COMMENT YOUR CODE ####
 #
 # Bad example : comment the obvious
 # read table example.csv
@@ -36,7 +39,7 @@ info_data <- data.table::fread("example.csv", header = T)
 
 
 ###
-# EXAMPLE - PLAN YOUR PROGRAM
+# EXAMPLE - PLAN YOUR PROGRAM  ####
 #
 # Describe your problem and the steps you need to do to solve it.
 # Example problem : Plot a normal distribution with mean = 0 and sd = 1.
@@ -59,7 +62,7 @@ plot(x)
 
 
 ###
-# EXAMPLE - USE A CODE STYLE
+# EXAMPLE - USE A CODE STYLE  ####
 #
 # examples taken from tidyverse code style 
 # http://adv-r.had.co.nz/Style.html and https://style.tidyverse.org/syntax.html#long-lines
@@ -82,7 +85,7 @@ do_something_very_complicated("that", requires, many, arguments,
 
 
 ###
-# EXAMPLE - Test your code
+# EXAMPLE - Test your code  ####
 #
 # create example data.frame
 example <- data.frame(species = c("Erithacus rubecula", "Arion vulgaris", 
@@ -103,7 +106,7 @@ example$abundance
 
 
 ###
-# EXAMPLE - NAMING THINGS
+# EXAMPLE - NAMING THINGS  ####
 #
 # good names reduce comments
 time_tolerance <- 60 # seconds
@@ -111,7 +114,7 @@ time_tolerance_in_seconds <- 60
 
 
 ###
-# READ ERROR MESSAGES
+# READ ERROR MESSAGES  ####
 #
 # read the error messages
 x <- as.factor("A", "B", "C")
