@@ -8,6 +8,11 @@
 #
 # this file contains examples of practices to improve the
 # readability of your code.
+#
+# Dependencies : 
+#    The code in this script is not thought to be run, but rather
+#    serves as an example. Therefore, no in- and output is needed
+#    or generated.
 
 ###
 # EXAMPLE - KEEP IT SIMPLE!  ####
