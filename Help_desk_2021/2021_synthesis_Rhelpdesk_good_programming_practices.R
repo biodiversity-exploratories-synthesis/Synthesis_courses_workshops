@@ -14,22 +14,49 @@
 #    serves as an example. Therefore, no in- and output is needed
 #    or generated.
 
+library(data.table)
+library(reshape2)
+library(tidyr)
+
+path_to_data <- "example_data_synthesis_helpdesk/"
+path_to_output <- "R_outputs_and_plots/"
+
 ###
 # EXAMPLE - KEEP IT SIMPLE!  ####
 #
 # bad example : all in one line
-info_data <- data.table::fread(paste(pathtodata, "/data_assembly/helper_data/info_data.csv", sep = ""), header=T)
+info_data <- data.table::fread(paste(path_to_data, "/info_data.csv", sep = ""), header=T)
 #
 # good example : use many lines
 info_data <- data.table::fread(
-  paste(pathtodata, 
-        "/data_assembly/helper_data/info_data.csv", 
+  paste(path_to_data, 
+        "/info_data.csv", 
         sep = ""), 
   header=T)
 
 # add structure to your file ####
 # if you add four "#" in the end of the title, RStudio will allow
 #   you to fold in and out the section
+
+###
+# EXAMPLE - relative paths over absolute paths ####
+absolute_path <- "C:/user/yourname/Documents/Project1/Rscripts/data/info_data.csv"
+relative_path <- "/data/info_data.csv"
+
+# TRICK (Additional)
+# Abbreviations in paths:
+# "."  : refers to the folder where you are at the moment = the working directory
+# the below paths point to the same directory
+path_to_data <- "./example_data_synthesis_helpdesk/"
+path_to_data <- "example_data_synthesis_helpdesk/"
+# ".." : refers to the parent directory (1 level up) from where you are now (=from the working directory)
+#   given your path structure looks like this : 
+#   C:/user/yourname/Documents/PhD/Project1/Analysis/Rscripts/data/info_data.csv
+#   and your working directory is "Rscripts"
+#   both of the following path points to the folder "Analysis"
+path_to_data <- "../"
+path_to_data <- "C:/user/yourname/Documents/PhD/Project1/Analysis/"
+
 
 ###
 # EXAMPLE - COMMENT YOUR CODE ####
@@ -106,7 +133,7 @@ sum(is.na(example$species))
 min(example$abundance)        # min is 0 now, as expected
 max(example$abundance)
 View(example)
-plot(example)
+barplot(height = example$abundance, names.arg = example$species)
 example$abundance
 
 
@@ -127,3 +154,5 @@ help("as.factor")
 # the function encodes a vector, I gave the elements of a vector,
 #    not the vector itself.
 x <- as.factor(c("A", "B", "C"))
+
+
