@@ -21,6 +21,8 @@ library(tidyr)
 path_to_data <- "example_data_synthesis_helpdesk/"
 path_to_output <- "R_outputs_and_plots/"
 
+set.seed(12) # always generate the same random numbers, every time you run this script
+
 ###
 # EXAMPLE - KEEP IT SIMPLE!  ####
 #
@@ -74,24 +76,36 @@ info_data <- data.table::fread("example.csv", header = T)
 # EXAMPLE - PLAN YOUR PROGRAM  ####
 #
 # Describe your problem and the steps you need to do to solve it.
-# Example problem : Plot a normal distribution with mean = 0 and sd = 1.
+# Example problem : Plot samples from a normal distribution with mean = 0 and sd = 1.
 # Example planning : 
-#    - generate a normally distributed dataset with mean = 0 and sd = 1
-#        - search internet which function can generate normally distributed data
+#    - decide how many samples to take
+#    - generate samples from a normal distribution with mean = 0 and sd = 1
+#        - search internet which function can generate samples from normal distribution
 #        - look up help of this function in R
-#        - try out function
+#        - try out function with a small number of samples (e.g. 4)
 #        - make vector x with normally distributed data
 #    - make the plot
 #        - search internet which function to use for plotting
 #        - make title and axis labels
 
+# we will take 40 samples
 help(rnorm)
 rnorm(4, mean = 0, sd = 1)
 x <- rnorm(40, mean = 0, sd = 1) # first parameter : length of vector
 plot(x)
-# plot() just shows the data.points. Maybe a Histogram would fit better?
-#TODO plot histogram. 
+# Additional : 
+#    - evaluate your solution : are the points really from a normal distribution?
 
+# plot histogram to evaluate distribution
+hist(x) # looks reasonably normally distributed
+# take mean and sd to compare with what was given (mean = 0 and sd = 1)
+mean(x) # is around 0
+sd(x)   # is around 1
+
+# please note : rnorm will generate different samples every time, that means
+#  the plots, mean and sd will look different every time.
+#  If you wish to get the same results every time, you can "set a seed" with the
+#  function set.seed().
 
 ###
 # EXAMPLE - USE A CODE STYLE  ####
