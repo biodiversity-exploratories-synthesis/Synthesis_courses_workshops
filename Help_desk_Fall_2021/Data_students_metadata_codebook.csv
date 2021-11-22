@@ -1,0 +1,49 @@
+Variable,Description
+EP_PlotID,Name of the plot
+Grazing,Grazing intensity
+Mowing,Mowing intensity
+Fertilization,Fertilization intensity
+Plant,Plant diversity
+Plant_SLA,Plant Surface Leaf Area
+Plant_N,Plant N content
+Plant_P,Plant P content
+Lichen,Lichen diversity
+Moss,Moss diversity
+Arth_Herb,Arthropod herbivore diversity
+Arth_Omni,Arthropod omnivore diversity
+Arth_Pollin,Arthropod pollinator diversity
+Arth_Carniv,Arthropodcarnivore diversity
+Arth_Decom,Arthropod decomposer diversity
+Below_Pred,Belowground predator diversity (invertebrate)
+Below_Decom,Belowground decomposer diversity (invertebrate)
+Fungi_Decom,Fungi decomposer diversity
+Fungi_Pathog,Fungi pathogen diversity
+Fungi_Symb,Fungi symbiont diversity
+Fungi_Other,Fungi other group diversity
+Protist_Bact,Protist bacterivore diversity
+Protist_Euka,Protist eukarivore diversity
+Protist_Omni,Protist omnivore diversity
+Protist_Paras,Protist parasite diversity
+Bacteria,Bacteria diversity
+Soil_C,Soil C stock
+Soil_OrgC,Soil organic C stock
+Soil_N,Soil N stock
+Soil_P,Soil P stock
+Plant_Aerial_Biom,Plant aerial biomass
+Plant_Root_Biom,Plant root biomass
+Water_Recharge,Soil water recharge
+Pot_Nitrification,Soil potential nitrification
+Retention_N,Soil N retention
+Retention_P,Soil P retention
+Litter_Decomp,Litter decomposition
+Root_Decomp,Root decomposition
+Dung_Removal,Dung removal
+Seed_Removal,Seed removal
+Herbivory_Rate,Herbivory rate
+Mycorrhization_Rate,Mycorrhization rate
+Parasitoid_Rate,Parasitoid rate
+Pollination_Rate,Pollination rate
+Pathogen_Rate,Pathogen rate
+C_Flux,Soil C flux
+Nitrate_Flux,Soil Nitrate flux
+Ammonia_Flux,Soil Ammonia flux
