@@ -17,6 +17,7 @@
 library(data.table)
 library(reshape2)
 library(tidyr)
+library(styler)
 
 path_to_data <- "example_data_synthesis_helpdesk/"
 path_to_output <- "R_outputs_and_plots/"
@@ -107,6 +108,8 @@ sd(x)   # is around 1
 #  If you wish to get the same results every time, you can "set a seed" with the
 #  function set.seed().
 
+
+
 ###
 # EXAMPLE - USE A CODE STYLE  ####
 #
@@ -128,6 +131,13 @@ do_something_very_complicated(
 do_something_very_complicated("that", requires, many, arguments,
                               "some of which may be long"
 )
+
+# Example use of styler with RStudio
+# 1. copy bad example from above
+# 2. Select the piece of code you wish to style
+# 3. Go to RStudio Menu bar above > Addins > search for "styler" > click "Style selection"
+average<-mean(feet/12+inches,na.rm=TRUE)
+OneFile <- c(1,2,3) # styler does not correct variable names in CamelCase
 
 
 ###
