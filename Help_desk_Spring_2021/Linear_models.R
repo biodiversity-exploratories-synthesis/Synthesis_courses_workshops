@@ -8,22 +8,21 @@
 
 install.packages(c("ggplot2", "MASS", "effects", "car", "corrplot", "GGally"))
 
-library(xlsx)
 library(corrplot)
 library(car)
 library(GGally)
 library(effects)
 
-#TODO change to relative path according to GitHub folder structure
-setwd("N:/Users/Caterina/Dropbox/2018_Intro_stats/")
-setwd("N:/R/2018_Intro_stats/")
-
+# The folder structure is assumed to be identical to the folder structure in GitHub,
+#  see https://github.com/biodiversity-exploratories-synthesis/Synthesis_courses_workshops
+#  the required dataset is saved in the same folder as this script.
+getwd() # double-check if your working directory is where you expect it to be 
+        #  --> wherever you store this script and the according dataset.
+setwd("Help_desk_Fall_2021/")
 
 ##### Data exploration #####
 #read arthropod - plant dataset
-#dat <- read.xlsx("Datasets_StatCourse/Plant_herb_carn/04_SEMData_2008.xlsx", sheetName="2008") #if you want to read directly the xlsx
-dat <- read.table("Datasets_StatCourse/Plant_herb_carn/04_SEMData_2008.txt", h=T, sep=";")
-#TODO adapt file name and path
+dat <- read.table("example_data_linear_models.txt", h=T, sep="\t")
 
 #have a look at the data
 dim(dat)
@@ -31,10 +30,21 @@ names(dat)
 head(dat)
 summary(dat)
 
+# check data types in the data
+str(dat)
+# 3 columns are characters, but should be factors
+# region
 #recode the regions names (to avoid problems with special characters)
-class(dat$Region) #it's a factor
-levels(dat$Region)
+dat$Region <- sub("Schwäbische Alb", "ALB", dat$Region)
+dat$Region <- sub("Schorfheide-Chorin", "SCH", dat$Region)
+dat$Region <- sub("Hainich-Dün", "HAI", dat$Region)
+class(dat$Region) #it's a character
+dat$Region <- as.factor(dat$Region) # convert to factor
 levels(dat$Region) <- c("HAI", "SCH", "ALB")
+# PlotID
+dat$PlotID <- as.factor(dat$PlotID)
+# Lifestock
+dat$Lifestock <- as.factor(dat$Lifestock)
 
 #explore the dataset with simple plots
 plot(dat$Region)
@@ -60,7 +70,7 @@ dim(dat) #one plot less
 plot(Plant_SpeciesRichness~Fertilization, data=dat)
 
 #two categorical variables
-plot(dat$Region,dat$Lifestock)
+plot(dat$Region, dat$Lifestock)
 
 #one categorical, one numerical variable
 plot(Plant_SpeciesRichness~Region, data=dat)
@@ -131,14 +141,20 @@ predict(mod0, interval="confidence")
 #### Check model assumptions ####
 hist(residuals(mod0))
 shapiro.test(residuals(mod0))
-
+# interpretation of p-values form shapiro.test : 
+# p > 0.05 : data distribution does not differ from normality
+#   --> assume normality.
+# p < 0.05 : deviance from normality --> don't assume normality
+# http://www.sthda.com/english/wiki/normality-test-in-r
 qqnorm(residuals(mod0))
 qqline(residuals(mod0))
 
 par(mfrow=c(2,2)) #with this all graphs will be in the same plot (see plot course on Friday)
 plot(mod0)
+dev.off() # make plots disappear and have graphs in their own's windows again
+
 #influential Observations, Cook's D plot - identify D values > 4/(n-k-1) 
-cutoff <- 4/((nrow(dat)-length(mod0$coefficients)-2)) 
+cutoff <- 4/((nrow(dat)-length(mod0$coefficients)-2)) # cutoff at 0.03361345
 plot(mod0, which=4, cook.levels=cutoff)
 
 #### Transformation of the response variable ####
