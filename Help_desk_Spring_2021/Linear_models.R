@@ -6,7 +6,7 @@
 ## Long version                  ##
 ###################################
 
-install.packages(c("ggplot2", "xlsx", "MASS", "effects", "car", "corrplot", "GGally"))
+install.packages(c("ggplot2", "MASS", "effects", "car", "corrplot", "GGally"))
 
 library(xlsx)
 library(corrplot)
@@ -14,6 +14,7 @@ library(car)
 library(GGally)
 library(effects)
 
+#TODO change to relative path according to GitHub folder structure
 setwd("N:/Users/Caterina/Dropbox/2018_Intro_stats/")
 setwd("N:/R/2018_Intro_stats/")
 
@@ -22,6 +23,7 @@ setwd("N:/R/2018_Intro_stats/")
 #read arthropod - plant dataset
 #dat <- read.xlsx("Datasets_StatCourse/Plant_herb_carn/04_SEMData_2008.xlsx", sheetName="2008") #if you want to read directly the xlsx
 dat <- read.table("Datasets_StatCourse/Plant_herb_carn/04_SEMData_2008.txt", h=T, sep=";")
+#TODO adapt file name and path
 
 #have a look at the data
 dim(dat)
