@@ -19,3 +19,12 @@ The following files are provided :
 | material to come : Lecture on linear models, example data for linear models | data analysis  | , by Caterina Penone                                         | Lecture<br />pdf         |
 | example_data_linear_models.txt                               | data analysis  | Example data to work with the script Lienar_models.R<br />Renamed data : 04_SEMData_2008.txt | data<br />txt            |
 |                                                              |                |                                                              |                          |
+
+
+## Resources
+Random collection of nice references shared during the course.
+
+### p-values
+During the linear models session, we discussed about p-values and a participant shared this interesting links with us (Thanks Johannes):
+- Paper describing cases where relying on the p-value led to irreproducible results : Nature Methods, 2015 https://www.nature.com/articles/nmeth.3288/ 
+- Great overview paper introducing into a special issue with 43 innovative and thought-provoking papers from forward-looking statisticians. Moving to a World Beyond “p < 0.05” R. L. Wasserstein, A. L. Schirm and N. A. Lazar The American Statistician 2019 Vol. 73 Issue sup1 Pages 1-19 DOI: 10.1080/00031305.2019.1583913 https://doi.org/10.1080/00031305.2019.1583913 
