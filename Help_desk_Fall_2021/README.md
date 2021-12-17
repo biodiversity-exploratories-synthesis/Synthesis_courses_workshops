@@ -28,3 +28,5 @@ Random collection of nice references shared during the course.
 During the linear models session, we discussed about p-values and a participant shared this interesting links with us (Thanks Johannes):
 - Paper describing cases where relying on the p-value led to irreproducible results : Nature Methods, 2015 https://www.nature.com/articles/nmeth.3288/ 
 - Great overview paper introducing into a special issue with 43 innovative and thought-provoking papers from forward-looking statisticians. Moving to a World Beyond “p < 0.05” R. L. Wasserstein, A. L. Schirm and N. A. Lazar The American Statistician 2019 Vol. 73 Issue sup1 Pages 1-19 DOI: 10.1080/00031305.2019.1583913 https://doi.org/10.1080/00031305.2019.1583913 
+- Muff 2021 : Rewriting results sections in the language of evidence, https://doi.org/10.1016/j.tree.2021.10.009
+- Goodman 2008 : A Dirty Dozen: Twelve P-Value Misconceptions, doi:10.1053/j.seminhematol.2008.
