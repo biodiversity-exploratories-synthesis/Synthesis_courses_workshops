@@ -22,7 +22,7 @@ setwd("Help_desk_Fall_2021/")
 
 ##### Data exploration #####
 #read arthropod - plant dataset
-dat <- read.table("example_data_linear_models.txt", h=T, sep="\t")
+dat <- read.table("example_data_linear_models.txt", header = T, sep="\t")
 
 #have a look at the data
 dim(dat)
@@ -50,7 +50,7 @@ dat$Lifestock <- as.factor(dat$Lifestock)
 plot(dat$Region)
 hist(dat$Plant_SpeciesRichness)
 
-plot(Plant_SpeciesRichness~Grazing, data=dat)
+plot(Plant_SpeciesRichness ~ Grazing, data=dat)
 plot(Plant_SpeciesRichness~Herbivore_SpeciesRichness, data=dat)
 plot(Plant_SpeciesRichness~Mowing, data=dat)
 plot(Plant_SpeciesRichness~Fertilization, data=dat)
@@ -60,6 +60,7 @@ text(Plant_SpeciesRichness~Fertilization, data=dat, labels=PlotID, cex=0.7, pos=
 
 #check HEG01 in the dataset
 dat[dat$PlotID == "HEG01",]
+#TODO someting wrong here, HEG01 is from Schorfheide
 hist(dat$Fertilization)
 
 #it does not seem realistic, it is an outlier that we can probably remove
@@ -291,4 +292,3 @@ lines(newLUI_ALB$LUI, preds[ ,2], lty = 'dashed', col = 'red')
 #add observed and predicted dots
 points(preds$fit ~ newLUI_ALB$LUI, data= dat, col= "red")
 points(Plant_biomass~LUI, data=dat, col="blue")
-
