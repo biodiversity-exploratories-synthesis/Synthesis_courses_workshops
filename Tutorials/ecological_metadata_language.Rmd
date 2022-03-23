@@ -1,0 +1,48 @@
+# The EML R package
+
+## Aim
+create machine-readable metadata, using the Ecological Metadata Language.
+This package creates an .XML format metadata, which is machine-readable.
+
+For human-readability, it is convenient to convert the dataset to .HTML, e.g. with the online tool : https://codebeautify.org/xml-to-html-converter
+
+
+## Material
+- R package vignette : https://cran.r-project.org/web/packages/EML/EML.pdf
+- website with background information, recommended/ writte by developers : https://eml.ecoinformatics.org/
+- GitHub of package (with most recent information) : https://github.com/ropensci/EML
+- Tutorial to follow (EML Tutorial): https://nceas.github.io/oss-lessons/ecological-metadata/ecological-metadata.html
+
+- minimal tutorial on the `xml2` package : https://www.rstudio.com/blog/xml2/
+
+The citation abbreviation used in this document is given in brackets.
+
+## INSTALL PACKAGE
+*Note* on Ubuntu OS : non-zero exit status of the EML package installation : requires you to install the libjq-dev package (not within R, but within your operating system)
+```{r}
+# install.packages("EML")
+library(EML)
+```
+
+## Minimal example 
+Taken from the tutorial linked above (EML Tutorial).
+```{r}
+me <- list(individualName = list(givenName = "Carl", surName = "Boettiger"))
+my_eml <- list(dataset = list(
+              title = "A Minimal Valid EML Dataset",
+              creator = me,
+              contact = me)
+            )
+write_eml(my_eml, "ex.xml")
+eml_validate("ex.xml")
+```
+
+
+## read, navigate and visualise
+A xml file is not very easy to understand for humans (it's machine-readable). But in R, you can e.g. convert it to a list in order to read it more easily.
+```{r}
+# install.packages("xml2")
+library(xml2)
+f <- read_xml("ex.xml")
+as_list(f) # see that not all fields are filled.
+```
