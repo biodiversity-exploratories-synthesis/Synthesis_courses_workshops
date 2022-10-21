@@ -1,0 +1,31 @@
+---
+title: "Selected topics around GDM"
+author: "N. Schenk"
+date: "2022-10-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Generalised Dissimilarity Modelling (GDM)
+This file contains selected topics and frequently asked questions around GDMs.
+
+## Recommmended reading
+GDM Guide by Mokany 2022 DOI: 10.1111/geb.13459
+
+# Frequently asked questions
+
+## Y axis labelling
+How should the y-axis be labelled?
+
+There are different labels around, from very mathematical to more applied :
+- "f(explanatory variable)" (Mokany Guide and Ferrier 2007)
+- "partial ecological distance" (Fitzpatrick 2013, Fitzpatrick 2015)
+-"Effect on beta-diversity" (Gossner 2016)
+
+Personally recommended : last option, potentially "Partial effects on beta-diversity" because easiest to understand. 
+
+## Variance partitioning
+
