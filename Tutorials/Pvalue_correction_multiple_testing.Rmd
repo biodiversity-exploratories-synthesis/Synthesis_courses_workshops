@@ -10,6 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Correcting for multiple testing
+Aim of this document : summary of current recommendations for Ecology based on Literature and discussion within the Synthesis Team, and answers to questions around the topic that have been asked to the Synthesis helpdesk.
 
 ## Description of the problem
 If we work with a p-value threshold of 0.05, we are controlling for false positives. A p-value of 0.05 tells us : If there was no effect (H0 is true), the probability of observing our data (a value for the test statistic as extreme or more extreme than ours) is 5%. There is a 5% chance of observing data at least as extreme than ours, by chance alone. The idea of the p-value is to safeguards us from seeing an effect where there is actually none, it prevents us from assuming biological importance when there is actually none. These "wrong discoveries" are called type-I-errors. The p-value controls for the probability of type-I-errors.
