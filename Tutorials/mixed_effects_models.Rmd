@@ -19,8 +19,10 @@ This is not a real tutorial but rather a cheatsheet to quickly look up things yo
 Packages
 ```{r}
 library(nlme) # used in Zuur et al. primarily
+library(lme4) # other package for mixed effects models
 
 # helper packages
+library(car) # for qqPlot function
 library(emmeans) # copute contrats for multilevel factors
 library(ggeffects) # produce nice marginal plots
 library(sjPlot) # help with visualisations
@@ -31,22 +33,25 @@ library(glmmTMB) # required by sjPlot
 # remotes::install_github("romunov/AED")
 library(AED)
 
+# overview table
+tab1_compare_lme4_nlme <- read.table("table1_compare_lme4_nlme.csv", sep = ";", header = T, encoding = "UTF-8")
+# note, if this line does not work, try "Tutorials/..." as file name
 
-# Function for plotting residuals
-#
-# creates a Tukey-Anscombe plot and a QQPlot
-# Tukey-Anscombe-plot : check heterogeneity of residuals
-# QQPlot : check normality of residuals
-library(car)
-plotresid <- function(lmodel) {
-  # plots the residuals of a linear model; requires loading package car
-  par(mfrow = c(1, 2))
-  plot(fitted(lmodel), resid(lmodel), xlab = "Fitted values", ylab = "Residuals", 
-       main = "TA plot")
-  qqPlot(resid(lmodel), dist = "norm", mean = mean(resid(lmodel)), sd = sd(resid(lmodel)),
-         xlab = "Theoretical quantiles", ylab = "Empirical quantiles",
-         main = "Q-Q plot of residuals")
-}
+# # Function for plotting residuals
+# #
+# # creates a Tukey-Anscombe plot and a QQPlot
+# # Tukey-Anscombe-plot : check heterogeneity of residuals
+# # QQPlot : check normality of residuals
+# library(car)
+# plotresid <- function(lmodel) {
+#   # plots the residuals of a linear model; requires loading package car
+#   par(mfrow = c(1, 2))
+#   plot(fitted(lmodel), resid(lmodel), xlab = "Fitted values", ylab = "Residuals", 
+#        main = "TA plot")
+#   qqPlot(resid(lmodel), dist = "norm", mean = mean(resid(lmodel)), sd = sd(resid(lmodel)),
+#          xlab = "Theoretical quantiles", ylab = "Empirical quantiles",
+#          main = "Q-Q plot of residuals")
+# }
 
 ```
 
@@ -66,27 +71,9 @@ data("Machines") # from the nlme package
 
 # Packages
 
-+---+----------+-------+
-|   | lme4     | nlmer |
-|   |          |       |
-|   | lmerTest |       |
-+===+==========+=======+
-|   |          |       |
-+---+----------+-------+
-|   |          |       |
-+---+----------+-------+
-|   |          |       |
-+---+----------+-------+
-|   |          |       |
-+---+----------+-------+
-|   |          |       |
-+---+----------+-------+
-|   |          |       |
-+---+----------+-------+
-|   |          |       |
-+---+----------+-------+
-```{r}
-#TODO
+```{r, echo = F, results = "asis"}
+knitr::kable(tab1_compare_lme4_nlme, caption = "Note that the `&#124;` character is pipe |")
+#TODO check correct encoding of pipe for rmarkdown.
 ```
 
 
@@ -378,10 +365,14 @@ Often used transformations
 - if your response is far from normally distributed
 - if multiple problems arise during model validation
 ```{r}
-plotresid(Mlme1)
+qqPlot(resid(Mlme1), dist = "norm", mean = mean(resid(Mlme1)), sd = sd(resid(Mlme1)),
+         xlab = "Theoretical quantiles", ylab = "Empirical quantiles",
+         main = "Q-Q plot of residuals")
 # Solution : transformation of response variable
 Mlme1t <- lme(log(Richness + 6) ~ NAP, random = ~ 1 | Beach, data = RIKZ)
-plotresid(Mlme1t) # plots look way better
+qqPlot(resid(Mlme1t), dist = "norm", mean = mean(resid(Mlme1t)), sd = sd(resid(Mlme1t)),
+         xlab = "Theoretical quantiles", ylab = "Empirical quantiles",
+         main = "Q-Q plot of residuals") # plots look way better
 ```
 
 
@@ -436,9 +427,5 @@ sjPlot::plot_model(Mlme2, type = "pred", terms = c("NAP", "Exposure"))
 # plot all interactions with type = "int"
 sjPlot::plot_model(Mlme2, type = "int", terms = c("NAP", "Exposure"))
 ```
-
-
-
-
 
 
