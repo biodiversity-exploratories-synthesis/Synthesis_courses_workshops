@@ -128,23 +128,6 @@ machines.lme.2 <- lme(score ~ Machine, random = ~ 1 | Worker/Machine, data=Machi
 ```
 
 
-# Specific cases
-
-## Post-hoc tests for multilevel factors
-
-keywords : Omnibus test, contrasts, pairwise comparisons
-
-Aim : compare the levels of a factor pairwise. In the Machines example : which machine differs from which machine?
-```{r}
-library(nlme)
-library(emmeans)
-data("Machines") # from the nlme package
-machines.lme.1 <- lme(score ~ Machine, random = ~ 1 | Worker, data = Machines)
-emmeans(machines.lme.1, pairwise ~ Machine, adjust="bonferroni")
-library(ggeffects)
-ggpredict(machines.lme.1, c("Machine")) |> plot()
-```
-
 
 # Checking Assumptions
 It is crucial to check the model assumptions after fitting. Mixed effects model assumptions concern the error terms $\epsilon$ and the random effects $b_i$.
@@ -165,6 +148,7 @@ Assumptions on random effects : Random terms should be normally distributed with
 # check overall model fit
 plot(fitted(Mlme1), RIKZ$Richness)
 abline(0, 1)
+# ideal case : all points lie on the diagonal
 # comment : deviation in larger values. (The model fit is not good for large values.)
 
 # Homogeneity of residuals (Tukey-Anscombe Plot)
@@ -175,7 +159,9 @@ Fit <- fitted(Mlme1)
 # boxplot(Res ~ catvar, data = RIKZ, main = "catvar", ylab = "Residuals")
 # for continuous explanatory variables
 plot(x = RIKZ$NAP, y = Res, ylab = "Residuals", xlab = "NAP")
+abline(h = 0, lty="dotted")
 # note : do this for each explanatory variable
+# ideal case : all points are equally spread around the horizontal line. No pattern in the points or in the variance of the points visible.
 ```
 
 ## Check Assumptions on Error terms within groups
@@ -183,13 +169,15 @@ Plot residuals per group (per random effect group)
 ```{r}
 # is the mean == 0 and variance equal?
 boxplot(residuals(Mlme1) ~ RIKZ$Beach, ylab="Residuals")
-abline(h=0, lty="dotted")
+abline(h = 0, lty = "dotted")
 # note : do for each random term (i.e. for each group)
+# ideal case : all means are at 0 and the variance is the same for each group.
 ```
 
 Additional : Plot residuals against predicted values per random effect group.
 ```{r}
-plot(Mlme1, resid(.) ~ fitted(.) | Beach, grid=FALSE, abline=0, lty="dotted")
+plot(Mlme1, resid(.) ~ fitted(.) | Beach, grid = FALSE, abline = 0, lty = "dotted")
+# ideal case : no pattern of the points nor the variance of the points.
 ```
 
 Additional for hierarchical models (random intercept and slope): Plot residuals against each continuous explanatory variable per random effect combination.
@@ -203,6 +191,7 @@ QQPlot of the residuals across groups and within group.
 qqPlot(resid(Mlme1), dist = "norm", mean = mean(resid(Mlme1)), sd = sd(resid(Mlme1)),
          xlab = "Theoretical quantiles", ylab = "Empirical quantiles",
          main = "Q-Q plot of residuals")
+# ideal case : all points are near to the diagonal and within the blue shades
 
 # normality of residuals within group
 #  for Beach 1
@@ -220,12 +209,21 @@ qqPlot(resid(Mlme1)[RIKZ$Beach == 2], dist = "norm", mean = mean(resid(Mlme1)), 
 ## Check Assumptions on Random terms
 QQPlot of random intercepts on each level (if more than 1 random effect, see example below)
 ```{r}
-qqnorm(Mlme1, ~ ranef(.,level=1), main = "Level 1")
-# qqnorm(Mlme1, ~ ranef(.,level=2), main = "Level 2") # if more than 1 level of random effects
+# Do the levels of the given random effect come from the same normal distribution?
+qqPlot(ranef(Mlme1,level=1)[,1], dist = "norm",
+       mean = mean(resid(Mlme1)), sd = sd(resid(Mlme1)),
+         xlab = "Theoretical quantiles", ylab = "Empirical quantiles",
+         main = "Q-Q plot of across-group residuals")
+
+# if more than 1 level of random effects
+# qqPlot(ranef(Mlme1,level=2)[,1], dist = "norm",
+#        mean = mean(resid(Mlme1)), sd = sd(resid(Mlme1)),
+#          xlab = "Theoretical quantiles", ylab = "Empirical quantiles",
+#          main = "Q-Q plot of across-group residuals")
 ```
 
-Additional if >1 random effect : Plot random intercept on each level
-```{r, eval = F}
+Additional if >1 random effect : Plot random intercept on each level (TODO).
+```{r, eval = F, echo = F}
 #TODO
 # mean == 0 and equal variance
 re <- ranef(Mlme1, augFrame=TRUE)
@@ -243,88 +241,88 @@ main="Gruppierung nach Hafersorte"))
 abline(h=0, v=1:3, lty=’dotted’, col=’grey’)
 ```
 
-## TODO CLEAN Error term assumptions
-check constant variance (homoscedasicity) and mean = 0 across groups (across groups within the random effects)
-plot(Mlme1, Beach ~ residuals(.), abline=0)
+<!-- ## TODO CLEAN Error term assumptions -->
+<!-- check constant variance (homoscedasicity) and mean = 0 across groups (across groups within the random effects) -->
+<!-- plot(Mlme1, Beach ~ residuals(.), abline=0) -->
 
-- across groups : 
-    - check homogeneity of residuals : plot residuals against fitted values --> identify violation of homogeneity. Ideal case : points fluctuate randomly around a horizontal line through zero. Violation is indicated by differences in spread of the residuals, e.g. increase in spread for larger fitted values. Method : Tukey-anscombe Plot
-        - if spread increases with larger fitted values --> (i) apply transformation to response (ii) check if increase in spread is due to a covariate (iii) use generalised linear modelling (e.g. with poisson distr. for counts)
-        - Additional : plot residuals against each explanatory variable --> check for patterns in spread.
-            - if pattern is found : add more explanatory variables, interactions, quadratic terms, and if all that does not help: use additive mixed modelling
-    - Normality of residuals : all residuals within groups should come from the same normal distribution. Method : QQplot (graphic tools recommended, same as in linear models)
-
-
-- within groups : 
-    - Plot differences between observed and predicted values within groups. Method : boxplot or Tukey-Anscombe-Plot
-        - Additional : plot Residuals within groups against individual predicted values of a given group variable (e.g. if a variable is "gender", plot for "masculine", "feminine" and "diverse" separately).
+<!-- - across groups :  -->
+<!--     - check homogeneity of residuals : plot residuals against fitted values --> identify violation of homogeneity. Ideal case : points fluctuate randomly around a horizontal line through zero. Violation is indicated by differences in spread of the residuals, e.g. increase in spread for larger fitted values. Method : Tukey-anscombe Plot -->
+<!--         - if spread increases with larger fitted values --> (i) apply transformation to response (ii) check if increase in spread is due to a covariate (iii) use generalised linear modelling (e.g. with poisson distr. for counts) -->
+<!--         - Additional : plot residuals against each explanatory variable --> check for patterns in spread. -->
+<!--             - if pattern is found : add more explanatory variables, interactions, quadratic terms, and if all that does not help: use additive mixed modelling -->
+<!--     - Normality of residuals : all residuals within groups should come from the same normal distribution. Method : QQplot (graphic tools recommended, same as in linear models) -->
 
 
-
-
-
-```{r}
-# ACROSS GROUPS
-#
-# heterogeneity of residuals across groups
-plot(fitted(Mlme1), resid(Mlme1), xlab = "Fitted values", ylab = "Residuals", 
-       main = "TA plot")
-# Check residuals vs. explanatory
-plot(residuals(Mlme1), RIKZ$NAP)
-#
-# normality of residuals across groups
-qqPlot(resid(Mlme1), dist = "norm", mean = mean(resid(Mlme1)), sd = sd(resid(Mlme1)),
-         xlab = "Theoretical quantiles", ylab = "Empirical quantiles",
-         main = "Q-Q plot of residuals")
-# qqnorm(resid(Mlme1)) # alternative command
-# note that the assumptions are violated.
-
-
-# WITHIN GROUPS
-#
-# Plot differences between observed and predicted values within groups. Method : boxplot or Tukey-Anscombe-Plot
-# mean == 0 and equal variance
-re <- ranef(Mlme1, augFrame=TRUE)
-boxplot(re$`(Intercept)` ~ re$Sample)
-# continue for each random effect
-```
+<!-- - within groups :  -->
+<!--     - Plot differences between observed and predicted values within groups. Method : boxplot or Tukey-Anscombe-Plot -->
+<!--         - Additional : plot Residuals within groups against individual predicted values of a given group variable (e.g. if a variable is "gender", plot for "masculine", "feminine" and "diverse" separately). -->
 
 
 
 
 
-
-**Error term assumptions**
-
-- Compare observed and predicted values
-- Check normal distribution with QQplot
-- Check mean == 0 and constant variance with boxplot
-
-
-
-- for random effects : ...#TODO
-
-
-using the random intercept example from above, `Mlme1`
-```{r}
-# Random term assumptions
-#
-# Normality
-qqnorm(Mlme1t, ~ ranef(.))
-#
-# mean == 0 and equal variance
-re <- ranef(Mlme1, augFrame=TRUE)
-boxplot(re$`(Intercept)` ~ re$NAP)
-# continue for each random effect
+<!-- ```{r, eval = F} -->
+<!-- # ACROSS GROUPS -->
+<!-- # -->
+<!-- # heterogeneity of residuals across groups -->
+<!-- plot(fitted(Mlme1), resid(Mlme1), xlab = "Fitted values", ylab = "Residuals",  -->
+<!--        main = "TA plot") -->
+<!-- # Check residuals vs. explanatory -->
+<!-- plot(residuals(Mlme1), RIKZ$NAP) -->
+<!-- # -->
+<!-- # normality of residuals across groups -->
+<!-- qqPlot(resid(Mlme1), dist = "norm", mean = mean(resid(Mlme1)), sd = sd(resid(Mlme1)), -->
+<!--          xlab = "Theoretical quantiles", ylab = "Empirical quantiles", -->
+<!--          main = "Q-Q plot of residuals") -->
+<!-- # qqnorm(resid(Mlme1)) # alternative command -->
+<!-- # note that the assumptions are violated. -->
 
 
+<!-- # WITHIN GROUPS -->
+<!-- # -->
+<!-- # Plot differences between observed and predicted values within groups. Method : boxplot or Tukey-Anscombe-Plot -->
+<!-- # mean == 0 and equal variance -->
+<!-- re <- ranef(Mlme1, augFrame=TRUE) -->
+<!-- boxplot(re$`(Intercept)` ~ re$Sample) -->
+<!-- # continue for each random effect -->
+<!-- ``` -->
 
 
-# Solution : transformation of response variable
-Mlme1t <- lme(sqrt(Richness) ~ NAP, random = ~ 1 | Beach, data = RIKZ)
-plotresid(Mlme1t)
 
-```
+
+
+
+<!-- **Error term assumptions** -->
+
+<!-- - Compare observed and predicted values -->
+<!-- - Check normal distribution with QQplot -->
+<!-- - Check mean == 0 and constant variance with boxplot -->
+
+
+
+<!-- - for random effects : ...#TODO -->
+
+
+<!-- using the random intercept example from above, `Mlme1` -->
+<!-- ```{r, eval = F} -->
+<!-- # Random term assumptions -->
+<!-- # -->
+<!-- # Normality -->
+<!-- qqnorm(Mlme1, ~ ranef(.)) -->
+<!-- # -->
+<!-- # mean == 0 and equal variance -->
+<!-- re <- ranef(Mlme1, augFrame=TRUE) -->
+<!-- boxplot(re$`(Intercept)` ~ re$NAP) -->
+<!-- # continue for each random effect -->
+
+
+
+
+<!-- # Solution : transformation of response variable -->
+<!-- Mlme1t <- lme(sqrt(Richness) ~ NAP, random = ~ 1 | Beach, data = RIKZ) -->
+<!-- plotresid(Mlme1t) -->
+
+<!-- ``` -->
 
 
 
@@ -360,6 +358,27 @@ plotresid(Mlme1)
 Mlme1t <- lme(sqrt(Richness) ~ NAP, random = ~ 1 | Beach, data = RIKZ)
 plotresid(Mlme1t) # plots look way better
 ```
+
+
+
+
+# Specific cases
+
+## Post-hoc tests for multilevel factors
+
+keywords : Omnibus test, contrasts, pairwise comparisons
+
+Aim : compare the levels of a factor pairwise. In the Machines example : which machine differs from which machine?
+```{r}
+library(nlme)
+library(emmeans)
+data("Machines") # from the nlme package
+machines.lme.1 <- lme(score ~ Machine, random = ~ 1 | Worker, data = Machines)
+emmeans(machines.lme.1, pairwise ~ Machine, adjust="bonferroni")
+library(ggeffects)
+ggpredict(machines.lme.1, c("Machine")) |> plot()
+```
+
 
 
 # Plotting
