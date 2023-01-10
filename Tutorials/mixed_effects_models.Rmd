@@ -158,12 +158,24 @@ Assumptions on random effects : Random terms should be normally distributed with
 
 ## General model fit
 - check overall model fit : plot the observed against the predicted values of the given model. Ideal case : All points lie on the diagonal.
+- check homogeneity of residuals per (explanatory) variable. Ideal case : no pattern nor in points or in the variance.
+    - If pattern or pattern in spread : wrong model --> add more explanatory variables, interactions, quadratic terms or use additive mixed modelling
 
 ```{r}
 # check overall model fit
 plot(fitted(Mlme1), RIKZ$Richness)
 abline(0, 1)
 # comment : deviation in larger values. (The model fit is not good for large values.)
+
+# Homogeneity of residuals (Tukey-Anscombe Plot)
+# Check residual vs. individual explanatory variables
+Res <- resid(Mlme1, type = "normalized")
+Fit <- fitted(Mlme1)
+# for categorical explanatory variables (example invents a variable catvar)
+# boxplot(Res ~ catvar, data = RIKZ, main = "catvar", ylab = "Residuals")
+# for continuous explanatory variables
+plot(x = RIKZ$NAP, y = Res, ylab = "Residuals", xlab = "NAP")
+# note : do this for each explanatory variable
 ```
 
 ## Check Assumptions on Error terms within groups
@@ -175,7 +187,7 @@ abline(h=0, lty="dotted")
 # note : do for each random term (i.e. for each group)
 ```
 
-Plot residuals against predicted values per random effect group.
+Additional : Plot residuals against predicted values per random effect group.
 ```{r}
 plot(Mlme1, resid(.) ~ fitted(.) | Beach, grid=FALSE, abline=0, lty="dotted")
 ```
@@ -321,6 +333,33 @@ plotresid(Mlme1t)
 
 
 
+
+
+
+
+
+# Transformation
+If the assumption of homogeneity is violated, a transformation can help. Here, square root transformation. Remember to always check the model assumptions also after transformation (not only before).
+
+Often used transformations
+- logarithmic (base 2, sometimes base 10) --> small values close to each other are spread, large and spread values are brought closer together
+- square root
+- for explanatory variables : adding a quadratic term
+
+# Transformation of an explanatory variable
+- if the only or the dominant problem is non-linearity (independence, normality and equal variance is met)
+- if in a multiple model, only one of the explanatory variables has a non-linearity issue
+
+# Transformation of the response
+- if transformation of the explanatory variable does not help
+- if your response is far from normally distributed
+- if multiple problems arise during model validation
+```{r}
+plotresid(Mlme1)
+# Solution : transformation of response variable
+Mlme1t <- lme(sqrt(Richness) ~ NAP, random = ~ 1 | Beach, data = RIKZ)
+plotresid(Mlme1t) # plots look way better
+```
 
 
 # Plotting
