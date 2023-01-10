@@ -23,6 +23,8 @@ library(nlme) # used in Zuur et al. primarily
 # helper packages
 library(emmeans) # copute contrats for multilevel factors
 library(ggeffects) # produce nice marginal plots
+library(sjPlot) # help with visualisations
+library(glmmTMB) # required by sjPlot
 
 # AED is the package accompanying the Book from Zuur et al.
 # install.packages("remotes")
@@ -241,14 +243,37 @@ main="Gruppierung nach Hafersorte"))
 abline(h=0, v=1:3, lty=’dotted’, col=’grey’)
 ```
 
+## Minimal example
+The `sjPlot` package can be used to generate the most important diagnostic plots. Note that the last plot can only be done if the mixed effects model has been fitted with the `lme4` package!
+
+Please additionally create the plot for General model fit, to see if observed and predicted values correspond to each other (see above).
+```{r}
+Mlme1_lme4 <- lme4::lmer(Richness ~ NAP + (1 | Beach), data = RIKZ)
+
+# Is a lineaer model the right choice? Check if all coefficients are modelled well with a line. Plots the slopes (coefficients) of each predictor (=explanatory variable) against the response.
+# downside : does not show individual data points, but a blue line. Check if the blue line is within the red confidence intervals or if there is a deviation
+sjPlot::plot_model(Mlme1_lme4, type = "slope")
+
+# Check Tukey-Anscombe plot per predictor (downside: does not show individual points, as above)
+sjPlot::plot_model(Mlme1, type = "resid")
+
+# Checking the model assumptions
+sjPlot::plot_model(Mlme1, type = "diag") # (1) QQplot (2) similar to QQPlot (3) Tukey-Anscombe Plot
+
+# Plotting the random effects (only works for models from the lme4 package)
+# Do the residuals within random effect levels have the same variance and mean == 0?
+sjPlot::plot_model(Mlme1_lme4, type = "re")
+```
+
+
 <!-- ## TODO CLEAN Error term assumptions -->
 <!-- check constant variance (homoscedasicity) and mean = 0 across groups (across groups within the random effects) -->
 <!-- plot(Mlme1, Beach ~ residuals(.), abline=0) -->
 
 <!-- - across groups :  -->
-<!--     - check homogeneity of residuals : plot residuals against fitted values --> identify violation of homogeneity. Ideal case : points fluctuate randomly around a horizontal line through zero. Violation is indicated by differences in spread of the residuals, e.g. increase in spread for larger fitted values. Method : Tukey-anscombe Plot -->
-<!--         - if spread increases with larger fitted values --> (i) apply transformation to response (ii) check if increase in spread is due to a covariate (iii) use generalised linear modelling (e.g. with poisson distr. for counts) -->
-<!--         - Additional : plot residuals against each explanatory variable --> check for patterns in spread. -->
+<!--     - check homogeneity of residuals : plot residuals against fitted values -> identify violation of homogeneity. Ideal case : points fluctuate randomly around a horizontal line through zero. Violation is indicated by differences in spread of the residuals, e.g. increase in spread for larger fitted values. Method : Tukey-anscombe Plot -->
+<!--         - if spread increases with larger fitted values -> (i) apply transformation to response (ii) check if increase in spread is due to a covariate (iii) use generalised linear modelling (e.g. with poisson distr. for counts) -->
+<!--         - Additional : plot residuals against each explanatory variable -> check for patterns in spread. -->
 <!--             - if pattern is found : add more explanatory variables, interactions, quadratic terms, and if all that does not help: use additive mixed modelling -->
 <!--     - Normality of residuals : all residuals within groups should come from the same normal distribution. Method : QQplot (graphic tools recommended, same as in linear models) -->
 
@@ -355,7 +380,7 @@ Often used transformations
 ```{r}
 plotresid(Mlme1)
 # Solution : transformation of response variable
-Mlme1t <- lme(sqrt(Richness) ~ NAP, random = ~ 1 | Beach, data = RIKZ)
+Mlme1t <- lme(log(Richness + 6) ~ NAP, random = ~ 1 | Beach, data = RIKZ)
 plotresid(Mlme1t) # plots look way better
 ```
 
@@ -399,6 +424,18 @@ We were all very happy about this informations, and thought about writing them u
 ggpredict(machines.lme.1, c("Machine")) |> plot()
 ```
 
+With the `sjPlot` package, interactions can be plotted easily as well: 
+```{r}
+# fit a model with an interaction
+RIKZ$Exposure <- as.factor(RIKZ$Exposure)
+Mlme2 <- lme(Richness ~ NAP * Exposure, random = ~ 1 | Beach, data = RIKZ)
+summary(Mlme2)
+
+# plot a model with an interaction
+sjPlot::plot_model(Mlme2, type = "pred", terms = c("NAP", "Exposure"))
+# plot all interactions with type = "int"
+sjPlot::plot_model(Mlme2, type = "int", terms = c("NAP", "Exposure"))
+```
 
 
 
