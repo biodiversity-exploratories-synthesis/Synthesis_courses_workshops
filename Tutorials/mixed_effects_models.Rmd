@@ -1,0 +1,147 @@
+---
+title: "Mixed Effects Models Cheatsheet"
+author: "N. Schenk"
+date: "2022-11-17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Mixed Effects models
+
+## Aim
+
+This is not a real tutorial but rather a cheatsheet to quickly look up things you already learned but keep forgetting:)
+
+## dependencies
+Packages
+```{r}
+library(nlme) # used in Zuur et al. primarily
+
+# helper packages
+library(emmeans) # copute contrats for multilevel factors
+library(ggeffects) # produce nice marginal plots
+
+# AED is the package accompanying the Book from Zuur et al.
+# install.packages("remotes")
+# remotes::install_github("romunov/AED")
+library(AED)
+```
+
+Datasets
+```{r}
+data("RIKZ")     # from the AED package
+data("Machines") # from the nlme package
+```
+
+
+## Resources
+- Book : Zuur, A., Ieno, E. N., Walker, N., Saveliev, A. A., & Smith, G. M. (2009). Mixed effects models and extensions in ecology with R (2009th ed.). Springer.
+- nice Tutorial : https://ourcodingclub.github.io/tutorials/mixed-models/ (thanks Marta for finding)
+- Tutorial about factors (incl. mixed effects models) : http://courses.atlas.illinois.edu/spring2016/STAT/STAT200/RProgramming/RegressionFactors.html
+
+
+
+# Packages
+
++---+----------+-------+
+|   | lme4     | nlmer |
+|   |          |       |
+|   | lmerTest |       |
++===+==========+=======+
+|   |          |       |
++---+----------+-------+
+|   |          |       |
++---+----------+-------+
+|   |          |       |
++---+----------+-------+
+|   |          |       |
++---+----------+-------+
+|   |          |       |
++---+----------+-------+
+|   |          |       |
++---+----------+-------+
+|   |          |       |
++---+----------+-------+
+
+- marginal F tests for fixed effects : 
+
+
+
+```{r}
+library(nlme)
+library(lme4)
+library(lmerTest)
+
+data(sleepstudy)
+geno <- sample(as.factor(c("A", "B", "C")), size = nrow(sleepstudy), replace = T)
+sleepstudy <- cbind(sleepstudy, geno)
+fm1 <- lmer(Reaction ~ Days + geno + (1 | Subject), sleepstudy)
+anova(fm1, type = "marginal")
+
+```
+
+
+
+
+# Simple examples
+
+## Random Intercept
+Using the RIKZ dataset.
+```{r}
+# using the package nlme
+RIKZ$Beach <- factor(RIKZ$Beach)
+Mlme1 <- lme(Richness ~ NAP, random = ~ 1 | Beach, data = RIKZ)
+
+summary(Mlme1)
+```
+
+
+## Random Intercept and Slope
+Using the RKIZ dataset
+
+
+# Specific cases
+
+## Post-hoc tests for multilevel factors
+
+keywords : Omnibus test, contrasts, pairwise comparisons
+
+Aim : compare the levels of a factor pairwise. In the Machines example : which machine differs from which machine?
+```{r}
+library(nlme)
+library(emmeans)
+data("Machines") # from the nlme package
+machines.lme.1 <- lme(score ~ Machine, random = ~ 1 | Worker, data = Machines)
+emmeans(machines.lme.1, pairwise ~ Machine, adjust="bonferroni")
+library(ggeffects)
+ggpredict(machines.lme.1, c("Machine")) |> plot()
+```
+
+
+# Plotting
+ggeffects package : 
+
+
+From R buddy : **Abiel** *: was investigating the use of the ggeffects package for visualisation of mixed model results. He spent quite some time investigating this, and therefore wanted to share with us, as many of us are using mixed effects models.
+While the effects package does what it should, it uses gridplots for visualisation. These plots are a bit more limited in communicating the results as not so well thought-through/ designed as the ggplots. Alternatively, there was the remef package, which was not on CRAN.
+There is a new package, ggeffects, which can visualise the effects package predictions in a ggplot. But there are 3 different functions in this package for visualisation, which differ in the handling of factors :
+        ◦ ggpredict() uses analogous theory to the predict() function in base R. For predictions, it uses the first level of each factor.
+        ◦ ggemmeans() uses analogous theory to the emmeans package, and takes average of factor levels
+        ◦ ggeffects() uses analogous theory to the effects package and takes weighted averages of the factor levels.
+Abiel’s choice is the ggeffects package, as it relies on the effect package philosophy which seems a good choice to him, and is what we currently understand best.
+We were all very happy about this informations, and thought about writing them up in an Rmarkdown to share with others. If we want, we can take this to the next session.*
+
+
+```{r}
+ggpredict(machines.lme.1, c("Machine")) |> plot()
+```
+
+
+
+
+
+
+
