@@ -97,5 +97,5 @@ opt_naturefood = stepAIC(fm_naturefood, direction = "both", trace = T,
 
 # Source 6 : Biraj analysis
 this is a copy-paste of the example code provided for Biraj.
-
+TODO
 
