@@ -1,0 +1,101 @@
+---
+title: "model selection"
+author: "N. Schenk"
+date: "2023-02-01"
+output: html_document
+---
+
+**Please note that this tutorial is in draft stage.**
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Model selection
+This tutorial addresses the question of how a set of potential models can be reduced to a smaller set of final models, ideally to a single final value for each parameter estimate.
+
+This tutorial excludes the assessment of bi- or multivariate associations between explanatory variables, which is an essential step before defining the set of potential models.
+
+This tutorial is based on the following references :
+- `MuMIn` package 
+
+Further reading
+- Highly recommended : Grace, J. B., and K. M. Irvine. 2020. Scientist’s guide to developing explanatory statistical models using causal analysis principles. Ecology 101(4):e02962. 10.1002/ecy.2962
+
+
+## Dependencies
+```{r}
+# install.packages("MuMIn")
+library(MuMIn)
+```
+
+
+
+# Source 1 : metafor
+
+
+# Source 2 : R for fish and wildlife grads
+https://sites.google.com/site/rforfishandwildlifegrads/home/mumin_usage_examples?pli=1
+```{r}
+dater<-read.csv("https://drive.google.com/file/d/10Ncj8ooqQ6v8kkQ5u0f_WrHC1FEmpIOX/view?usp=sharing")
+```
+
+# Source 3 : by hand
+```{r}
+library(AED)
+data("biodiversity")
+
+# na.fail : need to handle NA values BEFORE using the model 
+#    because models which are fit on different subsets of rows are NOT comparable
+mod1 <- lm(biomass ~ treatment + nutrient + concentration + mesocosm, data = Biodiversity, na.action = na.fail)
+summary(mod1)
+
+# fixed : define fixed variables that MUST stay in the model, e.g. the treatment variable of an experiment
+#    note : keep this also if not significant!
+dredge(mod1, beta = "none", fixed = c("treatment"))
+```
+
+
+
+# Source 4 : Chat GPT
+below 1:1 copy of the Chat GPT answer.
+
+How can I use the R package MuMIn in the following way : I want to perform model selection of a linear model with 10 explanatory variables. I want to use the function dredge() to test all possible models, and subsequently want to calculate an average model of the few best models using the appropriate function from the MuMIn package.
+
+Here is an example on how to use the dredge() function from the MuMIn package for model selection in a linear model with 10 explanatory variables:
+```{r}
+# Load the necessary libraries
+library(MuMIn)
+
+# Load a data set with 10 variables
+data(mtcars)
+
+# Fit a full model with all 10 variables
+full_model <- lm(mpg ~ ., data = mtcars)
+
+# Use the dredge() function to perform model selection
+model_set <- dredge(full_model)
+
+# Extract the best models
+best_models <- model_set[which.min(model_set$AICc), ]
+
+# Calculate the average model using the model.avg() function
+average_model <- model.avg(best_models)
+
+```
+In this example, dredge() performs a stepwise model selection by testing all possible models (subsets of variables) in the full_model and returns a summary of the models with their respective Akaike Information Criterion (AIC) values. The which.min() function is then used to extract the models with the lowest AIC values (the best models). Finally, the model.avg() function is used to calculate the average model from the best models.
+
+# Source 5 : Biraj analysis preparation
+This workflow was used in Biraj analysis first, before dredge was selected.
+```{r}
+opt_naturefood = stepAIC(fm_naturefood, direction = "both", trace = T,
+                         scope = list(lower = ~ Occupation + Location + q47_WaterShortage, 
+                                      upper = fm_naturefood))
+# with the parameter scope, define the variables to keep in the model. 
+```
+
+
+# Source 6 : Biraj analysis
+this is a copy-paste of the example code provided for Biraj.
+
+
