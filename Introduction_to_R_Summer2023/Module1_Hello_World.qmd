@@ -1,0 +1,610 @@
+---
+title: "Module1: Hello, World!"
+author: "N. V. Schenk"
+format: html
+editor: source
+execute: 
+  cache: true
+---
+
+```{r}
+#| label: requirements
+#| include: false
+# load and install necessary R packages
+# This is not shown in the html script.
+
+# install necessary R packages
+if(!require(dplyr)) install.packages("tidyverse")
+# if(!require(cowplot)) install.packages("cowplot")
+
+# load necessary R packages
+library(tidyverse)
+```
+
+
+This document describes Module 1 of the course "Introduction to R", held in Summer 2023 for the [Biodiversity Exploratories](www.biodiversity-exploratories.de).
+
+# Learning outcome
+
+- getting familiar with R
+- hands on!
+- establish workflow for this course
+- experience your first moments of success with programming
+
+:::{.callout-tip}
+In order to learn coding, you need to code
+:::
+
+
+
+## Content
+
+this Module is splitted into TODO_number chapters. The chapters are intented to be worked on sequentially, but feel free to try working on them in any other order (please report back if recommendable).
+
+TODO add table of content
+
+## Prerequisites
+
+A prerequisite of this course is having R and RStudio installed. If you did not do so, please follow Chapter 1.2 in "Beckmann".
+
+
+# 1.1 Hello, RStudio!
+
+**Aim of this chapter** : getting familiar with RStudio.
+
+**Material** : Bergmann, Ch 1.4 - 1.11
+
+During this chapter, you will be working with this document, and with Bergmann, Ch 1. While working througn this chapter, try to develop the habit to actively code while reading. Every time you see a code, try it out in your console! This whole chapter is about experiencing R. The more things you try out, the more you will develop a feeling about programming, and the easier it get to learn new things.
+
+:::{.callout-important}
+Most of the time we have to understand before we can act. In programming, it is the other way around. We have to act first in order to understand.
+:::
+
+One of the key insights about learning how to program is that you have to experience it in order to understand. This can sometimes be difficult, because we are usually trained to understand first and act second, not to act before understanding. However, many concepts of programming are hard to understand without having experienced them, but easy to understand after you have already applied them.
+
+During this chapter, practice to establish an active way of reading, having RStudio and the console open, and applying the exercises. Additionally, try out new things! Most examples can be slightly  modified by you. You will see examples of this as you go through this module.
+
+## Bergmann 1.4 - 1.5
+
+Please work through "Bergmann" Ch 1.4 and 1.5, and solve the below exercises after.
+
+Please note the below discussion point, where the "Bergmann" book is recommending something I do not agree with.
+
+::: {.callout-note icon=false}
+
+### Discussion point Bergmann Ch 1.6.1
+
+When introducing scripts, the Bergmann book recommends starting each script with :
+
+`rm(list = ls())`
+
+The book argues that : "It’s always good to start a script with nothing accidentally left over in R from a previous session." Which is very legitimate.
+
+We will discuss the reasons that speak against this during the discussion of module 1.
+
+As an additional exercise, feel free to already explore the opinions, e.g. in Chapter 2.5 of [this book](https://rstats.wtf/source-and-blank-slates.html), or Chapter 17.1.2 of [that book](https://bookdown.org/pdr_higgins/rmrwr/intermediate-steps-toward-reproducibility.html), which includes a famous meme about this topic.
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Please compute the solution to the following mathematical operations using your R console : 
+
+$1 + 2$
+
+$5 / 8$
+
+$1 + 3 / 4$
+
+$(1 + 3) / 4$
+
+$1 == 1$
+
+
+### Solution
+
+```{r}
+1 + 2
+5 / 8
+
+1 + 3 / 4
+(1 + 3) / 4 
+# please note, that if no brackets are given, the division is computed first, addition second.
+
+1 == 1
+```
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Use R to create the integers from 2 to 10, inclusive.
+
+### Solution
+
+```{r}
+2:10
+seq(from = 2, to = 10)
+seq(from = 2, to = 10, by = 1)
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Use R to create the integers from 100 to 200, inclusive. Save them in a variable called `vec1`
+
+### Solution
+
+There are (at least) tree solutions : 
+```{r}
+vec1 <- 100:200
+vec1
+
+vec1 <- seq(from = 100, to = 200)
+vec1
+
+vec1 <- seq(from = 100, to = 200, by = 1)
+vec1
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Use R to create the numbers from 100 to 200, using steps of 0.5. In other words, create the numbers $100, 100.5, 101, 101.5, ... ,199.5, 200$.
+
+### Solution
+
+```{r}
+seq(from = 100, to = 200, by = 1)
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Please give us the sequence of numbers that begins at 73, ends at 156, and has a 0.023 unit difference between the numbers.
+
+Did you notice something special?
+
+### Solution
+
+```{r}
+seq(from = 73, to = 156, by = 0.23)
+```
+
+Please notice that in this case, the vector (the sequence of numbers) does not end with 156, but with 155.8. This is because the interval of numbers is not divisible through the step size of 0.23 without rest. The `seq()` function thus starts at the number given by the parameter `from`, and ends at the closest number equal or smaller than the number given by the `to` parameter.
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create two sequences of numbers : The first is a sequence of numbers from 0 to 10, with steps of 1. Save this sequence in a variable called `a`. The second sequence is a sequence of numbers from 0 to 1, with steps of 0.1. Save this sequence in a variable called `b`.
+
+Add the sequences a and b.
+
+### Solution
+
+```{r}
+a <- seq(from = 0, to = 10, by = 1)
+b <- seq(from = 0, to = 1, by = 0.1)
+a + b
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create two sequences of numbers : The first is a sequence of numbers from 0 to 10, with steps of 1. Save this sequence in a variable called `a`. The second sequence is a sequence of numbers from 0 to 0.9, with steps of 0.1. Save this sequence in a variable called `b`.
+
+Add the sequences a and b.
+
+What do you observe? Can you explain why?
+
+### Solution
+
+```{r}
+a <- seq(from = 0, to = 10, by = 1)
+b <- seq(from = 0.1, to = 1, by = 0.1)
+a + b
+```
+
+Besides the solution of the addition, you get a so-called warning message. R tells you, that something might have gotten wrong, and that you should double-check if the solution is correct.
+
+Here, vector a is 11 elements long (or in other words, sequence a has 11 numbers). Vector b is only 10 elements long, and thus 1 element shorter. When we add vector a to vector b, the first element of a is added to the first element of b, the second element of a is added to the second element of b and so on.
+
+`0 + 0.0  1 + 0.1 ... 9 + 0.9 ...`
+
+However, after we added the tenth element of a to the tenth element of b or in other words, added 9 + 0.9, vector b has no other elments. Therefore, R is **extending vector b with its first element**. It is adding the last element of a, which is 10, to the **first** element of b. R is re-using, or **recycling** the elements of vector b in order to extend b to the length of a.
+
+`10 + 0`
+
+See the next exercise for clarification.
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create two sequences of numbers : The first is a sequence of numbers from 1 to 5, with steps of 1. Save this sequence in a variable called `a`. The second sequence is a sequence of numbers from 0.1 to 0.3, with steps of 0.1. Save this sequence in a variable called `b`.
+
+Add the sequences a and b.
+
+What do you observe? Can you explain why?
+
+### Solution
+
+```{r}
+a <- seq(from = 1, to = 5, by = 1)
+b <- seq(from = 0.1, to = 0.3, by = 0.1)
+a + b
+```
+
+Again, you get the warning message telling you, that one of the vectors is shorter than the other.
+
+Because a is longer than b, R is recycling the elements of b to extend it to the length of a. a is 5 elements long. b is 3 elements long. R extends the vector b to the length 5, by adding the first two elements at the end : 
+
+`0.1 0.2 0.3 0.1 0.2`
+
+and adding this to the vector a. We end up with the vector : 
+
+`1.1 2.2 3.3 4.1 5.2`
+
+`1+0.1 2+0.2 3+0.3 4+0.1 5+0.2`
+
+:::
+
+
+
+
+
+::: {.callout-tip icon=false}
+
+### Checkpoint
+
+Please invent and write down 1-2 Exercises about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+TODO : where to collect the exercises? In which module will we work on them?
+
+We will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
+
+
+
+## Bergmann 1.4 - 1.9
+
+In the previous section, you were given many additional exercises. The aim of this was to show you some possibilities to just slightly modify the examples from the book, in order to create new exercises. When reading the next chapters, please continue trying out slightly modifying the examples from the book yourself, in order to get more practice.
+
+::: {.callout-note icon=false}
+
+### Discussion point
+
+During the discussion of Module 1, we will discuss about this practice of applying all exercises from the book and slightly modifying them - in order to maximise the pracice.
+Please record your experiences and report them in class, during the discussion of Module 1.
+
+Is this approach easy/difficult for you? Do you need anything to make it easier? Do you have some helpful advice/ insight for the class?
+
+TODO record this discussion point.
+
+:::
+
+
+Please work through "Bergmann" Ch 1.6 - 1.9 (including the package installation in 1.8), and solve the below exercises after.
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a new script called "my_test_script1.R". Follow the instructions from the Bergmann book about the first few lines, except the part about adding the line `rm(list = ls())` (although they really seem to recommend it).
+
+In the script, create a vector of numbers between 12 and 24, with a step size of 1. Give the vector a name of your choice, and print it to the console (write the name again below, so when running the given line, the vector is shown in the console panel).
+
+
+### Solution
+
+Your script could look e.g. like this
+
+```
+# Amazing R User (your name)
+# 18 August, 2023
+# This is my first R script. I create a vector and call it.
+# No R packages are required.
+
+my_first_vector <- seq(from = 12, to = 24, by = 1)
+my_first_vector
+
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a new script called "my_test_script2.R". Follow the instructions from the Bergmann book about the first few lines, except the part about adding the line `rm(list = ls())` (although they really seem to recommend it).
+
+Create the a vector from 1 to 240 with stepsize 1, and call it `a`. Create a second vector `b`, which is the square of vector `a`.
+
+Create a plot of vector a and b, by adding the following code : `plot(a, b)`
+
+### Hint
+
+You can calculate the square of a vector as following : 
+```{r}
+# creating vector a
+a <- seq(from = 12, to = 24, by = 1)
+
+# Option one: using **
+a**2
+# Option two : using ^
+a^2
+```
+
+
+### Solution
+
+Your script could look e.g. like this
+
+```{r}
+# Amazing R User (your name)
+# 18 August, 2023
+# Creating vector and plotting them.
+
+# creating vector a
+a <- seq(from = 1, to = 240, by = 1)
+
+# Creating vector b, using ** (note : alternatively, you can use the ** operation)
+b <- a^2
+
+# plotting a and b
+plot(a, b)
+
+```
+
+Congratulations, you just created your first plot!
+
+:::
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a new script called "my_test_script3.R". Follow the instructions from the Bergmann book about the first few lines, except the part about adding the line `rm(list = ls())` (although they really seem to recommend it).
+
+Load the package `ggplot2`. This is a package used for plotting.
+
+Create the a vector from 1 to 240 with stepsize 1, and call it `a`. Create a second vector `b`, which is the square of vector `a`.
+
+Create a plot of vector a and b, by using a function from the package `ggplot2`, adding the following code (don't worry if you don't understand the details, this will be covered later): 
+```
+qplot(x = a, y = b)
+ggplot(data.frame(a, b), aes(x = a, y = b)) + 
+  geom_line()
+```
+
+
+### Solution
+
+```{r}
+# Amazing R User (your name)
+# 18 August, 2023
+# Creating vector and plotting them with ggplot2.
+
+library(ggplot2)
+
+# creating vector a
+a <- seq(from = 1, to = 240, by = 1)
+
+# Creating vector b, using ** (note : alternatively, you can use the ** operation)
+b <- a^2
+
+# plotting a and b
+ggplot(data.frame(a, b), aes(x = a, y = b)) + 
+  geom_line()
+```
+
+Take-home : You are already able to create a plot in R!
+
+Take-home 2 : R packages : Much of the often used code in R comes in software packages, which are added "on top" of the basic R. We can load a package with the `library()` function. A software package, like e.g. `ggplot2` provides more functions. In the case of `ggplot2`, those are functions for creating nice looking plots.
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+In your script "my_test_script3.R", add the following new command : `fortune()`, and see what happens. Can you explain why?
+
+### Solution
+
+You get an error message, saying : `Error in fortunes() : could not find function "fortunes"`
+
+If we call a function (try to use a function) from a package which is not installed, we get an error message.
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+The function `fortunes()` is from a package called `fortunes`. Install and load the package `fortunes` and call the function `fortune()` again.
+
+What happens?
+
+
+### Solution
+
+Install the `fortunes` package using the function : `install.packages("fortunes")`
+
+Add the below code to your script :
+```{r}
+library(fortunes)
+
+fortune()
+```
+
+This package only consists of a single function, giving you random fortunes about R. It exists just for fun.
+
+If you would like to try out some more "just for fun" packages, see e.g. [here](https://towardsdatascience.com/make-learning-r-fun-with-these-5-packages-3c3f6ca82c96)
+
+:::
+
+::: {.callout-tip icon=false}
+
+### Checkpoint
+
+Please invent and write down 1-2 Exercises about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+TODO : where to collect the exercises? In which module will we work on them?
+
+We will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
+
+
+## Bergmann 1.10 - 1.11
+
+TODO : Bergmann letzte Kapitel lesen und par exercises schribä.
+Lektion weiter planen
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+bli
+
+
+### Solution
+
+bla
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+bli
+
+
+### Solution
+
+bla
+
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+## Example code
+
+To learn more about Quarto see <https://quarto.org>.
+
+[linked phrase](http://example.com)
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+
+Including code which is not shown at all in the document : 
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+data(diamonds)
+
+smaller <- diamonds |> 
+  filter(carat <= 2.5)
+```
+... there is a big chunk of code between this sentence and the above one.
+
+
+We have data about `r nrow(diamonds)` diamonds.
+Only `r nrow(diamonds) - nrow(smaller)` are larger than 2.5 carats.
+The distribution of the remainder is shown below:
+
+```{r}
+#| label: plot-smaller-diamonds
+#| echo: false
+
+smaller |> 
+  ggplot(aes(x = carat)) + 
+  geom_freqpoly(binwidth = 0.01)
+```
+
+
+
+::: {.panel-tabset}
+
+## Plot
+
+```{r}
+plot(diamonds$clarity, diamonds$carat)
+```
+
+## Data
+
+```{r}
+head(diamonds)
+```
+
+:::
+
+
+::: {.border}
+This content can be styled with a border
+:::
+
+:::{.callout-note}
+Note that there are five types of callouts, including: 
+`note`, `tip`, `warning`, `caution`, and `important`.
+:::
+
+
