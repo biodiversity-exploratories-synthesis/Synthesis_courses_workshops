@@ -137,9 +137,9 @@ Tip
 </section>
 <section id="hello-rstudio" class="level1">
 <h1>1.1 Hello, RStudio!</h1>
-<p><strong>Aim of this chapter</strong> : getting familiar with RStudio.</p>
-<p><strong>Material</strong> : Bergmann, Ch 1.4 - 1.11</p>
-<p>During this chapter, you will be working with this document, and with Bergmann, Ch 1. While working througn this chapter, try to develop the habit to actively code while reading. Every time you see a code, try it out in your console! This whole chapter is about experiencing R. The more things you try out, the more you will develop a feeling about programming, and the easier it get to learn new things.</p>
+<p><strong>Aim of this Module</strong> : getting familiar with RStudio.</p>
+<p><strong>Material</strong> : Beckerman, Ch 1.4 - 1.11 and R4DS, Ch TODO (…)</p>
+<p>During this chapter, you will be working with this document, and with Beckerman, Ch 1. While working througn this chapter, try to develop the habit to actively code while reading. Every time you see a code, try it out in your console! This whole chapter is about experiencing R. The more things you try out, the more you will develop a feeling about programming, and the easier it get to learn new things.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -155,21 +155,21 @@ Important
 </div>
 <p>One of the key insights about learning how to program is that you have to experience it in order to understand. This can sometimes be difficult, because we are usually trained to understand first and act second, not to act before understanding. However, many concepts of programming are hard to understand without having experienced them, but easy to understand after you have already applied them.</p>
 <p>During this chapter, practice to establish an active way of reading, having RStudio and the console open, and applying the exercises. Additionally, try out new things! Most examples can be slightly modified by you. You will see examples of this as you go through this module.</p>
-<section id="bergmann-1.4---1.5" class="level2">
-<h2 class="anchored" data-anchor-id="bergmann-1.4---1.5">Bergmann 1.4 - 1.5</h2>
-<p>Please work through “Bergmann” Ch 1.4 and 1.5, and solve the below exercises after.</p>
-<p>Please note the below discussion point, where the “Bergmann” book is recommending something I do not agree with.</p>
+<section id="beckerman-1.4---1.5" class="level2">
+<h2 class="anchored" data-anchor-id="beckerman-1.4---1.5">Beckerman 1.4 - 1.5</h2>
+<p>Please work through “Beckerman” Ch 1.4 and 1.5, and solve the below exercises after.</p>
+<p>Please note the below discussion point, where the “Beckerman” book is recommending something I do not agree with.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Discussion point Bergmann Ch 1.6.1
+Discussion point Beckerman Ch 1.6.1
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>When introducing scripts, the Bergmann book recommends starting each script with :</p>
+<p>When introducing scripts, the Beckerman book recommends starting each script with :</p>
 <p><code>rm(list = ls())</code></p>
 <p>The book argues that : “It’s always good to start a script with nothing accidentally left over in R from a previous session.” Which is very legitimate.</p>
 <p>We will discuss the reasons that speak against this during the discussion of module 1.</p>
@@ -289,15 +289,26 @@ Discussion point Bergmann Ch 1.6.1
 <p>Use R to create the numbers from 100 to 200, using steps of 0.5. In other words, create the numbers <span class="math inline">\(100, 100.5, 101, 101.5, ... ,199.5, 200\)</span>.</p>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-5_2886deb8089ed5955e2df85bce4e6388">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">100</span>, <span class="at">to =</span> <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-5_d5169d2ce9ac88fd374c972fad5cdc7a">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">100</span>, <span class="at">to =</span> <span class="dv">200</span>, <span class="at">by =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117
- [19] 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135
- [37] 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153
- [55] 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171
- [73] 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189
- [91] 190 191 192 193 194 195 196 197 198 199 200</code></pre>
+<pre><code>  [1] 100.0 100.5 101.0 101.5 102.0 102.5 103.0 103.5 104.0 104.5 105.0 105.5
+ [13] 106.0 106.5 107.0 107.5 108.0 108.5 109.0 109.5 110.0 110.5 111.0 111.5
+ [25] 112.0 112.5 113.0 113.5 114.0 114.5 115.0 115.5 116.0 116.5 117.0 117.5
+ [37] 118.0 118.5 119.0 119.5 120.0 120.5 121.0 121.5 122.0 122.5 123.0 123.5
+ [49] 124.0 124.5 125.0 125.5 126.0 126.5 127.0 127.5 128.0 128.5 129.0 129.5
+ [61] 130.0 130.5 131.0 131.5 132.0 132.5 133.0 133.5 134.0 134.5 135.0 135.5
+ [73] 136.0 136.5 137.0 137.5 138.0 138.5 139.0 139.5 140.0 140.5 141.0 141.5
+ [85] 142.0 142.5 143.0 143.5 144.0 144.5 145.0 145.5 146.0 146.5 147.0 147.5
+ [97] 148.0 148.5 149.0 149.5 150.0 150.5 151.0 151.5 152.0 152.5 153.0 153.5
+[109] 154.0 154.5 155.0 155.5 156.0 156.5 157.0 157.5 158.0 158.5 159.0 159.5
+[121] 160.0 160.5 161.0 161.5 162.0 162.5 163.0 163.5 164.0 164.5 165.0 165.5
+[133] 166.0 166.5 167.0 167.5 168.0 168.5 169.0 169.5 170.0 170.5 171.0 171.5
+[145] 172.0 172.5 173.0 173.5 174.0 174.5 175.0 175.5 176.0 176.5 177.0 177.5
+[157] 178.0 178.5 179.0 179.5 180.0 180.5 181.0 181.5 182.0 182.5 183.0 183.5
+[169] 184.0 184.5 185.0 185.5 186.0 186.5 187.0 187.5 188.0 188.5 189.0 189.5
+[181] 190.0 190.5 191.0 191.5 192.0 192.5 193.0 193.5 194.0 194.5 195.0 195.5
+[193] 196.0 196.5 197.0 197.5 198.0 198.5 199.0 199.5 200.0</code></pre>
 </div>
 </div>
 </div>
@@ -307,7 +318,7 @@ Discussion point Bergmann Ch 1.6.1
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href="">Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
-<p>Please give us the sequence of numbers that begins at 73, ends at 156, and has a 0.023 unit difference between the numbers.</p>
+<p>Please give us the sequence of numbers that begins at 73, ends at 156, and has a 0.23 unit difference between the numbers.</p>
 <p>Did you notice something special?</p>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
@@ -373,6 +384,18 @@ Discussion point Bergmann Ch 1.6.1
 <pre><code> [1]  0.0  1.1  2.2  3.3  4.4  5.5  6.6  7.7  8.8  9.9 11.0</code></pre>
 </div>
 </div>
+<p>Two vectors of the same length can be added easily.</p>
+<p>Additional : You can check the length of a vector in R by using :</p>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-8_c236390a71e83856087b4e5fc8fa19fa">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -380,15 +403,15 @@ Discussion point Bergmann Ch 1.6.1
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-7-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-1" role="tab" aria-controls="tabset-7-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-7-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-7-2" role="tab" aria-controls="tabset-7-2" aria-selected="false" href="">Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-7-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-7-1-tab">
-<p>Create two sequences of numbers : The first is a sequence of numbers from 0 to 10, with steps of 1. Save this sequence in a variable called <code>a</code>. The second sequence is a sequence of numbers from 0 to 0.9, with steps of 0.1. Save this sequence in a variable called <code>b</code>.</p>
+<p>Create two sequences of numbers : The first is a sequence of numbers from 0 to 10, with steps of 1. Save this sequence in a variable called <code>a</code>. The second sequence is a sequence of numbers from 0 to 1, with steps of 0.1. Save this sequence in a variable called <code>b</code>.</p>
 <p>Add the sequences a and b.</p>
 <p>What do you observe? Can you explain why?</p>
 </div>
 <div id="tabset-7-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-7-2-tab">
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-8_cf9f3e4ef7d64dead940bd9612d734a7">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-9_c014526f0c8f8f5f51f83d013426b498">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">10</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="dv">1</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in a + b: longer object length is not a multiple of shorter object
 length</code></pre>
@@ -398,11 +421,21 @@ length</code></pre>
 </div>
 </div>
 <p>Besides the solution of the addition, you get a so-called warning message. R tells you, that something might have gotten wrong, and that you should double-check if the solution is correct.</p>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-10_fff19869075bf76c4ce417dd49959c41">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 10</code></pre>
+</div>
+</div>
 <p>Here, vector a is 11 elements long (or in other words, sequence a has 11 numbers). Vector b is only 10 elements long, and thus 1 element shorter. When we add vector a to vector b, the first element of a is added to the first element of b, the second element of a is added to the second element of b and so on.</p>
 <p><code>0 + 0.0  1 + 0.1 ... 9 + 0.9 ...</code></p>
 <p>However, after we added the tenth element of a to the tenth element of b or in other words, added 9 + 0.9, vector b has no other elments. Therefore, R is <strong>extending vector b with its first element</strong>. It is adding the last element of a, which is 10, to the <strong>first</strong> element of b. R is re-using, or <strong>recycling</strong> the elements of vector b in order to extend b to the length of a.</p>
 <p><code>10 + 0</code></p>
-<p>See the next exercise for clarification.</p>
+<p>See the next exercise about the same topic to deepen your understanding.</p>
 </div>
 </div>
 </div>
@@ -415,10 +448,10 @@ length</code></pre>
 <p>What do you observe? Can you explain why?</p>
 </div>
 <div id="tabset-8-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-8-2-tab">
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-9_d20cc7249922e3d72927ed7a747d7071">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-11_cf2a171fa58bc5e6a963776cb6035ce0">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in a + b: longer object length is not a multiple of shorter object
 length</code></pre>
@@ -428,7 +461,7 @@ length</code></pre>
 </div>
 </div>
 <p>Again, you get the warning message telling you, that one of the vectors is shorter than the other.</p>
-<p>Because a is longer than b, R is recycling the elements of b to extend it to the length of a. a is 5 elements long. b is 3 elements long. R extends the vector b to the length 5, by adding the first two elements at the end :</p>
+<p>Because a is longer than <code>b</code>, R is recycling the elements of b to extend it to the length of a. a is 5 elements long. b is 3 elements long. R extends the vector b to the length 5, by adding the first two elements at the end :</p>
 <p><code>0.1 0.2 0.3 0.1 0.2</code></p>
 <p>and adding this to the vector a. We end up with the vector :</p>
 <p><code>1.1 2.2 3.3 4.1 5.2</code></p>
@@ -446,14 +479,14 @@ Checkpoint
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please invent and write down 1-2 Exercises about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
-<p>TODO : where to collect the exercises? In which module will we work on them?</p>
-<p>We will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
+<p>Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
+<p>TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me</p>
+<p>I will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
 </div>
 </div>
 </section>
-<section id="bergmann-1.4---1.9" class="level2">
-<h2 class="anchored" data-anchor-id="bergmann-1.4---1.9">Bergmann 1.4 - 1.9</h2>
+<section id="beckerman-1.6---1.9" class="level2">
+<h2 class="anchored" data-anchor-id="beckerman-1.6---1.9">Beckerman 1.6 - 1.9</h2>
 <p>In the previous section, you were given many additional exercises. The aim of this was to show you some possibilities to just slightly modify the examples from the book, in order to create new exercises. When reading the next chapters, please continue trying out slightly modifying the examples from the book yourself, in order to get more practice.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -465,17 +498,17 @@ Discussion point
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>During the discussion of Module 1, we will discuss about this practice of applying all exercises from the book and slightly modifying them - in order to maximise the pracice. Please record your experiences and report them in class, during the discussion of Module 1.</p>
+<p>During the discussion of Module 1, we will discuss about this practice of applying all exercises from the book and slightly modifying them - in order to maximise the practice. Please record your experiences and report them in class, during the discussion of Module 1.</p>
 <p>Is this approach easy/difficult for you? Do you need anything to make it easier? Do you have some helpful advice/ insight for the class?</p>
 <p>TODO record this discussion point.</p>
 </div>
 </div>
-<p>Please work through “Bergmann” Ch 1.6 - 1.9 (including the package installation in 1.8), and solve the below exercises after.</p>
+<p>Please work through “Beckerman” Ch 1.6 - 1.9 (including the package installation in 1.8), and solve the below exercises after.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-9-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-1" role="tab" aria-controls="tabset-9-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-9-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-9-2" role="tab" aria-controls="tabset-9-2" aria-selected="false" href="">Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-9-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-9-1-tab">
-<p>Create a new script called “my_test_script1.R”. Follow the instructions from the Bergmann book about the first few lines, except the part about adding the line <code>rm(list = ls())</code> (although they really seem to recommend it).</p>
+<p>Create a new script called “my_test_script1.R”. Follow the instructions from the Beckerman book about the first few lines, except the part about adding the line <code>rm(list = ls())</code> (although they really seem to recommend it).</p>
 <p>In the script, create a vector of numbers between 12 and 24, with a step size of 1. Give the vector a name of your choice, and print it to the console (write the name again below, so when running the given line, the vector is shown in the console panel).</p>
 </div>
 <div id="tabset-9-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-9-2-tab">
@@ -495,23 +528,23 @@ my_first_vector
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-10-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-1" role="tab" aria-controls="tabset-10-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-2" role="tab" aria-controls="tabset-10-2" aria-selected="false" href="">Hint</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-10-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-10-3" role="tab" aria-controls="tabset-10-3" aria-selected="false" href="">Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-10-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-10-1-tab">
-<p>Create a new script called “my_test_script2.R”. Follow the instructions from the Bergmann book about the first few lines, except the part about adding the line <code>rm(list = ls())</code> (although they really seem to recommend it).</p>
+<p>Create a new script called “my_test_script2.R”. Follow the instructions from the Beckerman book about the first few lines, except the part about adding the line <code>rm(list = ls())</code> (although they really seem to recommend it).</p>
 <p>Create the a vector from 1 to 240 with stepsize 1, and call it <code>a</code>. Create a second vector <code>b</code>, which is the square of vector <code>a</code>.</p>
 <p>Create a plot of vector a and b, by adding the following code : <code>plot(a, b)</code></p>
 </div>
 <div id="tabset-10-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-2-tab">
 <p>You can calculate the square of a vector as following :</p>
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-10_48531bb326cc09f26ba50aff0db615bf">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating vector a</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">12</span>, <span class="at">to =</span> <span class="dv">24</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Option one: using **</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>a<span class="sc">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-12_3756f31ef7dcc26afb6935d31cef76c4">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating vector a</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">12</span>, <span class="at">to =</span> <span class="dv">24</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Option one: using **</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>a<span class="sc">**</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 144 169 196 225 256 289 324 361 400 441 484 529 576</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option two : using ^</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Option two : using ^</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a>a<span class="sc">^</span><span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 144 169 196 225 256 289 324 361 400 441 484 529 576</code></pre>
 </div>
@@ -519,21 +552,21 @@ my_first_vector
 </div>
 <div id="tabset-10-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-10-3-tab">
 <p>Your script could look e.g.&nbsp;like this</p>
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-11_43e293e7d479d44a3b89d62602d18678">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Amazing R User (your name)</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 18 August, 2023</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector and plotting them.</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co"># creating vector a</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">240</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector b, using ** (note : alternatively, you can use the ** operation)</span></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting a and b</span></span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(a, b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-13_5fd1b11569bb6431d94906be4afdef4a">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Amazing R User (your name)</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 18 August, 2023</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector and plotting them.</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co"># creating vector a</span></span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">240</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector b, using ** (note : alternatively, you can use the ** operation)</span></span>
+<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting a and b</span></span>
+<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(a, b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Module1_Hello_World_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+<p><img src="Module1_Hello_World_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Congratulations, you just created your first plot!</p>
@@ -544,7 +577,7 @@ my_first_vector
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-11-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-1" role="tab" aria-controls="tabset-11-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-11-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-11-2" role="tab" aria-controls="tabset-11-2" aria-selected="false" href="">Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-11-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-11-1-tab">
-<p>Create a new script called “my_test_script3.R”. Follow the instructions from the Bergmann book about the first few lines, except the part about adding the line <code>rm(list = ls())</code> (although they really seem to recommend it).</p>
+<p>Create a new script called “my_test_script3.R”. Follow the instructions from the Beckerman book about the first few lines, except the part about adding the line <code>rm(list = ls())</code> (although they really seem to recommend it).</p>
 <p>Load the package <code>ggplot2</code>. This is a package used for plotting.</p>
 <p>Create the a vector from 1 to 240 with stepsize 1, and call it <code>a</code>. Create a second vector <code>b</code>, which is the square of vector <code>a</code>.</p>
 <p>Create a plot of vector a and b, by using a function from the package <code>ggplot2</code>, adding the following code (don’t worry if you don’t understand the details, this will be covered later):</p>
@@ -553,24 +586,24 @@ ggplot(data.frame(a, b), aes(x = a, y = b)) +
   geom_line()</code></pre>
 </div>
 <div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-12_931007de4e4e8a1e68f5b9607456a992">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Amazing R User (your name)</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 18 August, 2023</span></span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector and plotting them with ggplot2.</span></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co"># creating vector a</span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">240</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector b, using ** (note : alternatively, you can use the ** operation)</span></span>
-<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting a and b</span></span>
-<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(a, b), <span class="fu">aes</span>(<span class="at">x =</span> a, <span class="at">y =</span> b)) <span class="sc">+</span> </span>
-<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-14_f4020e2eb5c00f4625ac0db4b4ae841c">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Amazing R User (your name)</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 18 August, 2023</span></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector and plotting them with ggplot2.</span></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co"># creating vector a</span></span>
+<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">240</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Creating vector b, using ** (note : alternatively, you can use the ** operation)</span></span>
+<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-13"><a href="#cb50-13" aria-hidden="true" tabindex="-1"></a><span class="co"># plotting a and b</span></span>
+<span id="cb50-14"><a href="#cb50-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">data.frame</span>(a, b), <span class="fu">aes</span>(<span class="at">x =</span> a, <span class="at">y =</span> b)) <span class="sc">+</span> </span>
+<span id="cb50-15"><a href="#cb50-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Module1_Hello_World_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+<p><img src="Module1_Hello_World_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Take-home : You are already able to create a plot in R!</p>
@@ -600,21 +633,100 @@ ggplot(data.frame(a, b), aes(x = a, y = b)) +
 <div id="tabset-13-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-13-2-tab">
 <p>Install the <code>fortunes</code> package using the function : <code>install.packages("fortunes")</code></p>
 <p>Add the below code to your script :</p>
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-13_304a883671326f7685fa6ae4a03d2fe7">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fortunes)</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fortune</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-15_38097ad70d37f103dc685aac7d4ec16d">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fortunes)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">fortune</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-You say yourself it wasn't reproducible. So it could have been anything that
-"crashed" your R, cosmic radiation, a bolt of lightning reversing a bit in your
-computer memory, ... :-)
-   -- Martin Maechler (replying to a bug report)
-      R-devel (July 2005)</code></pre>
+There's probably some examples, but there are some examples of people using
+  solve(t(X) %*% W %*% X) %*% W %*% Y
+to compute regression coefficients, too.
+   -- Thomas Lumley (discussing usefulness of evaluation order in lapply)
+      R-help (March 2006)</code></pre>
 </div>
 </div>
 <p>This package only consists of a single function, giving you random fortunes about R. It exists just for fun.</p>
 <p>If you would like to try out some more “just for fun” packages, see e.g.&nbsp;<a href="https://towardsdatascience.com/make-learning-r-fun-with-these-5-packages-3c3f6ca82c96">here</a></p>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href="">Solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
+<p>What are the advantages of using a scripted language (like R) over using a point-and-click language (like Excel)? Name 3 advantages.</p>
+<p>Note that you don’t have to stick to the points mentioned in the book, but add points from other sources or from your experience.</p>
+</div>
+<div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
+<p>You find some of these points in Section 1.7.</p>
+<ul>
+<li>The analysis is fully reproducible with a script (i.e.&nbsp;someone else can perform exactly the same steps as you have done)</li>
+<li>Scripts are easy to share. An advantage of using R is that many researchers are using R as well, which makes it easier to understand each other’s work.</li>
+<li>R is a free software (contrary to many, but not all point-and-click softwares, e.g.&nbsp;LibreOffice calc which works similar to Excel is freely available)</li>
+<li>R allows annotating steps of the analysis, e.g.&nbsp;decisions taken during data cleaning or analysis.</li>
+<li>R can be used for (many) full analyses from data cleaning to visualisation (not switching from one platform to another)
+<ul>
+<li>Additionally, it is possible to combine multiple programming languages like e.g.&nbsp;Julia, Python, bash, … or multiple kind of analyses (GIS, phylogenetics, multivariate, Bayesian, …) in one script using Rmarkdown or Quarto (which are included in RStudio) and multiple R packages.</li>
+</ul></li>
+<li>Automation : Scripts allow running the same steps over and over again upon small changes. Rerunning code is one click.</li>
+</ul>
+<p>Sources :</p>
+<ul>
+<li>Beckerman Chapter 1.7.</li>
+<li>Chapter 5.3.2 of <a href="https://www.ecologi.st/BIO3019S_Ecoforecasting/reproducibility.html#reproducible-scientific-workflows">“A Minimal Introduction to Ecological Forecasting” Jasper Slingsby, 2023-07-31</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false" href="">Solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
+<p>Find and download a cheatsheet for so-called “basic R” and identify the commands you already learned.</p>
+<p>If you want, you can use <a href="https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf">this</a> one.</p>
+<p>Note that if you wish to create your own cheatsheet, there are templates available, e.g.&nbsp;<a href="https://github.com/rstudio/cheatsheets/tree/main/powerpoints">here</a>. You can download a pretty cheat sheet and modify it yourself.</p>
+</div>
+<div id="tabset-15-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-15-2-tab">
+<p>On the <a href="https://iqss.github.io/dss-workshops/R/Rintro/base-r-cheat-sheet.pdf">Example Cheat Sheet</a>, we e.g.&nbsp;already saw the following commands : <code>?</code>, <code>help</code>, <code>install.packages</code>, <code>seq</code>, <code>length</code> and probably some more.</p>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false" href="">Solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-16-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-16-1-tab">
+<p>Name 5 sources of help in R and RStudio.</p>
+</div>
+<div id="tabset-16-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-16-2-tab">
+<p>from within R :</p>
+<ul>
+<li>the <code>help()</code> function (or, analogously the <code>?</code> function)</li>
+</ul>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-16_2df0e9c224c45114217a92c222da7cd4">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mean)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>?mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><strong>Cheatsheets</strong> : within RStudio, click on Help &gt; Cheat Sheets and e.g.&nbsp;Browse Cheatsheets. On the “Contributed Cheatsheets” section, you find cheat sheets written by other R users.</li>
+</ul>
+<p>from the internet :</p>
+<ul>
+<li>Use your favourite search engine (e.g.&nbsp;Google)</li>
+<li><a href="http://stackoverflow.com/tags/r/info">stackoverflow</a></li>
+<li><a href="https://www.r-bloggers.com/">R bloggers</a></li>
+<li><a href="rseek.org">RSeek</a></li>
+<li>ChatGPT</li>
+<li>watch YouTube videos</li>
+</ul>
+<p>from other humans:</p>
+<ul>
+<li>ask people from this course (e.g.&nbsp;via slack channel)</li>
+<li>ask people around you (also the ones still learning R!)</li>
+<li>ask yourself in a forum (e.g.&nbsp;Stackoverflow)</li>
+<li>join coding clubs or seminars about R</li>
+<li>ask me</li>
+</ul>
 </div>
 </div>
 </div>
@@ -628,110 +740,63 @@ Checkpoint
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Please invent and write down 1-2 Exercises about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
-<p>TODO : where to collect the exercises? In which module will we work on them?</p>
-<p>We will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
+<p>Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
+<p>TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email</p>
+<p>I will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
 </div>
 </div>
 </section>
-<section id="bergmann-1.10---1.11" class="level2">
-<h2 class="anchored" data-anchor-id="bergmann-1.10---1.11">Bergmann 1.10 - 1.11</h2>
-<p>TODO : Bergmann letzte Kapitel lesen und par exercises schribä. Lektion weiter planen</p>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-14-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-1" role="tab" aria-controls="tabset-14-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-14-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-14-2" role="tab" aria-controls="tabset-14-2" aria-selected="false" href="">Solution</a></li></ul>
-<div class="tab-content">
-<div id="tabset-14-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-14-1-tab">
-<p>bli</p>
-</div>
-<div id="tabset-14-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-14-2-tab">
-<p>bla</p>
-</div>
-</div>
-</div>
-<div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-15-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-1" role="tab" aria-controls="tabset-15-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-15-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-15-2" role="tab" aria-controls="tabset-15-2" aria-selected="false" href="">Solution</a></li></ul>
-<div class="tab-content">
-<div id="tabset-15-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-15-1-tab">
-<p>bli</p>
-</div>
-<div id="tabset-15-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-15-2-tab">
-<p>bla</p>
-</div>
-</div>
-</div>
+<section id="r4ds-1.4" class="level2">
+<h2 class="anchored" data-anchor-id="r4ds-1.4">R4DS 1.4</h2>
+<p>Please read and work through (the very short) Chapter 1.4. in R4DS. You will see some topics repeated.</p>
+<p>Goals : Get familiar with the R4DS book and learn about the existence of the <code>tidyverse</code> group of packages.</p>
 </section>
-<section id="example-code" class="level2">
-<h2 class="anchored" data-anchor-id="example-code">Example code</h2>
-<p>To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
-<p><a href="http://example.com">linked phrase</a></p>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-14_b0202e37a99df7d462c9c9a8e8507597">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<p>You can add options to executable code like this</p>
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-15_0a8a9cdaa055a812283cb05cd82b8712">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
-<p>Including code which is not shown at all in the document :</p>
-<p>… there is a big chunk of code between this sentence and the above one.</p>
-<p>We have data about 53940 diamonds. Only 126 are larger than 2.5 carats. The distribution of the remainder is shown below:</p>
-<div class="cell" data-hash="Module1_Hello_World_cache/html/plot-smaller-diamonds_90dc6fff0022a7a8ff4c947b83720f20">
-<div class="cell-output-display">
-<p><img src="Module1_Hello_World_files/figure-html/plot-smaller-diamonds-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
+<section id="beckerman-1.10---1.11" class="level2">
+<h2 class="anchored" data-anchor-id="beckerman-1.10---1.11">Beckerman 1.10 - 1.11</h2>
+<p>Please work through “Beckerman” Ch 1.10 - 1.11, and solve the below exercises after. Please take enough time for the Exercise in 1.10.</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-16-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-1" role="tab" aria-controls="tabset-16-1" aria-selected="true" href="">Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-16-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-16-2" role="tab" aria-controls="tabset-16-2" aria-selected="false" href="">Data</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-17-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-1" role="tab" aria-controls="tabset-17-1" aria-selected="true" href="">Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-17-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-17-2" role="tab" aria-controls="tabset-17-2" aria-selected="false" href="">Solution</a></li></ul>
 <div class="tab-content">
-<div id="tabset-16-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-16-1-tab">
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-18_fcd34f829606b245ea28ae05b0cf3923">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(diamonds<span class="sc">$</span>clarity, diamonds<span class="sc">$</span>carat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Module1_Hello_World_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+<div id="tabset-17-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-17-1-tab">
+<p>Does Beckerman recommend to save the workspace at quitting RStudio? Why (include your own opinion)?</p>
+</div>
+<div id="tabset-17-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-17-2-tab">
+<p>No, this is not recommended. Not saving the workspace strongly encourages a reproducible workflow. If you are ready to reproduce everything done within a script without having to consider external resources (e.g.&nbsp;finding a variable <code>a</code> which is used, but never created), the script is reproducible.</p>
+<p>Note : if you don’t know what a workspace is, please ask during the questions session. It is not a prerequisite for the below exercises.</p>
 </div>
 </div>
 </div>
-<div id="tabset-16-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-16-2-tab">
-<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-19_fff6296320925e765688afe4a392f8c0">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diamonds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 10
-  carat cut       color clarity depth table price     x     y     z
-  &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-1  0.23 Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
-2  0.21 Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
-3  0.23 Good      E     VS1      56.9    65   327  4.05  4.07  2.31
-4  0.29 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
-5  0.31 Good      J     SI2      63.3    58   335  4.34  4.35  2.75
-6  0.24 Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48</code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="border">
-<p>This content can be styled with a border</p>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
+<p>If you have enough time, feel free to read Appendix 1b as well.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
-<i class="callout-icon"></i>
+<i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Checkpoint
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note that there are five types of callouts, including: <code>note</code>, <code>tip</code>, <code>warning</code>, <code>caution</code>, and <code>important</code>.</p>
+<p>Please invent and write down 1-2 exercises including solutions about the past two sections. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
+<p>TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email</p>
+<p>I will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
+<p>–&gt; past 2 sections</p>
 </div>
 </div>
 </section>
+</section>
+<section id="additional-play-and-practice-with-swirl" class="level1">
+<h1>Additional : Play and practice with swirl</h1>
+<p>If you have some time to practice, you can try out <code>swirl</code>, an R package which teaches you R.</p>
+<p>Visit the page of <a href="https://swirlstats.com/students.html">swirl</a> and follow the installation procedure.</p>
+<p>Just two small notes : - for now : data frames is just an R name for tables - Run head() on the cars data. means you have to type : <code>head(cars)</code> to the console - swirl is an interactive program. It will write you information to the console. You have to actively start <code>swirl()</code> and stop <code>bye()</code> it.</p>
+<div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-17_a1bacd416346a60f1cee6cd507a6fa64">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"swirl"</span>)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(swirl)</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install_course</span>(<span class="st">"R Programming E"</span>)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># swirl()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once you are ready to start using the package, type <code>swirl()</code>. Note that if you want to quit swirl, you have to press Esc or write <code>bye()</code> to the console.</p>
 </section>
 
 </main>

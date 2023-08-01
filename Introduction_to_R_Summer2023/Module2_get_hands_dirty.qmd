@@ -1,0 +1,439 @@
+---
+title: "Module2 : Getting your hands dirty"
+author: "N. V. Schenk"
+format: html
+editor: source
+execute: 
+  cache: true
+---
+
+TODO HERE : add Beckermann Chapter 2 about data import + exercises!!
+
+```{r}
+#| label: requirements
+#| include: false
+# load and install necessary R packages
+# This is not shown in the html script.
+
+# install necessary R packages
+if(!require(dplyr)) install.packages("tidyverse")
+# if(!require(cowplot)) install.packages("cowplot")
+
+# load necessary R packages
+library(tidyverse)
+```
+
+
+This document describes Module 2 of the course "Introduction to R", held in Summer 2023 for the [Biodiversity Exploratories](www.biodiversity-exploratories.de).
+
+# Learning outcome
+
+- introduction to data visualisation
+- data types in R
+
+
+:::{.callout-tip}
+In order to learn coding, you need to code
+:::
+
+
+
+## Content
+
+This Module focuses on data visualisation with ggplot, and data import to R.
+
+TODO add table of content
+
+
+
+## Prerequisites
+
+... TODO
+
+# 1 Data Visualisation I : overview and play
+
+You have already created some plots in R, using the `plot` function from base R, and the `qplot` function from the `ggplot2` package.
+
+This chapter will take you through some visualisation techniques R can offer. The code below includes some more advanced R commands. You are absolutely not expected to understand each line of code. The goal of this chapter is (1) to practice running code that looks complicated, and (2) to experience some workflow in R, and to (3) hopefully motivate you to keep on track.
+
+Please just copy and paste the code to your script or console, and experience what happens.
+
+
+### R base plotting
+
+Without loading any visualisation package, R alone can create nice graphs. This chapter will show you how to create a scatterplot. The examples are taken from [sthda](http://www.sthda.com/english/wiki/scatter-plots-r-base-graphs#d-scatter-plots)
+
+R has some in-built datasets. Load the dataset `mtcars` :
+```{r}
+data("mtcars")
+```
+In order to get familiar with the dataset and what it is about, read (quickly) the information provided in the help function : 
+```{r}
+help(mtcars)
+```
+Print out the first 10 columns of the dataset, by using : 
+```{r}
+head(mtcars)
+```
+
+Create a scatter plot by running all the lines from the following code block: 
+```{r}
+x <- mtcars$wt
+y <- mtcars$mpg
+# Plot with main and axis titles
+# Change point shape (pch = 19) and remove frame.
+plot(x, y, main = "Main title",
+     xlab = "X axis title", ylab = "Y axis title",
+     pch = 19, frame = FALSE)
+# Add regression line
+abline(lm(y ~ x, data = mtcars), col = "blue")
+```
+
+Can you see a scatterplot appearing in RStudio?
+
+You can modify parts of the plot, by modifying parts of the code above. See what happens if we change the last line : We exchange the word "blue" with the word "red".
+
+```{r}
+x <- mtcars$wt
+y <- mtcars$mpg
+# Plot with main and axis titles
+# Change point shape (pch = 19) and remove frame.
+plot(x, y, main = "Main title",
+     xlab = "X axis title", ylab = "Y axis title",
+     pch = 19, frame = FALSE)
+# Add regression line
+abline(lm(y ~ x, data = mtcars), col = "red")
+```
+
+What happens? The color of the regression line changes from blue to red.
+
+::: {.panel-tabset}
+
+### Exercise
+
+Change the color of the regression line to pink.
+
+### Hint
+
+To do so, again run all the above lines, modifying only the last row.
+
+### Solution
+
+```{r}
+x <- mtcars$wt
+y <- mtcars$mpg
+# Plot with main and axis titles
+# Change point shape (pch = 19) and remove frame.
+plot(x, y, main = "Main title",
+     xlab = "X axis title", ylab = "Y axis title",
+     pch = 19, frame = FALSE)
+# Add regression line
+abline(lm(y ~ x, data = mtcars), col = "pink")
+```
+
+:::
+
+You see, by modifying just parts of the original code, you can modify parts of the plot. Usually, the parts you can easiest modify are the colors and the titles (plot titles and axes titles).
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Try to modify the title of the plot, naming it "New title" (or any other name you feel like). To do so, run all the code lines from the above code block again, adding a modification in only one of the lines.
+
+
+### Hint
+
+The current title of the plot is "Main title". Check the above block of code for the words "Main title". Closely inspect the fifth line (line 5 of the code block).
+
+### Solution
+
+```{r}
+x <- mtcars$wt
+y <- mtcars$mpg
+# Plot with main and axis titles
+# Change point shape (pch = 19) and remove frame.
+plot(x, y, main = "New title",
+     xlab = "X axis title", ylab = "Y axis title",
+     pch = 19, frame = FALSE)
+# Add regression line
+abline(lm(y ~ x, data = mtcars), col = "blue")
+```
+
+:::
+
+
+Play around with this plot, changing the title and the color of the regression line, maybe even more parameters.
+
+Above, you learned that the parts you can easiest modify are the colors and the titles (plot titles and axes titles). Did you observe that the titles are all highlighted in the same color?
+
+
+
+**Additional : ** 
+
+In the [sthda tutorial](http://www.sthda.com/english/wiki/scatter-plots-r-base-graphs#d-scatter-plots), you find instruction to do a 3D scatterplot. Follow those instructions.
+
+
+### Additional : Contour plots
+
+Run the below code to generate a nice colorful plot of the Manuga Whau volcano in Auckland.
+```{r}
+data("volcano")
+library(grDevices)
+library(graphics)
+filled.contour(volcano, color.palette = terrain.colors, asp = 1)
+title(main = "volcano data: filled contour map")
+```
+
+You find a description of the dataset [here](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/volcano.html) and by running `help(volcano)`.
+
+
+### plotting with ggplot2
+
+`ggplot2` is a powerful and often used package for visualisation. Below you find an example of a ggplot.
+```{r}
+library(ggplot2)
+```
+
+
+Run the code and inspect the plot you just created.
+
+Step 1 : create a data frame, a table of data which is used for plotting. In R, you can create such tables using the below code : 
+```{r}
+set.seed(1234)
+wdata = data.frame(
+        gender = factor(rep(c("F", "M", "D"), each=200)),
+        weight = c(rnorm(200, 55), rnorm(200, 58), c(rnorm(100, 55), rnorm(100, 58))))
+head(wdata)
+```
+You just created a table (R calls this format a `data.frame`), which stores information of 200 persons gender and weight.
+
+The below code creates a boxplot
+```{r}
+# Basic box plot from data frame
+ggplot(data = wdata, aes(x = gender, y = weight, fill = gender)) + 
+         geom_boxplot()
+```
+
+The below code creates a violin plot
+```{r}
+ggplot(data = wdata, aes(x = gender, y = weight, fill = gender)) + 
+         geom_violin()
+```
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a plot of the dataset "wdata", by recycling the code from the boxplot, replacing "geom_boxplot()" with "geom_point()"
+
+
+### Solution
+
+```{r}
+# Basic bar plot from data frame
+ggplot(data = wdata, aes(x = gender, y = weight, fill = gender)) + 
+         geom_point()
+```
+
+:::
+
+You see, that coding (especially plotting) can consist of copy-pasting code from the internet. A great source of different types of plots, which you can usually easily recreate is the [R Graph Gallery](https://r-graph-gallery.com/). This website works as a gallery. You can surf through and select a plot you would like to create (usually with your own data).
+
+Let's try it out, and recreate this [Basic ridgeline plot](https://r-graph-gallery.com/294-basic-ridgeline-plot.html#color). Please click on the link and read the introductory words. Then, copy paste the code from the website, or from below (it's the same code).
+```{r}
+# library
+library(ggridges)
+library(ggplot2)
+ 
+# Diamonds dataset is provided by R natively
+#head(diamonds)
+ 
+# basic example
+ggplot(diamonds, aes(x = price, y = cut, fill = cut)) +
+  geom_density_ridges() +
+  theme_ridges() + 
+  theme(legend.position = "none")
+```
+
+
+**Additional** : create more plots from this [sthda](http://www.sthda.com/english/wiki/be-awesome-in-ggplot2-a-practical-guide-to-be-highly-effective-r-software-and-data-visualization) tutorial, or from the [R Graph Gallery](https://r-graph-gallery.com/).
+
+
+
+::: {.callout-tip icon=false}
+
+### Checkpoint
+
+Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
+
+
+# 2 Data Visualisation II : learning the basics
+
+Please work through Chapter 2 of R4DS, and solve the book exercises after. Note that you find solutions [here](https://r4ds-solutions.nhsrcommunity.com/). Record any topics you have difficulties to understand, or where you wish to get more input.
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Visualise the distribution of the numerical varialbe "Sepal.Length" from the dataset `iris` with a histogram.
+
+```{r}
+data(iris)
+head(iris)
+```
+
+### Solution
+
+```{r}
+ggplot(iris, aes(x = Sepal.Length)) +
+  geom_histogram(binwidth = 0.5)
+```
+
+:::
+
+
+
+::: {.callout-tip icon=false}
+
+### Checkpoint
+
+Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
+
+
+
+# 3 Data import
+
+Please work through Chapter
+
+
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+bli
+
+
+### Solution
+
+bla
+
+:::
+
+
+
+
+
+
+TODO : Hadley Chapter 1
+Some impressive stuff you can already do (e.g. firework)
+ome impressive stuff you can already do (e.g. firework, volcano plot)
+Simple Data visualisation (motivating examples!)
+
+Data formats in R (quickly → learn on the run) incl. tibble
+
+
+
+
+
+
+
+
+
+
+# Example code
+
+To learn more about Quarto see <https://quarto.org>.
+
+[linked phrase](http://example.com)
+
+When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+2 * 2
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+
+Including code which is not shown at all in the document : 
+```{r}
+#| label: setup
+#| include: false
+
+library(tidyverse)
+data(diamonds)
+
+smaller <- diamonds |> 
+  filter(carat <= 2.5)
+```
+... there is a big chunk of code between this sentence and the above one.
+
+
+We have data about `r nrow(diamonds)` diamonds.
+Only `r nrow(diamonds) - nrow(smaller)` are larger than 2.5 carats.
+The distribution of the remainder is shown below:
+
+```{r}
+#| label: plot-smaller-diamonds
+#| echo: false
+
+smaller |> 
+  ggplot(aes(x = carat)) + 
+  geom_freqpoly(binwidth = 0.01)
+```
+
+
+
+::: {.panel-tabset}
+
+## Plot
+
+```{r}
+plot(diamonds$clarity, diamonds$carat)
+```
+
+## Data
+
+```{r}
+head(diamonds)
+```
+
+:::
+
+
+::: {.border}
+This content can be styled with a border
+:::
+
+:::{.callout-note}
+Note that there are five types of callouts, including: 
+`note`, `tip`, `warning`, `caution`, and `important`.
+:::
+
