@@ -1,7 +1,10 @@
 ---
 title: "Module1: Hello, World!"
 author: "N. V. Schenk"
-format: html
+format: 
+    html:
+      toc: true
+      self-contained: true
 editor: source
 execute: 
   cache: true
@@ -340,7 +343,7 @@ Your script could look e.g. like this
 
 ```
 # Amazing R User (your name)
-# 18 August, 2023
+# 15 August, 2023
 # This is my first R script. I create a vector and call it.
 # No R packages are required.
 

@@ -1,7 +1,10 @@
 ---
 title: "Module2 : Getting your hands dirty"
 author: "N. V. Schenk"
-format: html
+format: 
+    html:
+      toc: true
+      self-contained: true
 editor: source
 execute: 
   cache: true
@@ -29,7 +32,7 @@ This document describes Module 2 of the course "Introduction to R", held in Summ
 # Learning outcome
 
 - introduction to data visualisation
-- data types in R
+- import data into R
 
 
 :::{.callout-tip}
@@ -40,9 +43,12 @@ In order to learn coding, you need to code
 
 ## Content
 
-This Module focuses on data visualisation with ggplot, and data import to R.
+This Module focuses on data visualisation with ggplot, and data import to R. 
+
+- 2 separate parts : start wherever you want. Data import is a more tricky topic, many people have problems with. --> start when you have energy
 
 TODO add table of content
+TODO should we start with visualisation?
 
 
 
@@ -50,7 +56,7 @@ TODO add table of content
 
 ... TODO
 
-# 1 Data Visualisation I : overview and play
+# 1.1 Data Visualisation I : overview and play
 
 You have already created some plots in R, using the `plot` function from base R, and the `qplot` function from the `ggplot2` package.
 
@@ -277,7 +283,7 @@ I will collect the exercises of everyone during the course, and provide them to 
 :::
 
 
-# 2 Data Visualisation II : learning the basics
+# 1.2 Data Visualisation II : learning the basics
 
 Please work through Chapter 2 of R4DS, and solve the book exercises after. Note that you find solutions [here](https://r4ds-solutions.nhsrcommunity.com/). Record any topics you have difficulties to understand, or where you wish to get more input.
 
@@ -318,9 +324,188 @@ I will collect the exercises of everyone during the course, and provide them to 
 
 
 
-# 3 Data import
+# 2.1 Data import
 
-Please work through Chapter
+Please work through Chapter 2.1 of Beckermann. As always, record any topics you have difficulties to understand, or where you wish to get more input.
+
+Once you reach Chapter 2.2, only read the first small paragraph on page 40. When you reach page 41, follow the important note below.
+
+:::{.callout-important}
+When you reach page 41, I recommend you create a different folder for the course than recommended in the book. I recommend you create a folder : "Intro_to_R" instead of "MyFirstAnalysis" (or use the folder you have already created). Make sure the folder name does NOT contain any whitespace (space, like this " "). Then proceed as recommended in the book, creating a folder "analyses" and a folder "datasets" within this folder. Make sure you EITHER use a capital letter as first letter ( like in "Analyses") or not (like in "analyses"). It does not matter if you use a capital letter or not, but it matters that you take this decision conciously, because R is what is called **case sensitive**. That means, the word "Analysis" is NOT the same as the word "analysis". Note that you find an example below.
+:::
+
+Now, read Chapter 2.2.1. From paragraph 2.2.2 on, the book will show you four methods of importing data. Note that the below example (which we treated in the introduction) is not mentioned in detail. I therefore recommend you work through this example again, before reading Chapter 2.2.2 and so on.
+
+
+## Example data import
+
+The following folders are created: `Documents/Intro_to_R_course/analyses` and `Documents/Intro_to_R_course/datasets`. 
+
+All the 46 datasets mentioned in the book (download from [here]()) are saved in the folder `Documents/Intro_to_R_course/datasets`.
+
+Following the instructions from the book, the following file is created : A file called "DataImportExample.R" which is stored in the "analyses" folder. In other words, the following file is created : `Documents/Intro_to_R_course/analyses/DataImportExample.R`. It is an R script, which contains the following content : 
+```{r}
+# Amazing R User (your name)
+# 17 August, 2023
+# This is my first attempt to import data into R.
+# No R packages are required.
+
+```
+
+Identify the dataset `compensation.csv` in the folder `Documents/Intro_to_R_course/datasets`, to check if it is there. If you want, you can open it with Excel and look at it.
+
+In the book, there is an example about the import dataset tool and the `file.choose()` function. This example does not cover this option, but skips Chapter 2.2.2 and 2.2.3 and jumps to Chapter 2.2.4.
+
+**Setting the working directory** : We now have to set the working directory for R, that means, we have to tell R where it needs to look for datasets.
+
+We can check the current working directory (where is R at the moment?) like this : 
+```{r}
+getwd()
+```
+The command prints out a working directory, in my case it is : `"/home/novalid/Documents/github/Synthesis_courses_workshops"`. It will look slightly different for you if you do not work with a Linux Operation system. But the main parts are the same. The working directory tells me, that I am working in a computer, within a user called "novalid", in a folder called "Documents", in a subfolder called "github" and in a sub-sub-folder called "Synthesis_courses_workshops".
+
+In Windows operation systems, the path usually looks somewhat like this : `C:/Users/username/Documents` or this `C:\Users\username\Documents` and so on. The important part is, the path starts with **C:**, because in windows systems, we usually work in a file partition called "C".
+
+In Mac operation systems, the path usually look somewhat like this : 
+`/Users/username/Documents`.
+
+You will agree that the example path "/home/novalid/Documents/github/Synthesis_courses_workshops" is not the same place as `Documents/Intro_to_R_course/datasets`.
+
+That means, I have to change the current working directory to the place I want R to look for datasets, which is `Documents/Intro_to_R_course`
+
+To do so, I can use the function `setwd()`. The good news is, that RStudio has a feature called "tab-completion". That means, if you start typing a word in the console or within a script, you can press "Tab" (the right arrow on your keyboard), and RStudio suggests you how you could complete the word you just started typing.
+
+Try this out : 
+Create a vector of numbers from 3 to 9 with step size of 0.2, called `a_very_very_long_variable_name_which_takes_a_long_time_to_type`.
+```{r}
+a_very_very_long_variable_name_which_takes_a_long_time_to_type <- seq(3, 9, 0.2)
+```
+When you want to print the vector to the console, you usually type the name of the vector and press enter : 
+```{r}
+a_very_very_long_variable_name_which_takes_a_long_time_to_type
+```
+Now, in your new script "DataImportExample.R" try typing just the beginning of the vector, and press Tab, and see what happens.
+
+You should observe a very little window showing the whole long name appearing after you started typing the name of the vector. When you press Tab, the whole name is completed immediately.
+
+Now that you have experienced the "tab-completion" function of RStudio, we are ready to set the working directory of the file "DataImportExample.R". 
+
+Within the file "DataImportExample.R", type the following, depending on your operation system : 
+- working on Mac OS : type `setwd("/Users/`
+- on Windows : type `setwd("C:/` or `setwd("C:\`
+- on Linux : type `setwd("~/` (note that the "~" is a special character used in Linux systems to make your life easier.)
+
+You should now see that RStudio is already suggesting you folders. Try navigating along the file path to find the course folders with the datasets. In this examples, it is : `Documents/Intro_to_R_course/datasets`. In my Linux OS, I can click (or select and "Tab") "Documents". Either the little "tab-completion" window is still open after chosing "Documents", or you click "Tab" again to chose the folder "Intro_to_R_course".
+
+In my operating system, I just created the following R command : `setwd("~/Documents/Intro_to_R_course/datasets")`. Click "Enter" to run the command.
+
+Congratulations, you just set your working directory to where the datasets are stored!
+
+Now, we can use the function `read.csv()` to import our first dataset!
+
+Try running : 
+```{r}
+#| code-overflow: wrap
+compensation <- read.csv("compensation.csv")
+```
+
+Now, the file "compensation.csv" is stored in a variable called `compensation`. You can look at the first ten lines of the new table as following : 
+```{r}
+head(compensation)
+```
+
+Very good.
+
+:::
+
+## Beckermann Ch 2.2.2 - End
+
+Now, work through Beckermann Chapter 2.2.2 until the end of 2.5 (excluding the Appendix). You will now see four more options to import data into R. Don't worry if you do not get all of them, data import is sometimes hard to understand. It's one of these topics you just have to practice a lot, and learn by doing. For now, it's absolutely fine if you still don't really understand WHAT you are doing, the goal is that after this lecture, you have a PROCEDURE that works more or less. Read the discussion point below before starting to read Chapter 2.2.2. If you run into problems, consider the troubleshooting chapter 2.4 or ask me.
+
+
+::: {.callout-note icon=false}
+
+### Discussion point data import
+
+Please record your difficulties of data import. Try to figure out pro and contra points for the different data import methods. Try to find a favorite method and be ready to report in our discussion of module 2. (Note that the import function `read_csv` from the next section is part of this discussion point as well.)
+
+:::
+
+
+# 2.2 Data import with `tidyverse`
+
+This course covers an introduction to the `tidyverse` package group, and this package group has a data import function `read_csv`. It is introduced in Chapter 8 of R4DS, however, the chapter already uses some data processing functions and could therefore still be a bit advanced. We will nevertheless get to know the `read_csv` function right now.
+
+Please work through Chapter 8 of R4DS, only until the chapter 8.2.1 starts (don't read 8.2.1). Solve the below exercises after.
+
+::: {.panel-tabset}
+
+### Exercise
+
+Use the `read_csv` function to read in the dataset "compensation.csv". Record what happens.
+
+### Solution
+
+```{r}
+compensation <- read_csv("compensation.csv")
+```
+
+The dataset is read in. The function `read_csv` gives more output, it e.g. mentions that the column types are not specified. For the moment, we ignore this warning (and we will cover data types in detail later), and check if the dataset looks okay : 
+
+```{r}
+head(compensation)
+```
+As you just learned, you can also use the `glimpse` function : 
+```{r}
+glimpse(compensation)
+```
+
+The output of the head function looks slightly different as well. This is because the dataset is read in with a function from the `tidyverse` package group, and the table of data is stored as an object called "tibble". This is additional information, the goal here is that you are able to read in the data.
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+This exercise is about missing data. As you learned, missing observations are encoded as "NA" in the data files.
+
+Open the dataset "compensation.csv" with Excel, and replace a random number with "NA". Save the changed dataset as "compensation_NA.csv".
+
+Import this dataset using the `read_csv()` function. Record what happens with the "NA" value.
+TODO finish exercise!! see what happens if already NA (--> R knows what to do) versus leaving empty cells (--> have to specify that this should be NA)
+
+### Solution
+
+```{r}
+
+```
+
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+bli
+NA values
+
+### Solution
+
+bla
+
+:::
+
+
+
+
+
+
+
+
 
 
 
