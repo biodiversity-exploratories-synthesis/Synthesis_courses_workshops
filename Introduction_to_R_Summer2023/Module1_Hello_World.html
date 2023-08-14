@@ -3146,6 +3146,7 @@ return!"\t\n\x0B\f\r                　\u2028\u2029
   <li><a href="#r4ds-1.4" id="toc-r4ds-1.4" class="nav-link" data-scroll-target="#r4ds-1.4">R4DS 1.4</a></li>
   <li><a href="#beckerman-1.10---1.11" id="toc-beckerman-1.10---1.11" class="nav-link" data-scroll-target="#beckerman-1.10---1.11">Beckerman 1.10 - 1.11</a></li>
   </ul></li>
+  <li><a href="#your-homework" id="toc-your-homework" class="nav-link" data-scroll-target="#your-homework">Your homework</a></li>
   <li><a href="#additional-play-and-practice-with-swirl" id="toc-additional-play-and-practice-with-swirl" class="nav-link" data-scroll-target="#additional-play-and-practice-with-swirl">Additional : Play and practice with swirl</a></li>
   </ul>
 </nav>
@@ -3175,7 +3176,7 @@ return!"\t\n\x0B\f\r                　\u2028\u2029
 
 </header>
 
-<p>This document describes Module 1 of the course “Introduction to R”, held in Summer 2023 for the <a href="www.biodiversity-exploratories.de">Biodiversity Exploratories</a>.</p>
+<p>This document describes Module 1 of the course “Introduction to R”, held in Summer 2023 for the <a href="www.biodiversity-exploratories.de">Biodiversity Exploratories</a> by the <a href="https://www.biodiversity-exploratories.de/en/projects/core-project-10-biodiversity-synthesis/">Synthesis Team</a>.</p>
 <section id="learning-outcome" class="level1">
 <h1>Learning outcome</h1>
 <ul>
@@ -3199,19 +3200,19 @@ Tip
 </div>
 <section id="content" class="level2">
 <h2 class="anchored" data-anchor-id="content">Content</h2>
-<p>this Module is splitted into TODO_number chapters. The chapters are intented to be worked on sequentially, but feel free to try working on them in any other order (please report back if recommendable).</p>
-<p>TODO add table of content</p>
+<p>This Module is splitted into two parts. The first gives an introduction to R, and the second one is a small intro to the homework. You find an additional chapter in the end, where you can play with a package and deepen your knowledge. The chapters are intented to be worked on sequentially, but feel free to try working on them in any other order.</p>
+<p>Note that this is the first time this course is held in this form, please report back any needs/ wishes and feedback.</p>
 </section>
 <section id="prerequisites" class="level2">
 <h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
-<p>A prerequisite of this course is having R and RStudio installed. If you did not do so, please follow Chapter 1.2 in “Beckmann”.</p>
+<p>A prerequisite of this course is having R and RStudio installed. If you did not do so, please follow Chapter 1.2 in the “Beckerman book”.</p>
 </section>
 </section>
 <section id="hello-rstudio" class="level1">
 <h1>1.1 Hello, RStudio!</h1>
 <p><strong>Aim of this Module</strong> : getting familiar with RStudio.</p>
-<p><strong>Material</strong> : Beckerman, Ch 1.4 - 1.11 and R4DS, Ch TODO (…)</p>
-<p>During this chapter, you will be working with this document, and with Beckerman, Ch 1. While working througn this chapter, try to develop the habit to actively code while reading. Every time you see a code, try it out in your console! This whole chapter is about experiencing R. The more things you try out, the more you will develop a feeling about programming, and the easier it get to learn new things.</p>
+<p><strong>Material</strong> : Beckerman, Ch 1.4 - 1.11 and R4DS, Ch 1.4</p>
+<p>During this chapter, you will be working with this document, and with Beckerman, Ch 1. While working through this chapter, try to develop the habit to actively code while reading. Every time you see a piece of code, try it out in your console! This whole chapter is about experiencing R. The more things you try out, the more you will develop a feeling about programming, and the easier it will be for you to learn new things.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -3222,15 +3223,14 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Most of the time we have to understand before we can act. In programming, it is the other way around. We have to act first in order to understand.</p>
+<p>Most of the time we have to understand before we can act. In programming, it is the other way around. We have to act first, in order to understand.</p>
 </div>
 </div>
-<p>One of the key insights about learning how to program is that you have to experience it in order to understand. This can sometimes be difficult, because we are usually trained to understand first and act second, not to act before understanding. However, many concepts of programming are hard to understand without having experienced them, but easy to understand after you have already applied them.</p>
-<p>During this chapter, practice to establish an active way of reading, having RStudio and the console open, and applying the exercises. Additionally, try out new things! Most examples can be slightly modified by you. You will see examples of this as you go through this module.</p>
+<p>One of the key insights about learning programming is that you have to experience it in order to understand it. This can sometimes be difficult, because we are usually trained to understand first, and act second. We are usually trained against acting before understanding. However, many concepts of programming are hard to understand without having experienced them, but easy to understand after you have already applied them.</p>
+<p>During this chapter, practice to establish an active way of reading, having RStudio and the console open, and solving the exercises. Additionally, try out new things! Most examples can be slightly modified by you. You will see examples of this as you go through this module.</p>
 <section id="beckerman-1.4---1.5" class="level2">
 <h2 class="anchored" data-anchor-id="beckerman-1.4---1.5">Beckerman 1.4 - 1.5</h2>
-<p>Please work through “Beckerman” Ch 1.4 and 1.5, and solve the below exercises after.</p>
-<p>Please note the below discussion point, where the “Beckerman” book is recommending something I do not agree with.</p>
+<p>Please work through “Beckerman” Ch 1.4 and 1.5, and solve the below exercises after. Please note the below discussion point, where the “Beckerman” book is recommending a practice I (and many others) do not agree with.</p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -3387,13 +3387,16 @@ Discussion point Beckerman Ch 1.6.1
 </div>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href>Solution</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href>Hint</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-3" role="tab" aria-controls="tabset-5-3" aria-selected="false" href>Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 <p>Please give us the sequence of numbers that begins at 73, ends at 156, and has a 0.23 unit difference between the numbers.</p>
 <p>Did you notice something special?</p>
 </div>
 <div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
+<p>Where does the sequence start, and where does the sequence stop? Is it exactly the numbers you gave? Why?</p>
+</div>
+<div id="tabset-5-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-3-tab">
 <div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-6_529f356d5537f761ba9829b66f415bac">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">73</span>, <span class="at">to =</span> <span class="dv">156</span>, <span class="at">by =</span> <span class="fl">0.23</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -3547,12 +3550,12 @@ length</code></pre>
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Checkpoint
+Checkpoint I
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
-<p>TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me</p>
+<p>Submit the exercises via ILIAS, under Checkpoint I.</p>
 <p>I will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
 </div>
 </div>
@@ -3570,9 +3573,8 @@ Discussion point
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>During the discussion of Module 1, we will discuss about this practice of applying all exercises from the book and slightly modifying them - in order to maximise the practice. Please record your experiences and report them in class, during the discussion of Module 1.</p>
-<p>Is this approach easy/difficult for you? Do you need anything to make it easier? Do you have some helpful advice/ insight for the class?</p>
-<p>TODO record this discussion point.</p>
+<p>During the discussion of Module 1, we will discuss about the practice of applying all exercises from the book and slightly modifying them - in order to maximize your programming practice. Please record your experiences and report them in class, during the discussion of Module 1.</p>
+<p>Is this approach easy/difficult for you? Do you need anything to make it easier? Do you have some helpful advice/ insight for the class? What motivates you to keep on?</p>
 </div>
 </div>
 <p>Please work through “Beckerman” Ch 1.6 - 1.9 (including the package installation in 1.8), and solve the below exercises after.</p>
@@ -3808,12 +3810,12 @@ to compute regression coefficients, too.
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Checkpoint
+Checkpoint II
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
-<p>TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email</p>
+<p>Submit the exercises via ILIAS, under Checkpoint II.</p>
 <p>I will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
 </div>
 </div>
@@ -3845,17 +3847,69 @@ Checkpoint
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Checkpoint
+Checkpoint III
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Please invent and write down 1-2 exercises including solutions about the past two sections. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
-<p>TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email</p>
+<p>Submit the exercises via ILIAS, under Checkpoint II.</p>
 <p>I will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
-<p>–&gt; past 2 sections</p>
 </div>
 </div>
 </section>
+</section>
+<section id="your-homework" class="level1">
+<h1>Your homework</h1>
+<p>The homework assignment is your chance to <strong>independently work on a topic of your choice</strong> and receive feedback on it. It acts as an intermediate step to working independently in R after this course.</p>
+<p>The <strong>aims</strong> of the homework are :</p>
+<ul>
+<li>deepen knowledge about one of the topics we touch, or a topic of your choice</li>
+<li>Write an R tutorial (R script or Report in Quarto/ Rmarkdown)</li>
+<li>Get feedback from me if wanted</li>
+<li>Practice your workflow of getting help</li>
+<li>Kickstart to exploring things on your own.</li>
+</ul>
+<p>Right now, it is probably hard for you to already think about a topic you could pick, as you have not seen all functionalities of R. But keep the homework in mind, and as you go through the modules, think about where you would like to invest more time.</p>
+<p><strong>Form of the homework</strong></p>
+<p>The homework will be written in R, either in the form of an R script (as you have already created one during this module), or in the form of an R report in Quarto/ Rmarkdown. This course did not cover yet how to create R reports, we will cover this briefly in a later module. With RStudio, it is possible to combine flow text and R code to a full report, as e.g. this tutorial does, which is written in R using Quarto.</p>
+<p><strong>Example topics</strong> :</p>
+<ul>
+<li>Explore a method/ practice you use in your work.</li>
+<li>Writing reports in R with Quarto / Rmarkdown. This tutorial is written in R, it’s not hard to learn how to make one your own.</li>
+<li>Explore and explain the use of a certain package discussed during the course
+<ul>
+<li>a package you considered for your analysis</li>
+<li>tidyverse</li>
+</ul></li>
+<li>A small tutorial/ cheatsheet about a coding practice
+<ul>
+<li>data wrangling</li>
+<li>data exploration</li>
+</ul></li>
+<li>A summary about a current topic in programming for ecology
+<ul>
+<li>reproducible coding</li>
+<li>code style</li>
+<li>version control with git</li>
+</ul></li>
+<li>Improve a script which is important for your work (e.g one that you will use possibly again)
+<ul>
+<li>Comment it</li>
+<li>Give it a nice structure</li>
+<li>Provide data, make it reproducible</li>
+</ul></li>
+<li>A summary about a method of data analysis used ecology, e.g
+<ul>
+<li>Linear modelling</li>
+<li>Mixed modelling</li>
+<li>Principal Component Analysis</li>
+</ul></li>
+<li>A small tutorial of a plotting practice (how to change colours, combine multiple plots)
+<ul>
+<li>Plotting interaction effects (e.g. ggeffects package)</li>
+<li>Plotting results of mixed effects models (e.g. ggeffects package)</li>
+</ul></li>
+</ul>
 </section>
 <section id="additional-play-and-practice-with-swirl" class="level1">
 <h1>Additional : Play and practice with swirl</h1>

@@ -25,7 +25,7 @@ library(tidyverse)
 ```
 
 
-This document describes Module 1 of the course "Introduction to R", held in Summer 2023 for the [Biodiversity Exploratories](www.biodiversity-exploratories.de).
+This document describes Module 1 of the course "Introduction to R", held in Summer 2023 for the [Biodiversity Exploratories](www.biodiversity-exploratories.de) by the [Synthesis Team](https://www.biodiversity-exploratories.de/en/projects/core-project-10-biodiversity-synthesis/).
 
 # Learning outcome
 
@@ -42,36 +42,35 @@ In order to learn coding, you need to code
 
 ## Content
 
-this Module is splitted into TODO_number chapters. The chapters are intented to be worked on sequentially, but feel free to try working on them in any other order (please report back if recommendable).
+This Module is splitted into two parts. The first gives an introduction to R, and the second one is a small intro to the homework. You find an additional chapter in the end, where you can play with a package and deepen your knowledge. The chapters are intented to be worked on sequentially, but feel free to try working on them in any other order.
 
-TODO add table of content
+Note that this is the first time this course is held in this form, please report back any needs/ wishes and feedback.
+
 
 ## Prerequisites
 
-A prerequisite of this course is having R and RStudio installed. If you did not do so, please follow Chapter 1.2 in "Beckmann".
+A prerequisite of this course is having R and RStudio installed. If you did not do so, please follow Chapter 1.2 in the "Beckerman book".
 
 
 # 1.1 Hello, RStudio!
 
 **Aim of this Module** : getting familiar with RStudio.
 
-**Material** : Beckerman, Ch 1.4 - 1.11 and R4DS, Ch TODO (...)
+**Material** : Beckerman, Ch 1.4 - 1.11 and R4DS, Ch 1.4
 
-During this chapter, you will be working with this document, and with Beckerman, Ch 1. While working througn this chapter, try to develop the habit to actively code while reading. Every time you see a code, try it out in your console! This whole chapter is about experiencing R. The more things you try out, the more you will develop a feeling about programming, and the easier it get to learn new things.
+During this chapter, you will be working with this document, and with Beckerman, Ch 1. While working through this chapter, try to develop the habit to actively code while reading. Every time you see a piece of code, try it out in your console! This whole chapter is about experiencing R. The more things you try out, the more you will develop a feeling about programming, and the easier it will be for you to learn new things.
 
 :::{.callout-important}
-Most of the time we have to understand before we can act. In programming, it is the other way around. We have to act first in order to understand.
+Most of the time we have to understand before we can act. In programming, it is the other way around. We have to act first, in order to understand.
 :::
 
-One of the key insights about learning how to program is that you have to experience it in order to understand. This can sometimes be difficult, because we are usually trained to understand first and act second, not to act before understanding. However, many concepts of programming are hard to understand without having experienced them, but easy to understand after you have already applied them.
+One of the key insights about learning programming is that you have to experience it in order to understand it. This can sometimes be difficult, because we are usually trained to understand first, and act second. We are usually trained against acting before understanding. However, many concepts of programming are hard to understand without having experienced them, but easy to understand after you have already applied them.
 
-During this chapter, practice to establish an active way of reading, having RStudio and the console open, and applying the exercises. Additionally, try out new things! Most examples can be slightly  modified by you. You will see examples of this as you go through this module.
+During this chapter, practice to establish an active way of reading, having RStudio and the console open, and solving the exercises. Additionally, try out new things! Most examples can be slightly modified by you. You will see examples of this as you go through this module.
 
 ## Beckerman 1.4 - 1.5
 
-Please work through "Beckerman" Ch 1.4 and 1.5, and solve the below exercises after.
-
-Please note the below discussion point, where the "Beckerman" book is recommending something I do not agree with.
+Please work through "Beckerman" Ch 1.4 and 1.5, and solve the below exercises after. Please note the below discussion point, where the "Beckerman" book is recommending a practice I (and many others) do not agree with.
 
 ::: {.callout-note icon=false}
 
@@ -182,6 +181,10 @@ seq(from = 100, to = 200, by = 0.5)
 Please give us the sequence of numbers that begins at 73, ends at 156, and has a 0.23 unit difference between the numbers.
 
 Did you notice something special?
+
+### Hint
+
+Where does the sequence start, and where does the sequence stop? Is it exactly the numbers you gave? Why?
 
 ### Solution
 
@@ -295,11 +298,11 @@ and adding this to the vector a. We end up with the vector :
 
 ::: {.callout-tip icon=false}
 
-### Checkpoint
+### Checkpoint I
 
 Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
 
-TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me
+Submit the exercises via ILIAS, under Checkpoint I.
 
 I will collect the exercises of everyone during the course, and provide them to you for the last module.
 
@@ -315,12 +318,10 @@ In the previous section, you were given many additional exercises. The aim of th
 
 ### Discussion point
 
-During the discussion of Module 1, we will discuss about this practice of applying all exercises from the book and slightly modifying them - in order to maximise the practice.
+During the discussion of Module 1, we will discuss about the practice of applying all exercises from the book and slightly modifying them - in order to maximize your programming practice.
 Please record your experiences and report them in class, during the discussion of Module 1.
 
-Is this approach easy/difficult for you? Do you need anything to make it easier? Do you have some helpful advice/ insight for the class?
-
-TODO record this discussion point.
+Is this approach easy/difficult for you? Do you need anything to make it easier? Do you have some helpful advice/ insight for the class? What motivates you to keep on?
 
 :::
 
@@ -579,11 +580,11 @@ from other humans:
 
 ::: {.callout-tip icon=false}
 
-### Checkpoint
+### Checkpoint II
 
 Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
 
-TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email
+Submit the exercises via ILIAS, under Checkpoint II.
 
 I will collect the exercises of everyone during the course, and provide them to you for the last module.
 
@@ -625,17 +626,62 @@ If you have enough time, feel free to read Appendix 1b as well.
 
 ::: {.callout-tip icon=false}
 
-### Checkpoint
+### Checkpoint III
 
 Please invent and write down 1-2 exercises including solutions about the past two sections. You can slightly modify one of the above or the book exercises, or think about a new one.
 
-TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email
+Submit the exercises via ILIAS, under Checkpoint II.
 
 I will collect the exercises of everyone during the course, and provide them to you for the last module.
 
---> past 2 sections
-
 :::
+
+
+
+# Your homework
+
+The homework assignment is your chance to **independently work on a topic of your choice** and receive feedback on it. It acts as an intermediate step to working independently in R after this course.
+
+The **aims** of the homework are : 
+
+- deepen knowledge about one of the topics we touch, or a topic of your choice
+- Write an R tutorial (R script or Report in Quarto/ Rmarkdown)
+- Get feedback from me if wanted
+- Practice your workflow of getting help
+- Kickstart to exploring things on your own.
+
+Right now, it is probably hard for you to already think about a topic you could pick, as you have not seen all functionalities of R. But keep the homework in mind, and as you go through the modules, think about where you would like to invest more time.
+
+**Form of the homework**
+
+The homework will be written in R, either in the form of an R script (as you have already created one during this module), or in the form of an R report in Quarto/ Rmarkdown. This course did not cover yet how to create R reports, we will cover this briefly in a later module. With RStudio, it is possible to combine flow text and R code to a full report, as e.g. this tutorial does, which is written in R using Quarto.
+
+
+**Example topics** : 
+
+- Explore a method/ practice you use in your work.
+- Writing reports in R with Quarto / Rmarkdown. This tutorial is written in R, it's not hard to learn how to make one your own.
+- Explore and explain the use of a certain package discussed during the course
+    - a package you considered for your analysis
+    - tidyverse
+- A small tutorial/ cheatsheet about a coding practice
+    - data wrangling
+    - data exploration
+- A summary about a current topic in programming for ecology
+    - reproducible coding
+    - code style
+    - version control with git
+- Improve a script which is important for your work (e.g one that you will use possibly again)
+    - Comment it
+    - Give it a nice structure
+    - Provide data, make it reproducible
+- A summary about a method of data analysis used ecology, e.g
+    - Linear modelling
+    - Mixed modelling
+    - Principal Component Analysis
+ - A small tutorial of a plotting practice (how to change colours, combine multiple plots)
+    - Plotting interaction effects (e.g. ggeffects package)
+    - Plotting results of mixed effects models (e.g. ggeffects package)
 
 
 
