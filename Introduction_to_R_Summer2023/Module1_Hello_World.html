@@ -3655,9 +3655,9 @@ my_first_vector
 <p>Load the package <code>ggplot2</code>. This is a package used for plotting.</p>
 <p>Create the a vector from 1 to 240 with stepsize 1, and call it <code>a</code>. Create a second vector <code>b</code>, which is the square of vector <code>a</code>.</p>
 <p>Create a plot of vector a and b, by using a function from the package <code>ggplot2</code>, adding the following code (don’t worry if you don’t understand the details, this will be covered later):</p>
-<pre><code>qplot(x = a, y = b)
-ggplot(data.frame(a, b), aes(x = a, y = b)) + 
+<pre><code>ggplot(data.frame(a, b), aes(x = a, y = b)) + 
   geom_line()</code></pre>
+<p><em>note</em> : You will sometimes find the function <code>qplot(x = a, y = b)</code> in books, which creates a similar plot, but is not used so often any more.</p>
 </div>
 <div id="tabset-11-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-11-2-tab">
 <div class="cell" data-hash="Module1_Hello_World_cache/html/unnamed-chunk-14_f4020e2eb5c00f4625ac0db4b4ae841c">

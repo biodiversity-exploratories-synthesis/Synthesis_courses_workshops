@@ -417,10 +417,11 @@ Create the a vector from 1 to 240 with stepsize 1, and call it `a`. Create a sec
 
 Create a plot of vector a and b, by using a function from the package `ggplot2`, adding the following code (don't worry if you don't understand the details, this will be covered later): 
 ```
-qplot(x = a, y = b)
 ggplot(data.frame(a, b), aes(x = a, y = b)) + 
   geom_line()
 ```
+
+*note* : You will sometimes find the function `qplot(x = a, y = b)` in books, which creates a similar plot, but is not used so often any more.
 
 
 ### Solution
