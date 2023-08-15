@@ -1,0 +1,196 @@
+---
+title: "Module1: Hello, World!"
+author: "N. V. Schenk"
+format: 
+    html:
+      toc: true
+      self-contained: true
+editor: source
+execute: 
+  cache: true
+---
+
+```{r}
+#| label: requirements
+#| include: false
+# load and install necessary R packages
+# This is not shown in the html script.
+
+# install necessary R packages
+if(!require(dplyr)) install.packages("tidyverse")
+# if(!require(cowplot)) install.packages("cowplot")
+
+# load necessary R packages
+library(tidyverse)
+```
+
+# Repetition of Module 1
+
+This document is the collection of exercises you have submitted while solving Module 1.
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+The operator `==` ("double-equal") checks if two elements (e.g. numbers) are the same.
+```{r}
+3 == 3 # by returning TRUE, R tells you that 3 is indeed the same as 3
+3 == 4 # by returning FALSE, R tells you that 3 is NOT the same as 3
+```
+
+Create a vector a from 0 to 5 with step size 1. Create a second vector b from 0.1 to 0.3 with step size 0.1. Compare the lengths of vectors a and b, and check if the length is the same, by using the operator `==`
+
+
+### Solution
+
+```{r}
+a <- seq(from = 0, to = 5, by = 1)
+b <- seq(from = 0.1, to = 0.3, by = 0.1)
+
+# checking the lengths of the two vectors by hand
+length(a)
+length(b)
+
+# check if the length of vector a is the same as the length of vector b
+length(a) == length(b)
+# their lengths differ, because a is longer than b.
+```
+
+:::
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+The `>` operator tests if a given element (e.g. a number) is larger than another.
+
+```{r}
+3 > 1 # 3 is larger than 1
+4 > 5 # 4 is NOT larger than 5
+```
+
+Use the operator `>` to check if vector a is longer than vector b.
+
+### Solution
+
+```{r}
+length(a) > length(b)
+```
+Vector a is indeed longer than vector b.
+
+**additionally**, you might have tried out this : 
+```{r}
+a > b
+```
+Here, the `>` operator is applied ELEMENTWISE, that means the first element of a is compared to the first element of b. In our case, 0 is compared to 0.1. 0 is not larger than 0.1, therefore the first answer is FALSE. Then, the second element of a is compared to the second element of b, i.e. 1 is compared to 0.2. 1 is larger than 0.2, therefore the second answer is TRUE. And so on.
+
+*note* that again here, the vector b is "recycled", because it is not as long as a. That means, the fourth element of vector a is compared to the FIRST element of vector b.
+
+:::
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create two sequences of numbers : The first is a sequence of numbers from 1 to 5, with steps of 1. Save this sequence in a variable called a. The second sequence is a sequence of numbers from 0.1 to 0.3, with steps of 0.1. Save this sequence in a variable called b. Subtract a from b.
+
+### Solution
+
+```{r}
+a <- seq(from = 1, to = 5, by = 1)
+b <- seq(from = 0.1, to = 0.3, by = 0.1)
+sum <- b - a # R adjusts the length of b according the sequence of a and subtracts the values correspondingly from each sequence.
+sum
+```
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create three sequences of numbers : The first is a sequence of numbers from 0 to 5, with steps of 1. Save this sequence in a variable called a. The second sequence is a sequence of numbers from 0 to 2.5, with steps of 0.5. Save this sequence in a variable called b. The third sequence is a sequence of numbers from 0 to 0.5, with steps of 0.1. Save this sequence in a variable called c.
+Add a the sequences a and b, then divide by sequence c.
+
+
+### Solution
+
+```{r}
+a <- seq(from = 0, to = 5, by = 1)
+b <- seq(from = 0, to = 2.5, by = 0.5)
+c <- seq(from = 0, to = 0.5, by = 0.1)
+(a + b) / c
+```
+*note* that you get a `NaN`, the abbreviation for "not a number". This is the result of a division through zero, which is not defined. The first element of c is 0. 
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+```{r}
+
+```
+
+### Solution
+
+```{r}
+
+```
+
+:::
+
+
+# Discussion insights
+
+Insights discussed during the individual work or during the discussion sessions.
+
+## R recycling
+
+In module 1, a shorter vector was recycled to fit the length of a longer vector.
+```{r}
+a <- seq(from = 1, to = 5, by = 1)
+b <- seq(from = 0.1, to = 0.3, by = 0.1)
+a + b
+```
+
+This recycling of vectors is a particularity of R, if you need to search about it's behaviour, you can refer to it by "R's recycling rules". 
+
+R's recycling rules dictate that if the recycled vector fits neatly into the longer vector without partial recycling, no warning is emitted.
+
+That means if vector a was 6 elements long, vector b would fit percetly two times (no splitting of vector b), and you do not get a warning : 
+```{r}
+a <- seq(from = 1, to = 6, by = 1)
+b <- seq(from = 0.1, to = 0.3, by = 0.1)
+a + b
+```
+
+
+## overwriting vectors
+
+By re-using a Vector's name, the former Vector is overwritten
+
+## Run R code without click
+
+Ctrl + Enter
+
+Run multiple lines at once : select the lines you want to run, Ctrl + Enter
+
+
+## Re-starting the graphics device
+
+If plotting does not work any more, sometimes it helps to re-start the graphics device, using : 
+```{r}
+dev.off()
+```
+And trying to plot again.
+
+

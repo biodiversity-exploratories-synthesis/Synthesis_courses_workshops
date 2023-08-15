@@ -2,10 +2,12 @@
 
 ## course organisation
 
+In order to work on the tutorials, please download the **.html** files. (Each module consists of many different small files, but the **.html** one is the combined one)
+
 Overview over modules : 
 
 - Module 1 : [Hello, world!]()
-
+- Module 2 : []()
 
 ## Lecture Material
 
