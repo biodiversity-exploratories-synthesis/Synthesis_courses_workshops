@@ -10,7 +10,6 @@ execute:
   cache: true
 ---
 
-TODO HERE : add Beckermann Chapter 2 about data import + exercises!!
 
 ```{r}
 #| label: requirements
@@ -43,24 +42,15 @@ In order to learn coding, you need to code
 
 ## Content
 
-This Module focuses on data visualisation with ggplot, and data import to R. 
-
-- 2 separate parts : start wherever you want. Data import is a more tricky topic, many people have problems with. --> start when you have energy
-
-TODO add table of content
-TODO should we start with visualisation?
+This Module focuses on data visualisation with ggplot, and data import to R. You can chose with which part to start, depending e.g. on your engery level: Data import is usually a bit more tricky, and visualisation more rewarding.
 
 
-
-## Prerequisites
-
-... TODO
 
 # 1.1 Data Visualisation I : overview and play
 
-You have already created some plots in R, using the `plot` function from base R, and the `qplot` function from the `ggplot2` package.
+You have already created some plots in R, using the `plot` function from base R, and the `ggplot` function from the `ggplot2` package.
 
-This chapter will take you through some visualisation techniques R can offer. The code below includes some more advanced R commands. You are absolutely not expected to understand each line of code. The goal of this chapter is (1) to practice running code that looks complicated, and (2) to experience some workflow in R, and to (3) hopefully motivate you to keep on track.
+This chapter will take you through some visualisation techniques R can offer. The code below includes some more advanced R commands. Depending on your previous knowledge, you are absolutely not expected to understand each line of code. The goal of this chapter is (1) to practice running code that looks complicated, and (2) to experience some workflow in R, and to (3) hopefully motivate you to keep on track.
 
 Please just copy and paste the code to your script or console, and experience what happens.
 
@@ -189,6 +179,9 @@ Run the below code to generate a nice colorful plot of the Manuga Whau volcano i
 data("volcano")
 library(grDevices)
 library(graphics)
+# note : in case you get a warning when loading the above packages, install them using : 
+#    install.packages("grDevices")
+#    install.packages("graphics")
 filled.contour(volcano, color.palette = terrain.colors, asp = 1)
 title(main = "volcano data: filled contour map")
 ```
@@ -199,10 +192,6 @@ You find a description of the dataset [here](https://stat.ethz.ch/R-manual/R-dev
 ### plotting with ggplot2
 
 `ggplot2` is a powerful and often used package for visualisation. Below you find an example of a ggplot.
-```{r}
-library(ggplot2)
-```
-
 
 Run the code and inspect the plot you just created.
 
@@ -218,6 +207,7 @@ You just created a table (R calls this format a `data.frame`), which stores info
 
 The below code creates a boxplot
 ```{r}
+library(ggplot2)
 # Basic box plot from data frame
 ggplot(data = wdata, aes(x = gender, y = weight, fill = gender)) + 
          geom_boxplot()
@@ -272,11 +262,11 @@ ggplot(diamonds, aes(x = price, y = cut, fill = cut)) +
 
 ::: {.callout-tip icon=false}
 
-### Checkpoint
+### Checkpoint 2.1
 
 Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
 
-TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email
+Submit the exercises via ILIAS.
 
 I will collect the exercises of everyone during the course, and provide them to you for the last module.
 
@@ -312,11 +302,11 @@ ggplot(iris, aes(x = Sepal.Length)) +
 
 ::: {.callout-tip icon=false}
 
-### Checkpoint
+### Checkpoint 2.2
 
 Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
 
-TODO : where to collect the exercises? In which module will we work on them? Submit as R files to me via email
+Submit the exercises via ILIAS.
 
 I will collect the exercises of everyone during the course, and provide them to you for the last module.
 
@@ -326,7 +316,7 @@ I will collect the exercises of everyone during the course, and provide them to 
 
 # 2.1 Data import
 
-Please work through Chapter 2.1 of Beckermann. As always, record any topics you have difficulties to understand, or where you wish to get more input.
+Please work through Chapter 2.1 of Beckerman. As always, record any topics you have difficulties to understand, or where you wish to get more input.
 
 Once you reach Chapter 2.2, only read the first small paragraph on page 40. When you reach page 41, follow the important note below.
 
@@ -341,7 +331,7 @@ Now, read Chapter 2.2.1. From paragraph 2.2.2 on, the book will show you four me
 
 The following folders are created: `Documents/Intro_to_R_course/analyses` and `Documents/Intro_to_R_course/datasets`. 
 
-All the 46 datasets mentioned in the book (download from [here]()) are saved in the folder `Documents/Intro_to_R_course/datasets`.
+Save all the 46 datasets mentioned in the book (download from [here]()) in the folder `Documents/Intro_to_R_course/datasets`.
 
 Following the instructions from the book, the following file is created : A file called "DataImportExample.R" which is stored in the "analyses" folder. In other words, the following file is created : `Documents/Intro_to_R_course/analyses/DataImportExample.R`. It is an R script, which contains the following content : 
 ```{r}
@@ -354,7 +344,7 @@ Following the instructions from the book, the following file is created : A file
 
 Identify the dataset `compensation.csv` in the folder `Documents/Intro_to_R_course/datasets`, to check if it is there. If you want, you can open it with Excel and look at it.
 
-In the book, there is an example about the import dataset tool and the `file.choose()` function. This example does not cover this option, but skips Chapter 2.2.2 and 2.2.3 and jumps to Chapter 2.2.4.
+In the book, there is an example about the import dataset tool and the `file.choose()` function. The example here does not cover the `file.choose()` option, but skips Chapter 2.2.2 and 2.2.3, jumping to Chapter 2.2.4.
 
 **Setting the working directory** : We now have to set the working directory for R, that means, we have to tell R where it needs to look for datasets.
 
@@ -364,7 +354,7 @@ getwd()
 ```
 The command prints out a working directory, in my case it is : `"/home/novalid/Documents/github/Synthesis_courses_workshops"`. It will look slightly different for you if you do not work with a Linux Operation system. But the main parts are the same. The working directory tells me, that I am working in a computer, within a user called "novalid", in a folder called "Documents", in a subfolder called "github" and in a sub-sub-folder called "Synthesis_courses_workshops".
 
-In Windows operation systems, the path usually looks somewhat like this : `C:/Users/username/Documents` or this `C:\Users\username\Documents` and so on. The important part is, the path starts with **C:**, because in windows systems, we usually work in a file partition called "C".
+In Windows operation systems, the path usually looks somewhat like this : `C:/Users/username/Documents` or this `C:\Users\username\Documents` and so on. The important part is, the path starts with **C:**, because in windows systems, we usually work in a file partition called "C". (In case you work on a different partition, use the respective letter, e.g. D:/ or T:/)
 
 In Mac operation systems, the path usually look somewhat like this : 
 `/Users/username/Documents`.
@@ -375,7 +365,10 @@ That means, I have to change the current working directory to the place I want R
 
 To do so, I can use the function `setwd()`. The good news is, that RStudio has a feature called "tab-completion". That means, if you start typing a word in the console or within a script, you can press "Tab" (the right arrow on your keyboard), and RStudio suggests you how you could complete the word you just started typing.
 
-Try this out : 
+Try this out if you don't know tab completion yet : 
+
+### Experiencing tab-completion in RStudio
+
 Create a vector of numbers from 3 to 9 with step size of 0.2, called `a_very_very_long_variable_name_which_takes_a_long_time_to_type`.
 ```{r}
 a_very_very_long_variable_name_which_takes_a_long_time_to_type <- seq(3, 9, 0.2)
@@ -389,6 +382,9 @@ Now, in your new script "DataImportExample.R" try typing just the beginning of t
 You should observe a very little window showing the whole long name appearing after you started typing the name of the vector. When you press Tab, the whole name is completed immediately.
 
 Now that you have experienced the "tab-completion" function of RStudio, we are ready to set the working directory of the file "DataImportExample.R". 
+
+
+### Data import in R part 2
 
 Within the file "DataImportExample.R", type the following, depending on your operation system : 
 - working on Mac OS : type `setwd("/Users/`
@@ -416,7 +412,6 @@ head(compensation)
 
 Very good.
 
-:::
 
 ## Beckermann Ch 2.2.2 - End
 
@@ -436,7 +431,7 @@ Please record your difficulties of data import. Try to figure out pro and contra
 
 This course covers an introduction to the `tidyverse` package group, and this package group has a data import function `read_csv`. It is introduced in Chapter 8 of R4DS, however, the chapter already uses some data processing functions and could therefore still be a bit advanced. We will nevertheless get to know the `read_csv` function right now.
 
-Please work through Chapter 8 of R4DS, only until the chapter 8.2.1 starts (don't read 8.2.1). Solve the below exercises after.
+Please read the beginning of Chapter 8 of R4DS, only the first part until the chapter 8.2.1 starts (don't read 8.2.1). Solve the below exercises after.
 
 ::: {.panel-tabset}
 
@@ -465,22 +460,42 @@ The output of the head function looks slightly different as well. This is becaus
 :::
 
 
+## Missing values
+
 ::: {.panel-tabset}
 
 ### Exercise
 
-This exercise is about missing data. As you learned, missing observations are encoded as "NA" in the data files.
+This exercise is about missing data. As you learned, missing observations are ideally encoded as "NA" in the data files.
 
 Open the dataset "compensation.csv" with Excel, and replace a random number with "NA". Save the changed dataset as "compensation_NA.csv".
 
-Import this dataset using the `read_csv()` function. Record what happens with the "NA" value.
-TODO finish exercise!! see what happens if already NA (--> R knows what to do) versus leaving empty cells (--> have to specify that this should be NA)
+Import this dataset using the `read_csv()` function. Inspect the dataset and record what happens with the "NA" value you have manually added.
+
+### Hint
+
+You can inspect a dataset with the following commands : 
+```{r}
+compensation # shows the first 10 rows of a datast imported with tidyverse (called a "tibble")
+print(compensation) # does the same as above
+print(compensation, n = 30) # prints out the first 30 rows
+print(compensation, n = 300) # prints the first 300 rows, but the dataset only has 40 rows, so only those 40 rows are shown.
+
+glimpse(compensation)
+
+View(compensation) # show the dataset as a new tab in the Viewer of RStudio
+```
+
 
 ### Solution
 
 ```{r}
-
+compensation_NA <- read_csv("compensation_NA.csv")
+# use one of the methods described under hints to show the dataset, e.g.
+View(compensation_NA)
 ```
+
+The missing values are shown as "NA". In the console, they are highlighted in red, in the viewer they are highlighted in grey.
 
 
 :::
@@ -490,135 +505,53 @@ TODO finish exercise!! see what happens if already NA (--> R knows what to do) v
 
 ### Exercise
 
-bli
-NA values
+Repeat the above exercise with the following variation: this time, create a copy of the "compensation.csv" dataset, open with e.g. Excel and delete two random values. Save the new dataset as "compensation_empty.csv". Import it, look at it and report what happens at the places where you inserted the missing values.
 
 ### Solution
 
-bla
+```{r}
+compensation_empty <- read_csv("compensation_empty.csv")
+print(compensation_empty, n = 40)
+```
+
+The function read_csv correctly interpreted the missing values as NA.
 
 :::
-
-
-
-
-
-
-
-
-
-
-
-
 
 ::: {.panel-tabset}
 
 ### Exercise
 
-bli
-
+Repeat the above exercise with the following variation: this time, create a copy of the "compensation.csv" dataset, open with e.g. Excel and delete two random values and replace them with "NM" (an abbreviation which is sometimes used to indicate Not Measured values). Save the new dataset as "compensation_NM.csv". Import it, look at it and report what happens at the places where you inserted the missing values.
 
 ### Solution
 
-bla
+```{r}
+compensation_NM <- read_csv("compensation_NM.csv")
+print(compensation_NM, n = 10)
+```
+
+The function read_csv does not any more correctly interpreted the missing values as NA.
 
 :::
 
 
 
-
-
-
-TODO : Hadley Chapter 1
-Some impressive stuff you can already do (e.g. firework)
-ome impressive stuff you can already do (e.g. firework, volcano plot)
-Simple Data visualisation (motivating examples!)
-
-Data formats in R (quickly → learn on the run) incl. tibble
-
-
-
-
-
-
-
-
-
-
-# Example code
-
-To learn more about Quarto see <https://quarto.org>.
-
-[linked phrase](http://example.com)
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
-```{r}
-1 + 1
-```
-
-You can add options to executable code like this
-
-```{r}
-#| echo: false
-2 * 2
-```
-
-The `echo: false` option disables the printing of code (only output is displayed).
-
-
-Including code which is not shown at all in the document : 
-```{r}
-#| label: setup
-#| include: false
-
-library(tidyverse)
-data(diamonds)
-
-smaller <- diamonds |> 
-  filter(carat <= 2.5)
-```
-... there is a big chunk of code between this sentence and the above one.
-
-
-We have data about `r nrow(diamonds)` diamonds.
-Only `r nrow(diamonds) - nrow(smaller)` are larger than 2.5 carats.
-The distribution of the remainder is shown below:
-
-```{r}
-#| label: plot-smaller-diamonds
-#| echo: false
-
-smaller |> 
-  ggplot(aes(x = carat)) + 
-  geom_freqpoly(binwidth = 0.01)
-```
-
-
-
-::: {.panel-tabset}
-
-## Plot
-
-```{r}
-plot(diamonds$clarity, diamonds$carat)
-```
-
-## Data
-
-```{r}
-head(diamonds)
-```
-
+:::{.callout-important}
+The `read_csv()` function interprets characters "NA" and "" (no entry, empty) correctly as NA values. Any other entry is not correctly read in as NA character. We recommend to ALWAYS indicate missing values as NA.
 :::
 
 
-::: {.border}
-This content can be styled with a border
-:::
 
-:::{.callout-note}
-Note that there are five types of callouts, including: 
-`note`, `tip`, `warning`, `caution`, and `important`.
+::: {.callout-tip icon=false}
+
+### Checkpoint 2.3
+
+Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+Submit the exercises via ILIAS.
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
 :::
 
