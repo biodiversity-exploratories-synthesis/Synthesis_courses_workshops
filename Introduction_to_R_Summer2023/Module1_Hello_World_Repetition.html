@@ -3030,6 +3030,7 @@ vertical-align: -.125em;
   <li><a href="#r-recycling" id="toc-r-recycling" class="nav-link" data-scroll-target="#r-recycling">R recycling</a></li>
   <li><a href="#overwriting-vectors" id="toc-overwriting-vectors" class="nav-link" data-scroll-target="#overwriting-vectors">overwriting vectors</a></li>
   <li><a href="#run-r-code-without-click" id="toc-run-r-code-without-click" class="nav-link" data-scroll-target="#run-r-code-without-click">Run R code without click</a></li>
+  <li><a href="#re-starting-the-graphics-device" id="toc-re-starting-the-graphics-device" class="nav-link" data-scroll-target="#re-starting-the-graphics-device">Re-starting the graphics device</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -3140,15 +3141,26 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p>TODO HERE</p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href>Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
-
+<p>Create two sequences of numbers : The first is a sequence of numbers from 1 to 5, with steps of 1. Save this sequence in a variable called a. The second sequence is a sequence of numbers from 0.1 to 0.3, with steps of 0.1. Save this sequence in a variable called b. Subtract a from b.</p>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-
+<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-7_bd566c40f0f48cd31f0ae7b57ee6aa3f">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> b <span class="sc">-</span> a <span class="co"># R adjusts the length of b according the sequence of a and subtracts the values correspondingly from each sequence.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in b - a: longer object length is not a multiple of shorter object
+length</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sum</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.9 -1.8 -2.7 -3.9 -4.8</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -3156,10 +3168,19 @@ vertical-align: -.125em;
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href>Solution</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
-
+<p>Create three sequences of numbers : The first is a sequence of numbers from 0 to 5, with steps of 1. Save this sequence in a variable called a. The second sequence is a sequence of numbers from 0 to 2.5, with steps of 0.5. Save this sequence in a variable called b. The third sequence is a sequence of numbers from 0 to 0.5, with steps of 0.1. Save this sequence in a variable called c. Add a the sequences a and b, then divide by sequence c.</p>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-
+<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-8_ff21526b7237f1361a8f91002b5163f1">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">2.5</span>, <span class="at">by =</span> <span class="fl">0.5</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.5</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>(a <span class="sc">+</span> b) <span class="sc">/</span> c</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NaN  15  15  15  15  15</code></pre>
+</div>
+</div>
+<p><em>note</em> that you get a <code>NaN</code>, the abbreviation for “not a number”. This is the result of a division through zero, which is not defined. The first element of c is 0.</p>
 </div>
 </div>
 </div>
@@ -3181,10 +3202,10 @@ vertical-align: -.125em;
 <section id="r-recycling" class="level2">
 <h2 class="anchored" data-anchor-id="r-recycling">R recycling</h2>
 <p>In module 1, a shorter vector was recycled to fit the length of a longer vector.</p>
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-13_c8afe5bdda0ab1c6867bc5552a81a9e8">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-11_8fbd643ca1ea0de59409c7e94e6d7e95">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in a + b: longer object length is not a multiple of shorter object
 length</code></pre>
@@ -3196,10 +3217,10 @@ length</code></pre>
 <p>This recycling of vectors is a particularity of R, if you need to search about it’s behaviour, you can refer to it by “R’s recycling rules”.</p>
 <p>R’s recycling rules dictate that if the recycled vector fits neatly into the longer vector without partial recycling, no warning is emitted.</p>
 <p>That means if vector a was 6 elements long, vector b would fit percetly two times (no splitting of vector b), and you do not get a warning :</p>
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-14_cbb767566409d0d409deaff3a591186c">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">6</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-12_084ad5f1faac6937966baee10747edc5">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">6</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.1 2.2 3.3 4.1 5.2 6.3</code></pre>
 </div>
@@ -3213,6 +3234,18 @@ length</code></pre>
 <h2 class="anchored" data-anchor-id="run-r-code-without-click">Run R code without click</h2>
 <p>Ctrl + Enter</p>
 <p>Run multiple lines at once : select the lines you want to run, Ctrl + Enter</p>
+</section>
+<section id="re-starting-the-graphics-device" class="level2">
+<h2 class="anchored" data-anchor-id="re-starting-the-graphics-device">Re-starting the graphics device</h2>
+<p>If plotting does not work any more, sometimes it helps to re-start the graphics device, using :</p>
+<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-13_0d468a06df4ed28d4df17e07656b1f42">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>null device 
+          1 </code></pre>
+</div>
+</div>
+<p>And trying to plot again.</p>
 </section>
 </section>
 
