@@ -1,0 +1,48 @@
+---
+title: "Module2 : Getting your hands dirty"
+author: "N. V. Schenk"
+format: 
+    html:
+      toc: true
+      self-contained: true
+editor: source
+execute: 
+  cache: true
+---
+
+
+```{r}
+#| label: requirements
+#| include: false
+# load and install necessary R packages
+# This is not shown in the html script.
+
+# install necessary R packages
+if(!require(dplyr)) install.packages("tidyverse")
+# if(!require(cowplot)) install.packages("cowplot")
+
+# load necessary R packages
+library(tidyverse)
+```
+
+
+This document describes Module 3 of the course "Introduction to R", held in Summer 2023 for the [Biodiversity Exploratories](www.biodiversity-exploratories.de).
+
+# Learning outcome
+
+- ...
+
+
+:::{.callout-tip}
+In order to learn coding, you need to code
+:::
+
+
+
+## Content
+
+This Module focuses on XY
+
+
+
+# 1.1 X
