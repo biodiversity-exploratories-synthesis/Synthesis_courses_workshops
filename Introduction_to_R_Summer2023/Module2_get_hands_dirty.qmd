@@ -331,7 +331,7 @@ Now, read Chapter 2.2.1. From paragraph 2.2.2 on, the book will show you four me
 
 The following folders are created: `Documents/Intro_to_R_course/analyses` and `Documents/Intro_to_R_course/datasets`. 
 
-Save all the 46 datasets mentioned in the book (download from [here]()) in the folder `Documents/Intro_to_R_course/datasets`.
+Save all the 46 datasets mentioned in the book (download from [here](https://r4all.org/books/datasets/)) to the folder `Documents/Intro_to_R_course/datasets`. (From the r4all home page, chose the "Bergmann book" which is the purple one, select dataset and click download all.)
 
 Following the instructions from the book, the following file is created : A file called "DataImportExample.R" which is stored in the "analyses" folder. In other words, the following file is created : `Documents/Intro_to_R_course/analyses/DataImportExample.R`. It is an R script, which contains the following content : 
 ```{r}
