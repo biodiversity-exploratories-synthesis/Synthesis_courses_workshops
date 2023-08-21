@@ -10,6 +10,12 @@ execute:
   cache: true
 ---
 
+```{css, echo = FALSE}
+.output {
+max-height: 300px;
+overflow-y: scroll;
+}
+```
 
 ```{r}
 #| label: requirements
@@ -30,7 +36,10 @@ This document describes Module 3 of the course "Introduction to R", held in Summ
 
 # Learning outcome
 
-- ...
+- data manipulation in R with tidyverse
+    - additional : data manipulation in base R
+- data exploration with tidyverse
+    - correlation coefficients and correlation plots
 
 
 :::{.callout-tip}
@@ -39,10 +48,504 @@ In order to learn coding, you need to code
 
 
 
-## Content
+# Classes in R
 
-This Module focuses on XY
+TODO
+
+
+# Data wrangling - R4DS Ch 4
+
+Read and work through Chapter 4 in R4DS. This is a dense chapter. Make sure you get enought practice and solve the exercises. To do so, e.g. try things out with the dataset `compensation` you have imported during the last module.
+
+In case you want some more test datasets, you can e.g. use these two datasets included in R : 
+```{r}
+data(iris)
+data(cars)
+```
+You find a description of these datasets using the help function.
+
+Note that you also find an introduction to data wrangling with `dplyr` in the Beckerman book, Chapter 3. However, the packages are continuously updated, and some of the examples in the Beckerman book are outdated. It is however a good source for an introduction, in case you would like to find some more exercises and explanation.
+
+::: {.panel-tabset}
+
+### Exercise
+Create a data frame called `testdat1` with the function `tibble()` from the `dplyr` package.
+The first column in `testdat1` is called "a" and is a vector of characters : "A", "B", "B", "C", the second column. The second column is called "b" and is a vector of 5, 4, 2, 1.
+
+### Solution
+```{r}
+testdat1 <- tibble(a = c("A", "B", "B", "C"), b = c(5, 4, 2, 1))
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+Sort the columns of `testdat1` by ascending order of the column "a". What do you observe in column "b"? Is there an ordering applied?
+
+### Hint
+use the `arrange()` function
+
+### Solution
+```{r}
+testdat1 |> arrange( a)
+```
+The order of column a is alphabetical (ascending). Column b is not used for ordering.
+
+There are 2 identical values "B" in the column a. The order of these two rows stays exactly the same as in the original table, no ordering is applied.
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+We overwrite the `testdat1` table with new test data, by adding a new row.
+```{r}
+testdat1 <- tibble(a = c("A", "B", "B", "B", "C"), 
+                   b = c(5, 4, 4, 2, 1))
+```
+One of the rows is duplicated.
+
+Use a `dplyr` function to remove the duplicated row.
+
+### Solution
+```{r}
+distinct(testdat1)
+# or equally : 
+testdat1 |> distinct( )
+```
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+We overwrite the `testdat1` table with new test data, by adding a new column.
+```{r}
+testdat1 <- tibble(a = c("A", "B", "B", "B", "C"), 
+                   b = c(5, 4, 4, 2, 1),
+                   c = c(12, 2, 3, 34, 12))
+```
+
+Use a `dplyr` function to find all unique pairs of values in the columns a and b. Make sure all your columns are printed, not just columns a and b.
+
+Do you observe any special behaviour?
+
+### Solution
+
+```{r}
+testdat1 |> distinct(a, b, .keep_all = T)
+# or equally :
+distinct(testdat1, a, b, .keep_all = TRUE)
+```
+
+For the unique combination "B" in column a and "4" in column b, there are two rows. one of these rows (the upper) has a value fo "2" in c, the other a value of "3".
+
+The output of `distinct()` is **only the first occurrence** of the value. Be aware of this behaviour in your scripts!
+
+:::
+
+::: {.callout-tip icon=false}
+
+### Checkpoint 3.1
+
+Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+Submit the exercises via ILIAS.
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
 
 
 
-# 1.1 X
+
+
+# Data wrangling in base R
+
+You have now seen a number of functions from the `dplyr` package, which is developed for data wrangling and is part of the `tidyverse` package complex.
+
+The `tidyverse` group of packages are used very frequently, and the main advantage of them is that they are "easier to understand". However, the `tidyverse` comprises of rather new packages (most of them were built around 2015, with updates in the later years). Because of it's relatively young age, and because base R remains a fundamental and powerful tool for data analysis and statistical computing, many researchers are using at least partly functions from base R. We did cover a number of base R functions in this course, and will do so in the future.
+
+Data wrangling, the reshaping of tables, can be done smoothly with the `dplyr` package for the `tidyverse`. As often in programming, this is by far not the only way of data wrangling. Base R has many powerful functions to do all the data transformations described above. Another package which is often used, especially for big data (very very large tables) is the `data.table` package. You will find this e.g. often used in the code used to create the Biodiversity Exploratories Synthesis datasets.
+
+I therefore want to take the time to show you some useful functions for data wrangling here. You find an introduction to data wrangling in base R in the R4DS book, Chapter 28, and in many other books.
+
+```{r}
+str(iris)
+```
+Is an alternative to the `head()` function, showing you a part of your data, together with a summary of the whole table. You see the number of observations (the number of rows), the number of variables (the number of columns) and each column with its type and the first 10 observations.
+
+In order to get a nice summary of your table, you can use :   
+```{r}
+summary(iris)
+```
+Which shows you some common summary statistics like the mean, minimum and maximum value and the 1st, 2nd (Median) and 3rd Quantile. For categorical variables, you get the numbers in each category.
+
+The `$` operator allows you to select a certain column and prints it to the console.
+```{r, max.height='100px'}
+#| class: output
+iris$Sepal.Length
+```
+
+Selecting multiple variables can be done by : 
+```{r, max.height='100px'}
+#| class: output
+iris[, c("Sepal.Length", "Sepal.Width")]
+```
+
+The `subset()` function choses a given subset of rows:
+```{r}
+#| class: output
+subset(iris, "Sepal.Length" > 2)
+```
+Note that you have to use ticks " to indicate that you are not referring to a variable (a table or number you have saved), but to the name of a column.
+
+As with `dplyr`, you can use the pipe operator : 
+```{r}
+iris[, c("Sepal.Length", "Sepal.Width")] |>  head()
+```
+Or you can nest functions to each other : 
+```{r}
+head(iris[, c("Sepal.Length", "Sepal.Width")])
+```
+
+Below you find a list with useful functions from base R. (You have seen some of them above). 
+
+::: {.callout-tip icon=false}
+
+### Checkpoint 3.2
+
+Pick one of these functions, find out how to use it and explain it's use together with an example.
+
+Invent an exercise about the use of this function.
+
+Submit the summary and the exercise via ILIAS.
+
+I will collect the summaries and exercises of everyone during the course, and provide them to you for the last module.
+:::
+
+List of useful functions in base R : 
+
+-  subset(): Selects a subset of rows from a data frame based on specified conditions.
+-   merge(): Combines two or more data frames based on common columns.
+-  transform(): Creates new variables or modifies existing ones within a data frame.
+-   aggregate(): Computes summary statistics on subsets of data using one or more functions.
+-  order(): Orders a data frame by one or more variables.
+-  reshape(): Reshapes data from long to wide format or vice versa.
+-  unique(): Returns unique values from a vector or data frame column.
+-  duplicated(): Identifies duplicated rows within a data frame.
+-   table(): Generates frequency tables or cross-tabulations.
+-  grep() and grepl(): Searches for patterns in character strings and returns matching indices or logical values.
+-  split(): Divides a data frame into subsets based on a specified factor.
+-  which(): Returns indices of elements that satisfy a given condition.
+-  match(): Finds the positions of values in a target vector within another vector.
+- summary(): Computes summary statistics for data frames or vectors.
+
+Note that you find an introduction to the base R functions in Beckerman Chapter Appendix3a, as well as in R4DS Chapter 28. Read through one of this chapters if you have time left, after this module. Or keep it in mind as a look-up source once you encounter your first R script doing data wrangling in base R.
+
+
+
+
+# Data exploration - R4DS Ch 11
+
+The first step before starting to fit models on data is to **explore** your data. If you have collected your data yourself, you probably have a good feeling about it's range, potential sources of problems, and maybe even about potential correlations. Nevertheless, and if you didn't collect data even more, an exploration of your data after having it imported to R is crucial.
+
+The main goals of data exploration are : 
+
+- **Understanding Data Quality** : Exploring the data helps you identify missing values, outliers, and inconsistencies in the dataset. By understanding the data quality, you can make informed decisions about how to handle these issues, which can greatly affect the performance of your models. More specifically, check for :
+    - Missing values
+    - Outliers
+- (Visually) check the **distribution** of your data.
+  - numerical data : normal distribution (bell-shaped)? Skewed to the right or to the left?
+  - categorical data : Do you have the same, or a different number of observations in each category (balanced vs. unbalanced data).
+- Need for **standardisation**? In many cases, different variables are measured on different scales. For some statistical models, it makes more sense to *standardise* values to a common range.
+
+You will read the introduction about data exploration from the R4DS book. The R4DS book approaches this topic from a data science perspective. However, data exploration in data science (data-driven research) sometimes differs slightly from data exploration in hypothesis-driven research (most studies in ecology). While one of the main outcomes/ goals of data-driven research is to find interesting questions, the research questions in hypothesis-driven research are already formulated before the data collection starts. Nevertheless, even in hypothesis-driven research, we can find new sub-questions from data exploration. Be aware that you usually can not change your main questions after data collection any more, among others because data was collected specifically for a given research question. 
+
+**Never lose sight of your initial research questions while exploring your data.**
+
+
+Further reading : you find a more targeted introduction to data exploration here : 
+
+- Basic [introduction](https://www.davidzeleny.net/anadat-r/doku.php/en:data_preparation) (very detailed, but no R code) : 
+- Good paper, a bit more advanced (includes statistical modelling) : Zuur, Ieno et al. 2010 "A protocol for data exploration to avoid common statistical problems", [doi](https://doi.org/10.1111/j.2041-210X.2009.00001.x)
+
+
+Read Chapter 11 in R4DS.
+
+
+
+
+## Correlation plots
+
+Another very handy tool for data exploration are correlation plots or correlograms. They visualise the pairwise correlation in a table (matrix) of numerical variables. A very handy package to create them is `corrplot` (you have to install it using `install.packages("corrplot")`) and load it : 
+```{r}
+library(corrplot)
+```
+
+
+There are various correlation indices, amongst them the most famous are : 
+
+- pearson correlation coefficient
+- spearman correlation coefficient
+- kendall correlation coefficient
+
+You find a description of those coefficients [here](http://www.sthda.com/english/wiki/correlation-test-between-two-variables-in-r). Make sure you at least read the first paragraphs of this introduction. 
+
+In a nutshell, all of them measure the strength of dependencies between two variables, i.e. how much variable 1 increases with variable 2. The most famous one is the pearson correlation coefficient, which is testing linear dependencies. It is the default used in the below described package. (Default means if you don't specify any other method, the one which is automatically chosen is pearson.)
+
+However, in Ecology, many relationships are not linear, e.g. think about how species richness increases with area within a given habitat, e.g. within grasslands - in a small scale, this dependency might be linear, i.e. more species are found in a larger area. But the relationship will be saturating soon : as the are gets larger and larger, most of the typical (common) species will be included, and less and less new species are found.
+
+Because we often find non-linear relationships in Ecology, it is a good idea to use a rank-based coefficient for your data exploration, e.g. the spearman coefficient. Below you find an instruction about how to chose the coefficient in R.
+
+Work on [this tutorial](http://www.sthda.com/english/wiki/visualize-correlation-matrix-using-correlogram) to get yourself familiar with correlation plots. No need to work through the full tutorial, just creating 4 or 5 different plots will be enough.
+
+After you have seen how correlation plots are created, you can chose the correlation coefficient as shown below.
+
+The **Pearson correlation coefficient** is the default method, that means if you don't specify a method, you will get the pearson coefficient.
+```{r}
+# no method specified : pearson coefficient
+M <- cor(mtcars)
+# alternatively, you can specify the method explicitly :
+M <- cor(mtcars, method = "pearson")
+
+corrplot(M, method = "circle")
+```
+
+The **Spearman correlation coefficient** is rank-based: The vales of the first variable is ordered in decreasing order, and each value is given a number, a "rank". The highest is given a rank 1, the second highest a rank 2, and so on. The same is done with the second variable. Now, the correspondence of the ranks of the two variables are compared. In other words, the monotonic relationship between the variables is measured, resulting in the correlation coefficient. It is sensitive to both linear and nonlinear relationships. It is therefore well-suited for cases where the relationship between variables is expected to be monotonic, but not necessarily strictly linear.
+```{r}
+# you need to specify the method explicitly :
+M <- cor(mtcars, method = "spearman")
+corrplot(M, method = "circle")
+```
+
+The **Kendall correlation coefficient** measures, similarly to the Spearman correlation coefficient, the rank-based correspondence between two variables. It is less sensitive to outliers than the spearman correlation.
+```{r}
+# you need to specify the method explicitly :
+M <- cor(mtcars, method = "kendall")
+corrplot(M, method = "circle")
+```
+
+Note that a correlation plot belongs to the explanatory analysis. It can show you correlations across your variables, helping you to e.g. select potential drivers of your response variable. It is possible to show significance levels in correlation plots (e.g. using the `sig.level` parameter). However, those are pairwise tests, not taking into account the remaining variables. For modelling the dependence of a variable on multiple explanatory variables, we strongly recommend multiple models over pairwise tests. For this reason, and because it is enough, we recommend not to show any significance levels in correlation plots.
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a vector x, which contains numbers from 1 to 100 with a 0.5 step size. Create the following 3 vectors :
+
+- `x_lin` which is x + 5
+- `x_cubic` which is the cubic of x
+. `x_log` which is the logarithm of x with base e
+- `x_complex` which is sin(x) * cos(2 * x)
+
+Plot those relationships.
+
+Calculate the pearson, spearman and kendall correlations between x, and those three vectors.
+
+Discuss what you find.
+
+### Solution
+
+Creating 3 vectors
+```{r}
+x <- seq(1, 100, 0.5)
+x_lin <- x + 5
+x_squared <- x^2
+x_log <- log(x) # base e is the default
+x_complex <- sin(x) * cos(2 * x)
+```
+
+Visualise the relationships : 
+
+*Tip* : if you want to show multiple graphs at once, you can use the R base function `par(mfrow = c(2,2))`. This will change the setting of R to show 4 graphs on one panel, until you re-set this setting by using `dev.off()`
+```{r, eval = T}
+# Visualising using R base
+par(mfrow = c(2, 2)) # show 4 plots on one panel
+plot(x, x_lin)
+plot(x, x_squared)
+plot(x, x_log)
+plot(x, x_complex, type = "l")
+# note : lines are used to visualise the complex relationship in a more accessible way.
+# note that all these plots can be created with ggplot2 as well!
+```
+Don't forget to run `dev.off()` to re-set the default plotting to 1 plot per panel.
+
+Calculation of the correlation coefficients : 
+
+**Pearson coefficients**
+```{r}
+# you can calculate each coefficient individually : 
+cor(x, x_lin, method = "pearson")     # 1
+cor(x, x_squared, method = "pearson") # 0.9691421
+cor(x, x_log, method = "pearson")     # 0.9010853
+cor(x, x_complex, method = "pearson") # 0.02968155
+
+# Alternatively, you can create a table where each of the vectors is a column, and calcluate the correlation coefficients on this table. You will get way more values, because the correlation of all pairwise combinations are calculated. Just focus on the 4 relevant values.
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "pearson")
+#
+# additionally, the values can be rounded using the pipe or using nested functions
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "pearson") |>  round(2) # using pipe
+# round(cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "pearson"), 2) # nested
+```
+
+**Spearman coefficients**
+```{r}
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "spearman") |>  
+  round(2)
+# x_lin      1
+# x_squared  1
+# x_log      1
+# x_complex  0.03
+```
+
+**Kendall coefficients**
+```{r}
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "kendall") |>  
+  round(2)
+# x_lin      1
+# x_squared  1
+# x_log      1
+# x_complex  0.02
+```
+
+Observation : Linear relationships are detected very well by all three coefficients. The exponential and logarithmic relationship is detected best by spearman and kendall. The complex relationship is not detected by any of the coefficients.
+
+:::
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+We usually not work with perfect mathematically created data, but have some measurement errors in data.
+Using the vectors from above, introduce an uncertainty in each of the vectors. An easy way to do so is to sample 199 values from a normal distribution with mean 0 and standard deviation 5, and add this to our vectors.
+
+`x_log` is the natural logarithm of x, and is not defined for values of zero or below. A dirty (not very elegant) solution is applied: Instead of adding the uncertainty directly, the absolute of the uncertainty is added.
+
+The below code adds uncertainty to our vectors. Re-calculate the correlation coefficients and discuss.
+
+```{r}
+x <- seq(1, 100, 0.5)
+uncertainty <- rnorm(199, 0, 5)
+x_lin <- x + 5 + uncertainty
+x_squared <- (x + uncertainty)^2
+x_log <- log(x + abs(uncertainty)) # base e is the default
+x_complex <- sin(x + uncertainty) * cos(2 * (x + uncertainty))
+
+par(mfrow = c(2, 2)) # show 4 plots on one panel
+plot(x, x_lin)
+plot(x, x_squared)
+plot(x, x_log)
+plot(x, x_complex, type = "l")
+```
+
+### Solution
+
+```{r}
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "pearson") |>  
+  round(2)
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "spearman") |>  
+  round(2)
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "kendall") |>  
+  round(2)
+
+# coeff        pearson    spearman    kendall
+# x_lin           0.99      0.99        0.90
+# x_squared       0.95      0.99        0.90
+# x_log           0.92      1.00        0.94
+# x_complex      -0.05     -0.07       -0.05
+```
+
+The correlations are in general lower, but similar picture than above.
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Test the performance of the three coefficients on data with outliers. In order to create outliers, we add two extremely high values to the uncertainty vector : 
+
+```{r}
+x <- seq(1, 100, 0.5)
+uncertainty <- rnorm(199, 0, 5)
+# the 10th and the 30th value are increased by 31
+uncertainty[10] <- uncertainty[10]+ 31
+uncertainty[30] <- uncertainty[30] + 31
+x_lin <- x + 5 + uncertainty
+x_squared <- (x + uncertainty)^2
+x_log <- log(x + abs(uncertainty)) # base e is the default
+x_complex <- sin(x + uncertainty) * cos(2 * (x + uncertainty))
+
+par(mfrow = c(2, 2)) # show 4 plots on one panel
+plot(x, x_lin)
+plot(x, x_squared)
+plot(x, x_log)
+plot(x, x_complex, type = "l")
+```
+
+
+### Solution
+
+```{r}
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "pearson") |>  
+  round(2)
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "spearman") |>  
+  round(2)
+cor(tibble(x, x_lin, x_squared, x_log, x_complex), method = "kendall") |>  
+  round(2)
+
+# coeff        pearson    spearman    kendall
+# x_lin           0.98      0.98        0.88
+# x_squared       0.95      0.98        0.88
+# x_log           0.90      0.99        0.93
+# x_complex       0.03     -0.01        0.00
+```
+
+Outliers can change the values of the correlation coefficients slightly. 
+
+:::
+
+
+This introduction to explanatory analysis did not cover statistical methods. You find an introduction to some commonly used statistical tests in the Beckerman book, Chapter 5. If you read this chapter, I strongly recommend the part about linear models, Chapter 5.4 and the following ones.
+
+
+
+::: {.callout-tip icon=false}
+
+### Checkpoint 3.3
+
+Please invent and write down 1-2 exercises including solutions about the past section (Data exploration in general, including correlation plots). You can slightly modify one of the above or the book exercises, or think about a new one.
+
+Submit the exercises via ILIAS.
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
+
+
+# Additional
+
+This was a long module. If you still wish for more material : Explore the additional reading mentioned in this module : 
+
+**data wrangling** in R : 
+
+- R4DS book, Chapter 28
+- Beckerman Chapter Appendix3a
+- list of useful functions in base R in this tutorial
+
+**data exploration **
+
+- Basic [introduction](https://www.davidzeleny.net/anadat-r/doku.php/en:data_preparation) (very detailed, but no R code) : 
+- Good paper, a bit more advanced (includes statistical modelling) : Zuur, Ieno et al. 2010 "A protocol for data exploration to avoid common statistical problems", [doi](https://doi.org/10.1111/j.2041-210X.2009.00001.x)
+
+**Introduction to statstistical modelling**
+
+- Beckerman book, Chapter 5 : first part, then jump to linear models, Chapter 5.4 and the following ones.
