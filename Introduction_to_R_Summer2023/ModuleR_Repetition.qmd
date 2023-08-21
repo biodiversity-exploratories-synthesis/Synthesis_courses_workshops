@@ -1,5 +1,5 @@
 ---
-title: "Module1: Hello, World!"
+title: "Module R: Repetition"
 author: "N. V. Schenk"
 format: 
     html:
@@ -149,11 +149,11 @@ c <- seq(from = 0, to = 0.5, by = 0.1)
 :::
 
 
-# Discussion insights
+## Discussion insights
 
 Insights discussed during the individual work or during the discussion sessions.
 
-## R recycling
+### R recycling
 
 In module 1, a shorter vector was recycled to fit the length of a longer vector.
 ```{r}
@@ -174,18 +174,18 @@ a + b
 ```
 
 
-## overwriting vectors
+### overwriting vectors
 
 By re-using a Vector's name, the former Vector is overwritten
 
-## Run R code without click
+### Run R code without click
 
 Ctrl + Enter
 
 Run multiple lines at once : select the lines you want to run, Ctrl + Enter
 
 
-## Re-starting the graphics device
+### Re-starting the graphics device
 
 If plotting does not work any more, sometimes it helps to re-start the graphics device, using : 
 ```{r}

@@ -8,7 +8,7 @@
 
 <meta name="author" content="N. V. Schenk">
 
-<title>Module1: Hello, World!</title>
+<title>Module R: Repetition</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -3024,13 +3024,15 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#repetition-of-module-1" id="toc-repetition-of-module-1" class="nav-link active" data-scroll-target="#repetition-of-module-1">Repetition of Module 1</a></li>
+  <li><a href="#repetition-of-module-1" id="toc-repetition-of-module-1" class="nav-link active" data-scroll-target="#repetition-of-module-1">Repetition of Module 1</a>
+  <ul class="collapse">
   <li><a href="#discussion-insights" id="toc-discussion-insights" class="nav-link" data-scroll-target="#discussion-insights">Discussion insights</a>
   <ul class="collapse">
   <li><a href="#r-recycling" id="toc-r-recycling" class="nav-link" data-scroll-target="#r-recycling">R recycling</a></li>
   <li><a href="#overwriting-vectors" id="toc-overwriting-vectors" class="nav-link" data-scroll-target="#overwriting-vectors">overwriting vectors</a></li>
   <li><a href="#run-r-code-without-click" id="toc-run-r-code-without-click" class="nav-link" data-scroll-target="#run-r-code-without-click">Run R code without click</a></li>
   <li><a href="#re-starting-the-graphics-device" id="toc-re-starting-the-graphics-device" class="nav-link" data-scroll-target="#re-starting-the-graphics-device">Re-starting the graphics device</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -3039,7 +3041,7 @@ vertical-align: -.125em;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Module1: Hello, World!</h1>
+<h1 class="title">Module R: Repetition</h1>
 </div>
 
 
@@ -3068,7 +3070,7 @@ vertical-align: -.125em;
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>The operator <code>==</code> (“double-equal”) checks if two elements (e.g. numbers) are the same.</p>
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-2_44fa59ad11b4572ce64a5aa84c5e286b">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-2_abfbef4abf0224c573992d2f48f79b37">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">==</span> <span class="dv">3</span> <span class="co"># by returning TRUE, R tells you that 3 is indeed the same as 3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
@@ -3081,7 +3083,7 @@ vertical-align: -.125em;
 <p>Create a vector a from 0 to 5 with step size 1. Create a second vector b from 0.1 to 0.3 with step size 0.1. Compare the lengths of vectors a and b, and check if the length is the same, by using the operator <code>==</code></p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-3_0acd84366e9304e3c48dc0a1f3cc889a">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-3_316fd9837ef6d0fa4b82624b2ca57b04">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -3109,7 +3111,7 @@ vertical-align: -.125em;
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p>The <code>&gt;</code> operator tests if a given element (e.g. a number) is larger than another.</p>
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-4_51bf5224bec362c1db29212c7072b986">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-4_55fbc31f08dff30cb7033cb551893002">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">1</span> <span class="co"># 3 is larger than 1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
@@ -3122,7 +3124,7 @@ vertical-align: -.125em;
 <p>Use the operator <code>&gt;</code> to check if vector a is longer than vector b.</p>
 </div>
 <div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-5_a6f717c6b22ed135515b912ae8d499d8">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-5_0c8eb2d37cbbc980207c53637f3170e9">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(a) <span class="sc">&gt;</span> <span class="fu">length</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
@@ -3130,7 +3132,7 @@ vertical-align: -.125em;
 </div>
 <p>Vector a is indeed longer than vector b.</p>
 <p><strong>additionally</strong>, you might have tried out this :</p>
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-6_18ca9fa00851526dc5677f23e017b237">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-6_d1bcc58a5b0c85301c1206ef937cc539">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>a <span class="sc">&gt;</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE  TRUE  TRUE  TRUE  TRUE  TRUE</code></pre>
@@ -3148,7 +3150,7 @@ vertical-align: -.125em;
 <p>Create two sequences of numbers : The first is a sequence of numbers from 1 to 5, with steps of 1. Save this sequence in a variable called a. The second sequence is a sequence of numbers from 0.1 to 0.3, with steps of 0.1. Save this sequence in a variable called b. Subtract a from b.</p>
 </div>
 <div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-7_bd566c40f0f48cd31f0ae7b57ee6aa3f">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-7_015888e9536538a761652d8ce0498399">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>sum <span class="ot">&lt;-</span> b <span class="sc">-</span> a <span class="co"># R adjusts the length of b according the sequence of a and subtracts the values correspondingly from each sequence.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3171,7 +3173,7 @@ length</code></pre>
 <p>Create three sequences of numbers : The first is a sequence of numbers from 0 to 5, with steps of 1. Save this sequence in a variable called a. The second sequence is a sequence of numbers from 0 to 2.5, with steps of 0.5. Save this sequence in a variable called b. The third sequence is a sequence of numbers from 0 to 0.5, with steps of 0.1. Save this sequence in a variable called c. Add a the sequences a and b, then divide by sequence c.</p>
 </div>
 <div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-8_ff21526b7237f1361a8f91002b5163f1">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-8_8ce57aa24336a2a53cf1c4191b0f91ea">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">2.5</span>, <span class="at">by =</span> <span class="fl">0.5</span>)</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> <span class="fl">0.5</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
@@ -3195,14 +3197,13 @@ length</code></pre>
 </div>
 </div>
 </div>
-</section>
-<section id="discussion-insights" class="level1">
-<h1>Discussion insights</h1>
+<section id="discussion-insights" class="level2">
+<h2 class="anchored" data-anchor-id="discussion-insights">Discussion insights</h2>
 <p>Insights discussed during the individual work or during the discussion sessions.</p>
-<section id="r-recycling" class="level2">
-<h2 class="anchored" data-anchor-id="r-recycling">R recycling</h2>
+<section id="r-recycling" class="level3">
+<h3 class="anchored" data-anchor-id="r-recycling">R recycling</h3>
 <p>In module 1, a shorter vector was recycled to fit the length of a longer vector.</p>
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-11_8fbd643ca1ea0de59409c7e94e6d7e95">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-11_0e1305fe51cd20c19004a675d460f482">
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">5</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
 <span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3217,7 +3218,7 @@ length</code></pre>
 <p>This recycling of vectors is a particularity of R, if you need to search about it’s behaviour, you can refer to it by “R’s recycling rules”.</p>
 <p>R’s recycling rules dictate that if the recycled vector fits neatly into the longer vector without partial recycling, no warning is emitted.</p>
 <p>That means if vector a was 6 elements long, vector b would fit percetly two times (no splitting of vector b), and you do not get a warning :</p>
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-12_084ad5f1faac6937966baee10747edc5">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-12_8f6d5671a2302c29c120ed1316acc4db">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="dv">1</span>, <span class="at">to =</span> <span class="dv">6</span>, <span class="at">by =</span> <span class="dv">1</span>)</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fl">0.1</span>, <span class="at">to =</span> <span class="fl">0.3</span>, <span class="at">by =</span> <span class="fl">0.1</span>)</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>a <span class="sc">+</span> b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -3226,19 +3227,19 @@ length</code></pre>
 </div>
 </div>
 </section>
-<section id="overwriting-vectors" class="level2">
-<h2 class="anchored" data-anchor-id="overwriting-vectors">overwriting vectors</h2>
+<section id="overwriting-vectors" class="level3">
+<h3 class="anchored" data-anchor-id="overwriting-vectors">overwriting vectors</h3>
 <p>By re-using a Vector’s name, the former Vector is overwritten</p>
 </section>
-<section id="run-r-code-without-click" class="level2">
-<h2 class="anchored" data-anchor-id="run-r-code-without-click">Run R code without click</h2>
+<section id="run-r-code-without-click" class="level3">
+<h3 class="anchored" data-anchor-id="run-r-code-without-click">Run R code without click</h3>
 <p>Ctrl + Enter</p>
 <p>Run multiple lines at once : select the lines you want to run, Ctrl + Enter</p>
 </section>
-<section id="re-starting-the-graphics-device" class="level2">
-<h2 class="anchored" data-anchor-id="re-starting-the-graphics-device">Re-starting the graphics device</h2>
+<section id="re-starting-the-graphics-device" class="level3">
+<h3 class="anchored" data-anchor-id="re-starting-the-graphics-device">Re-starting the graphics device</h3>
 <p>If plotting does not work any more, sometimes it helps to re-start the graphics device, using :</p>
-<div class="cell" data-hash="Module1_Hello_World_Repetition_cache/html/unnamed-chunk-13_0d468a06df4ed28d4df17e07656b1f42">
+<div class="cell" data-hash="ModuleR_Repetition_cache/html/unnamed-chunk-13_f89dd104711affc13b3d8d493492637c">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>null device 
@@ -3246,6 +3247,7 @@ length</code></pre>
 </div>
 </div>
 <p>And trying to plot again.</p>
+</section>
 </section>
 </section>
 
