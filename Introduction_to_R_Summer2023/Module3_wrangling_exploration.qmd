@@ -9,6 +9,10 @@ editor: source
 execute: 
   cache: true
 ---
+```{r, echo = F}
+# just a little test
+```
+
 
 ```{css, echo = FALSE}
 .output {
@@ -50,7 +54,57 @@ In order to learn coding, you need to code
 
 # Classes in R
 
-TODO
+Take 30 min to work through this [introduction to data types in R](https://digitaschools.com/data-types-in-r-tutorial/). Skip the part about Arrays, they are seldomly used in Ecology, unless you are working with image data. It might be slightly painful, just do it for 30 mins;)
+
+::: {.panel-tabset}
+## Exercise
+
+Factors/ Characters
+
+Imagine you have measured the height of a plant of 5 different plants. You categorised those values to "small", "medium" and "high". Create a vector of class factor `plantheight` containing data of those 5 plants (you can invent the height of the plants).
+
+Use the R base function `plot()` on the vector directly. You didn't see this yet, but you can always try the `plot()` function out of nowhere on a vector : `plot(plantheight)`.
+
+After, convert the `plantheight` vector to character. Use the `plot()` function again.
+
+Discuss what happens.
+
+## Solution
+
+Creating a factor
+```{r}
+plantheight <- c("small", "small", "high", "small", "medium")
+class(plantheight) # if not specified, the vector is classified as "character"
+plantheight
+plantheight <- as.factor(plantheight) # change the class of the vector
+class(plantheight)
+plantheight  # Note that once the vector is a factor, the printing to the console looks different as well.
+```
+
+Plot the factor
+```{r}
+plot(plantheight) # a draft barplot is created.
+```
+
+Convert to character
+```{r}
+plantheight <- as.character(plantheight)
+# plot(plantheight)
+```
+The function throws an error.
+
+**Discussion** : Factors are interpreted as categorical variables, with a fixed number of possible categories which a value can take. Bar plots are a good tool to visualise such data. Characters are used for text, e.g. for notes. R does not expect a fixed number of categories for characters, therefore a visualisation using bar plots is not suitable for character and even throws an error.
+
+:::
+
+
+::: {.callout-note icon=false}
+
+Most R functions are what is called "robust" against the use of chracters where factors would be expected. However, and even more dangerous, many modelling functions do need factors as inputs, and either throw an error or show some unexpected behaviour if characters are used instead.
+
+Make sure that all categorical variables in your dataset are encoded as factors, and you will be save.
+
+:::
 
 
 # Data wrangling - R4DS Ch 4
