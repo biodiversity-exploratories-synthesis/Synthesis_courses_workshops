@@ -1,0 +1,104 @@
+---
+title: "Module3 : Getting friends with R"
+author: "N. V. Schenk"
+format: 
+    html:
+      toc: true
+      self-contained: true
+editor: source
+execute: 
+  cache: true
+---
+```{r, echo = F}
+# just a little test
+```
+
+
+```{css, echo = FALSE}
+.output {
+max-height: 300px;
+overflow-y: scroll;
+}
+```
+
+```{r}
+#| label: requirements
+#| include: false
+# load and install necessary R packages
+# This is not shown in the html script.
+
+# install necessary R packages
+if(!require(dplyr)) install.packages("tidyverse")
+# if(!require(cowplot)) install.packages("cowplot")
+
+# load necessary R packages
+library(tidyverse)
+```
+
+
+This document describes Module 4 of the course "Introduction to R", held in Summer 2023 for the [Biodiversity Exploratories](www.biodiversity-exploratories.de).
+
+# Learning outcome
+
+- data wrangling II
+  - reshaping
+- data exploration II
+- reproducible workflow
+
+
+:::{.callout-tip}
+In order to learn coding, you need to code
+:::
+
+# Reproducible coding
+
+Chapter 5 R4DS
+Chapter 7 R4DS
+maybe : Quarto : Chapter 29 R4DS
+
+TODO : take most important of both chapters!
+
+
+
+# Data wrangling II
+
+Chapter 6 R4DS
+
+- also include reshape2 package, melt and dcast
+- merge
+- find some common problems in data wrangling? see my notes
+  - e.g. cbind and rbind cause problems
+  - check R buddy intro
+
+
+
+# Data exploration
+
+what is missing here?
+maybe add PCA?
+maybe even simple stats? Or importance of defining research question?
+
+
+
+
+# R code
+
+::: {.callout-tip icon=false}
+
+### Checkpoint 3.3
+
+Please invent and write down 1-2 exercises including solutions about the past section (Data exploration in general, including correlation plots). You can slightly modify one of the above or the book exercises, or think about a new one.
+
+Submit the exercises via ILIAS.
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
+
+::: {.panel-tabset}
+## Exercise
+
+## Solution
+
+:::
+
