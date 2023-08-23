@@ -9,10 +9,6 @@ editor: source
 execute: 
   cache: true
 ---
-```{r, echo = F}
-# just a little test
-```
-
 
 ```{css, echo = FALSE}
 .output {
@@ -40,36 +36,133 @@ This document describes Module 4 of the course "Introduction to R", held in Summ
 
 # Learning outcome
 
+- reproducible workflow
 - data wrangling II
   - reshaping
-- data exploration II
-- reproducible workflow
+- topic of your choice
 
 
 :::{.callout-tip}
 In order to learn coding, you need to code
 :::
 
+# Classes in R II
+
+Remember we discussed the main data types in R : 
+
+- vectors : 1-dimensional data
+- matrix : 2-dimensional data, only contains 1 class of data
+- data.frame : 2-dimensional data, can contain multiple types of data
+- tibble : 2-dimensional data, can contain multiple types of data, tidyverse-specific
+- arrays : 3-dimensional data
+
+And the main classes in R : 
+
+- numeric / integer : real or whole numbers
+- logical : TRUE or FALSE
+- character : text, used for notes. Usually not part of the data which is analysed or plotted.
+- factor : categories, looks like text but there is a defined number of available categories. Don't mix up with character. In Analysis and plotting, factors are used.
+
+You have already worked with **column names**, but not yet with **row names**. 
+```{r}
+set.seed(1)
+dataclasses <- data.frame(PlotID = paste("Plot_", seq(1, 10), sep = ""),
+                   observation1 = sample(c(1:50), 10, replace = T),
+                   observation2 = sample(c(1:20), 10, replace = T),
+                   observation3 = sample(c(4:22), 10, replace = T))
+colnames(dataclasses) # prints you the names of columns
+rownames(dataclasses) # prints you the names of rows
+```
+As we have not given any special names to the rows, they are just numbered from 1 to 10. To assign row names, you can overwrite those rownames with another vector, e.g. with the column "PlotID" from the same table. This ABSOLUTELY has to be a vector. A vector is not the same as one column of a table, as e.g. a column of a data.frame :
+```{r, error=T}
+rownames(dataclasses) <- dataclasses |> select(PlotID)
+```
+Will give you an error, because here you try to use a table (with 1 column) for row names. But row names need to be vectors. To select a column, you have so far seen the `select()` function, which returns a table. In order to select a column and return as a vector, you can use the `pull()` function. 
+```{r}
+rownames(dataclasses) <- dataclasses |> pull(PlotID)
+rownames(dataclasses)
+dataclasses
+```
+You see that you were able to set rownames in a data.frame. When you try setting rownames in a tibble : 
+```{r}
+dataclasses <- tibble(PlotID = paste("Plot_", seq(1, 10), sep = ""),
+                   observation1 = sample(c(1:50), 10, replace = T),
+                   observation2 = sample(c(1:20), 10, replace = T),
+                   observation3 = sample(c(4:22), 10, replace = T))
+rownames(dataclasses) <- dataclasses |> pull(PlotID)
+```
+You will get a warning message that setting row names in a tibble is deprecated (i.e. not possible any more). This is because usually it is not necessary, because all information can be saved in a column - why bothering about just another format?
+
+However, working with **matrices**, it can be very useful to use with row names. Remember, matrices can only contain 1 type of data, e.g. numeric. That means, if the names of your plot are saved in one column, but all the others are numeric (e.g. different chemicals measured), you can not just use a matrix to store this data.
+```{r}
+matrix_dataclasses <- as.matrix(dataclasses)
+```
+You can create a matrix from `dataclasses`, but all values are transformed to type character, which is usually useless for analysis.
+```{r}
+str(matrix_dataclasses)
+```
+It would be better to save all numeric columns as a matrix, and use the plot IDs as row names : 
+```{r}
+# step 1 : select all columns BUT the plot column from dataclasses.
+#   convert this to a matrix
+matrix_dataclasses <- dataclasses |>
+  select(-PlotID) |> 
+  as.matrix()
+# Step 2 : Select ONLY the column PlotID from dataclasses, and use this as rownames
+rownames(matrix_dataclasses) <- dataclasses |> 
+  pull(PlotID)
+```
+Now, you have a matrix which is purely observations, and the Plot IDs are given as row names. This is a very neat input for downstream analysis, like e.g. calculating correlation coefficients.
+```{r}
+# calculate correlations : 
+cor(matrix_dataclasses)
+```
+Neatly works. The `cor()` function requires pure numeric input. 
+```{r, error=T}
+# try running the cor function on the table of mixed data : 
+cor(dataclasses) # returns an error, because the table dataclasses does contain columns which are not numeric (the PlotIDs)
+```
+
+**Take home** from this chapter : 
+
+- you can use row names, which is most suitable if you work with matrices
+- a vector is not the same as a table with 1 column
+
+::: {.callout-tip icon=false}
+
+### Checkpoint 4.1
+
+Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+Submit the exercises via ILIAS.
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
+
+
 # Reproducible coding
 
-TODO
-Chapter 5 R4DS
-Chapter 7 R4DS
-maybe : Quarto : Chapter 29 R4DS *optional*
+The R4DS book has 2 chapters about reproducibility and clean coding, or "workflow" as it is called. I strongly recommend all of those chapters (5, 7, partly 29), but this course is just not long enough to look at everything. I therefore recommend you to read and work through Chapter 7 in R4DS.
 
-TODO : take most important of both chapters!
+::: {.callout-tip icon=false}
 
+### Checkpoint 4.2
+
+Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+Submit the exercises via ILIAS.
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
 
 
 # Data wrangling II
+
 ```{r}
 library(tidyverse)
 ```
-
-TODO : 
-- find some common problems in data wrangling? see my notes
-  - e.g. cbind and rbind cause problems
-  - check R buddy intro
 
 ## Selected methdos in data wrangling
 
@@ -203,33 +296,12 @@ ggplot(deleteme, aes(x = explanatory, y = response, colour = group)) +
 
 :::
 
-::: {.callout-tip icon=false}
 
-### Checkpoint 4.1
-
-Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
-
-Submit the exercises via ILIAS.
-
-I will collect the exercises of everyone during the course, and provide them to you for the last module.
-
-:::
 
 ## Chapter 6 R4DS
 
 Read and work through Chapter 6 in R4DS.
 
-::: {.callout-tip icon=false}
-
-### Checkpoint 4.2
-
-Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
-
-Submit the exercises via ILIAS.
-
-I will collect the exercises of everyone during the course, and provide them to you for the last module.
-
-:::
 
 ## Merging tables
 
@@ -251,8 +323,9 @@ soil_properties <- data.frame(
 Your job is to merge these two tables. They have a common identifier, the plot ID.
 
 In the ideal case, both tables have observations in all plots. You can merge those tables using the merge function. The most important thing here is that you specify the `by` argument, which identifies the common key (the common identifier) of both tables. It is good practice to also set `all = T` to keep all rows in both tables.
-```{r}
+```{r, max.height='100px'}
 #| class: output
+#| class-output: output
 merge(species_counts, soil_properties,
       by = "PlotID",
       all = T)
@@ -273,6 +346,7 @@ You might still want to merge those two tables. Now you have two options :
 (1) your goal is to get a table with only 10 rows, only using the plots which are present in the species counts table : 
 ```{r}
 #| class: output
+#| class-output: output
 merge(species_counts, soil_properties,
       by = "PlotID",
       all.x = T)
@@ -282,6 +356,7 @@ By setting `all.x` to `TRUE`, you specify that you ONLY want to keep the rows pr
 (2) or you might want to get a table of all 50 plots, with `NA` values in the plots where there is no species count measured.
 ```{r}
 #| class: output
+#| class-output: output
 merge(species_counts, soil_properties,
       by = "PlotID",
       all = T)
@@ -301,6 +376,7 @@ soil_properties <- data.frame(
 Good practice is to keep all the rows, by setting `all = T` : 
 ```{r}
 #| class: output
+#| class-output: output
 merge(species_counts, soil_properties,
       by = "PlotID",
       all = T)
@@ -323,12 +399,16 @@ soil_properties <- data.frame(
 species counts contains two measurements in Plot_11, and soil_properties in Plot_1.
 
 ```{r}
+#| class: output
+#| class-output: output
 merge(species_counts, soil_properties,
       by = "PlotID",
       all = T)
 ```
 You see the duplicated rows in the merged table as well. You can remove duplicated values before or after merging by using the `unique()` function.
 ```{r}
+#| class: output
+#| class-output: output
 merge(unique(species_counts), unique(soil_properties),
       by = "PlotID",
       all = T)
@@ -355,6 +435,8 @@ soil_properties <- data.frame(
 ```
 Filtering with unique does not solve this problem : 
 ```{r}
+#| class: output
+#| class-output: output
 unique(merge(species_counts, soil_properties,
       by = "PlotID",
       all = T))
@@ -391,25 +473,11 @@ Note that the commands in base R can get long quite fast, but do the same job.
 You have now learned a solid method of merging tables. If you use table merging a lot, consider to read and work through Chapter 20, which introduces you to more advanced table merging. You could also consider this for your homework assigment.
 
 
-
-
-# Data exploration
-
-what is missing here?
-maybe add PCA?
-maybe even simple stats? Or importance of defining research question?
-
-TODO identify R4DS chapter
-
-
-
-# R code
-
 ::: {.callout-tip icon=false}
 
-### Checkpoint TEST
+### Checkpoint 4.3
 
-Please invent and write down 1-2 exercises including solutions about the past section (Data exploration in general, including correlation plots). You can slightly modify one of the above or the book exercises, or think about a new one.
+Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
 
 Submit the exercises via ILIAS.
 
@@ -417,10 +485,27 @@ I will collect the exercises of everyone during the course, and provide them to 
 
 :::
 
-::: {.panel-tabset}
-## Exercise
 
-## Solution
+
+
+
+
+
+
+
+
+
+
+
+# *Optional* Chose a topic yourself
+
+After almost 4 Modules, you will certainly have seen one or more topics where you would like to invest more time. Take the rest of your time (e.g. 30 min) to work on a topic of your choice. You can get inspiration from the additional reading in this and the last modules, or ask me for inspiration.
+
+
+::: {.callout-note icon=false}
+
+### Discussion point chose your topic
+
+If you find some interesting things during this time, please report it in the discussion session of the next meeting. This can help the others (and yourself) to get inspiration for the last module.
 
 :::
-
