@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
 }
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -2992,7 +3026,15 @@ vertical-align: -.125em;
   <ul>
   <li><a href="#learning-outcome" id="toc-learning-outcome" class="nav-link active" data-scroll-target="#learning-outcome">Learning outcome</a></li>
   <li><a href="#reproducible-coding" id="toc-reproducible-coding" class="nav-link" data-scroll-target="#reproducible-coding">Reproducible coding</a></li>
-  <li><a href="#data-wrangling-ii" id="toc-data-wrangling-ii" class="nav-link" data-scroll-target="#data-wrangling-ii">Data wrangling II</a></li>
+  <li><a href="#data-wrangling-ii" id="toc-data-wrangling-ii" class="nav-link" data-scroll-target="#data-wrangling-ii">Data wrangling II</a>
+  <ul class="collapse">
+  <li><a href="#selected-methdos-in-data-wrangling" id="toc-selected-methdos-in-data-wrangling" class="nav-link" data-scroll-target="#selected-methdos-in-data-wrangling">Selected methdos in data wrangling</a></li>
+  <li><a href="#chapter-6-r4ds" id="toc-chapter-6-r4ds" class="nav-link" data-scroll-target="#chapter-6-r4ds">Chapter 6 R4DS</a></li>
+  <li><a href="#merging-tables" id="toc-merging-tables" class="nav-link" data-scroll-target="#merging-tables">Merging tables</a>
+  <ul class="collapse">
+  <li><a href="#optional-chapter-20-r4ds" id="toc-optional-chapter-20-r4ds" class="nav-link" data-scroll-target="#optional-chapter-20-r4ds"><em>Optional</em> Chapter 20 R4DS</a></li>
+  </ul></li>
+  </ul></li>
   <li><a href="#data-exploration" id="toc-data-exploration" class="nav-link" data-scroll-target="#data-exploration">Data exploration</a></li>
   <li><a href="#r-code" id="toc-r-code" class="nav-link" data-scroll-target="#r-code">R code</a></li>
   </ul>
@@ -3058,25 +3100,739 @@ Tip
 </section>
 <section id="reproducible-coding" class="level1">
 <h1>Reproducible coding</h1>
-<p>Chapter 5 R4DS Chapter 7 R4DS maybe : Quarto : Chapter 29 R4DS</p>
+<p>TODO Chapter 5 R4DS Chapter 7 R4DS maybe : Quarto : Chapter 29 R4DS <em>optional</em></p>
 <p>TODO : take most important of both chapters!</p>
 </section>
 <section id="data-wrangling-ii" class="level1">
 <h1>Data wrangling II</h1>
-<p>Chapter 6 R4DS</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-4_bce677680170c24bcc12d6a8750ea6cb">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>TODO : - find some common problems in data wrangling? see my notes - e.g. cbind and rbind cause problems - check R buddy intro</p>
+<section id="selected-methdos-in-data-wrangling" class="level2">
+<h2 class="anchored" data-anchor-id="selected-methdos-in-data-wrangling">Selected methdos in data wrangling</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href>Solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>You have seen the <code>rep()</code> function in earlier exercises. It is a handy function to create vectors of characters. The first argument is a vector, e.g. of characters you want to see repeated. The second argument gives you the number of times a vector should be repeated.</p>
+<p>The vector c(1, 3) is repeated 3 times :</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-5_2bc0736a8625e810e0d34e5000c40d63">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">times =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1 3 1 3 1 3</code></pre>
+</div>
+</div>
+<p>The vector c(“high”, “low”) is repeated 10 times</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-6_ce880540112cafc5d3fdf842e9e45d9a">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rep</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;high&quot;</span>, <span class="st">&quot;low&quot;</span>), <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] &quot;high&quot; &quot;low&quot;  &quot;high&quot; &quot;low&quot;  &quot;high&quot; &quot;low&quot;  &quot;high&quot; &quot;low&quot;  &quot;high&quot; &quot;low&quot; 
+[11] &quot;high&quot; &quot;low&quot;  &quot;high&quot; &quot;low&quot;  &quot;high&quot; &quot;low&quot;  &quot;high&quot; &quot;low&quot;  &quot;high&quot; &quot;low&quot; </code></pre>
+</div>
+</div>
+<p>Create a vector <code>deleteme</code> of length 10, which consists of 5 repetitions of values “A” and “B”</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-7_0e2d1c37c3b9b50d7cf3a5142685d676">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>deleteme <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="at">times =</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><em>Hint 1</em> : you do not have to give the arguments, if the order is correct. The call <code>rep(c(&quot;A&quot;, &quot;B&quot;), 10)</code> will lead to the same output.</p>
+<p><em>Hint 2</em> : When you try out things, you can name the created elements something like “deleteme”, to indicate that this element is not used in later code and just serves practising purposes. This will help you to keep your code clean.</p>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href>Solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Above you learned about the <code>rep()</code> function. Another very handy function to create tables is the <code>sample()</code> function. Check the help function (or google, …) yourself to find out how to create a vector <code>deleteme</code> (note that the vector you created in the previous section will be overwritten by that). <code>deleteme</code> is a vector of length 15 which contains random realisations of the categories “grass”, “legume” and “herb”.</p>
+<p>Convert the vector to a tibble and save it under the same name. Plot the result using ggplot.</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-8_da8d71ef2f6fa988d74ed07ac7c545a4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>deleteme <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="at">x =</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">&quot;grass&quot;</span>, <span class="st">&quot;legume&quot;</span>, <span class="st">&quot;herb&quot;</span>)),</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">size =</span> <span class="dv">15</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">replace =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <ul>
-<li>also include reshape2 package, melt and dcast</li>
-<li>merge</li>
-<li>find some common problems in data wrangling? see my notes
-<ul>
-<li>e.g. cbind and rbind cause problems</li>
-<li>check R buddy intro</li>
-</ul></li>
+<li>x gives the vector from which to sample from. Note that this is a factor.</li>
+<li><code>size</code> gives the size of the final vector</li>
+<li><code>replace</code> indicate that the length of the final vector is longer than the size of the categories. We allow resampling the same element again and again.</li>
 </ul>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-9_c1168fcb35a708623783fe2808eef7f9">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>deleteme <span class="ot">&lt;-</span> <span class="fu">tibble</span>(deleteme) <span class="co"># convert the vector to a table</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> deleteme, <span class="fu">aes</span>(<span class="at">x =</span> deleteme)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data:image/png;base64,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+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfCAGNQEAhYQYP+oUQ0AgEFBJm8KBfyD4N6I6JJHbV9c6mX8M+0fQX9qhjBg/6hezTgG7NYkddb2/6NewTTX9hjzpm8KBfyD4NKD+FH3ZNf2GPOmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF8IAY1AQCFhBg/6hRDQCAQUEmbwoF9IXEDvXryGgI6apr+wRx0zeNAvJCyg208uBHTkNP2FPeqYwYN+IWEBvawQ0NHT9Bf2qGMGD/qFRAX0+2PLCOjoafoLe9Qxgwf9QoIC+vDy5V8moKOn6S/sUccMHvQLCQrou8oN1xHQ0dP0F/aoYwYP+oXEBPQr5dJ6VkAf+nrHpkeS2F7XW5p+DftE01/Yo44ZPOgXEhLQe5eu2jY7oDce1jEu/dPgo+kv7FHHDB7CDkYK6MRbF91ZE9BR1PQX9qhjBg9hByMF9KPlE3VXQDd8pOPBR5N4vK63Nv0a9ommv7BHHTN40C8kIKB3LTxtojug0/hFpGHX9Bf2qGMGD/qFBAT02jLjxwR0pDT9hT3qmMGDfiEBAb3hxLblZcmJJ95DQEdK01/Yo44ZPOgXEhDQKfwUfgQ1/YU96pjBg34hBDQCAYWEGTzoF0JAIxBQSJjBg34hBDQCAYWEGTzoFxIX0CdAQIdd01/Yo44ZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiEENAIBhYQZPOgXQkAjEFBImMGDfiF9BXTdulnv3LfuYwS0BwGFhBk86BfSV0Cr2U/fWr2AgPYgoJAwgwf9QgYP6GergwhoDwIKCTN40C/kyQL6vedOqqrn7nbwAdWLCGgPAgoJM3jQL+TJAvrdaq7zCGgPAgoJM3jQL+TJAvqzNZOqas2Mt3+x334S0KHX9Bf2qGMGD/qFPFlAO8+Kv7uJgA67pr+wRx0zeNAvpK+ArlpFQOdFQCFhBg/6hfQVUBUBHXZNf2GPOmbwoF9IvwH9yVe/MoOA9iCgkDCDB/1C+gvodS/u+mV4AtqDgELCDB70C+kroP96UEVA50NAIWEGD/qF9BXQ46tq8T/e/qPdCGgPAgoJM3jQL6SvgB5aLeq3mQR0pDT9hT3qmMGDfiH9BHTXgdWXCOh8CCgkzOBBv5B+Arq5qq4noPMhoJAwgwf9QvoJ6PYF1fsJ6HwIKCTM4EG/kH4CWq+oDt1MQOdBQCFhBg/6hfQV0EdeWr3qdgK6ZwQUEmbwoF9IXwG9+lO/Vz31T1e8bfovZCKgPQgoJMzgQb+QvgLa+xeCEtAeBBQSZvCgX0hfAV3Qg4D2IKCQMIMH/UL6CqiKgA67pr+wRx0zeNAvhIBGIKCQMIMH/UIIaAQCCgkzeNAvpK+A3tODgPYgoJAwgwf9QvoKKL8K/yQIKCTM4EG/EAIagYBCwgwe9AvpK6BXTfvQX764esrfbCSgPQgoJMzgQb+QvgI6y7bTq+rvCWgPAgoJM3jQL2TQgNa7/kf1648T0G4EFBJm8KBfyMABrT9RVbcQ0G4EFBJm8KBfyOABvbmqfk5AuxFQSJjBg34hgwf0qupX++wnAR16TX9hjzpm8KBfyMAB3fGn1cv6DeijWTxe11ubfg37RNNf2KOOGTzoF9JXQD+z25UX/WFVnd5vQHf1+4FzNf0ZHXXMYIEZPKiZmqOf30j/m5v6/aftxU/hm/6MjjpmsMAMHtRMCX8SacFf/LTvHBNQW8xggRk8qJnqM6C/mGVn3/kkoMaYwQIzeFAz5fvX2TX9GR11zGCBGTyomSKgWTGDBWbwoGaq/4BOfHTVn//e7/y3lZfvIKCjgBksMIMHNVN9B/Tzh07/ItJLriKgI4AZLDCDBzVT/Qb0otYvv7/s8KUv/7XJB58noMOPGSwwgwc1U30G9I6nVc++cHPr0ZZ1z6mecy8BHXrMYIEZPKiZ6jOgJ1UHfnv68XcOrN5MQIceM1hgBg9qpvoM6CHVqtk1/QMCOvSYwQIzeFAz1WdAf7W6Yuadj1ULCOjQYwYLzOBBzVSfAf2V2QH96H756+ya/oyOOmawwAwe1Ez1GdDf56fwo4YZLDCDBzVTff8i0kHfmX783YOqkwno0GMGC8zgQc1UnwH96cHVcy/Z2nq09b2/WT39TgI69JjBAjN4UDPV72+k/3xVVb/xR0cd9ce/MflgXb/9JKC+mMECM3hQM9X3H+W86pDpP8p5SP9/EImA+mIGC8zgQc3UAH+ZyIdXvup3f/dVKz/EXyYyEpjBAjN4UDPFX2eXFTNYYAYPaqYIaFbMYIEZPKiZ6jugO6447qOtt3+x9O8mCOgIYAYLzOBBzVS/Ab37kKpa23rw8qr6k3sI6PBjBgvM4EHNVJ8B3TbZz4M/2Xr0zhdW1cv6/u/KEVBbzGCBGTyomeozoO+pqtVTv/o+cW5VvY+ADj1msMAMHtRM9RnQP6lePfPO4bPfIaBDihksMIMHNVN9BvQ51eUz71xRvZiADj1msMAMHtRM9RnQg6rPzLzzueoZBHToMYMFZvCgZqrPgL6oOmvmndXVCwno0GMGC8zgQc1UnwFdUT3vp9OP7/3tajkBHXrMYIEZPKiZ6jOgNz+1OvSazsPrXlo942YCOvSYwQIzeFAz1e9vpD+vqqr/uOzst5/wiskHl/bbTwLqixksMIMHNVN9/1HOj7xg+q+zO/j/9N1PAuqLGSwwgwc1U/3/ZSJbL/yf//5p1fNfufrB/vtJQH0xgwVm8KBmarC/jWnHYwPEk4BaYwYLzOBBzRR/nV1WzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGYqKqB3X/S6xSvfcTsBHRrMYIEZPKiZCgrotxaVsmJJGfs4AR0WzGCBGTyomYoJ6PiScsGmeuLzY2O3ENAhwQwWmMGDmqmYgF5Zzpxovb28vIuADglmsMAMHtRMxQT0r8uX22/vKCcQ0CHBDBaYwYOaqZiAvuOEH7Tf3lWWE9AhwQwWmMGDmqnY38b08XIuAR0SzGCBGTyomQoN6M2LS+dHovUtr+p4cJes6c/oqGMGC8zgQc3Url1hAd12xcLyyanHNx7WMS7/0+qmP6OjjhksMIMHNVNzyAH99gll6Vem37ltrOPBCVnTn9FRxwwWmMGD1Ki2mIA+vLaU8zfMeZp/B2qLGSwwgwc1U0H/DnTD8eVNdzzB8wTUFjNYYAYPaqZiAvrYqnLx40/0DQTUFjNYYAYPaqZiAvqF3t++REDtMYMFZvCgZiomoG8qt+ycQkCHBDNYYAYPaqZCAjqxsEw7kYAOCWawwAwe1EyFBPT+QkCHDjNYYAYPaqb4G+mzYgYLzOBBzRQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAzRUCzYgYLzOBBzRQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAzRUCzYgYLzOBBzRQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAzRUCzYgYLzOBBzRQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAzRUCzYgYLzOBBzRQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAzRUCzYgYLzOBBzXDdtd0AABSOSURBVBQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAzRUCzYgYLzOBBzRQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAzRUCzYgYLzOBBzRQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAzRUCzYgYLzOBBzRQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAzRUCzYgYLzOBBzRQBzYoZLDCDBzVTBDQrZrDADB7UTBHQrJjBAjN4UDNFQLNiBgvM4EHNFAHNihksMIMHNVMENCtmsMAMHtRMEdCsmMECM3hQM0VAs2IGC8zgQc0UAc2KGSwwgwc1UwQ0K2awwAwe1EwR0KyYwQIzeFAztY8DummjrOnP6KhjBgvM4EHN1MaN+zSgu/Tv2vRndNQxgwVm8KBmao7YgG7WNf0ZHXXMYIEZPKiZ2rx5nwaUfwdqixksMIMHNVP8IlJWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmikCmhUzWGAGD2qmCGhWzGCBGTyomSKgWTGDBWbwoGaKgGbFDBaYwYOaKQKaFTNYYAYPaqYIaFbMYIEZPKiZIqBZMYMFZvCgZoqAZsUMFpjBg5opApoVM1hgBg9qpghoVsxggRk8qJkioFkxgwVm8KBmioBmxQwWmMGDmqmogG794IqlZ31ygoAODWawwAwe1EwFBfSBU0pZVsrZjxDQYcEMFpjBg5qpoICuLmc9UN97UrmIgA4LZrDADB7UTMUE9I5ydOvHnr9YNPZLAjokmMECM3hQMxUT0MvLhe23Z5cvEtAhwQwWmMGDmqmYgK4u69tvr+z9OTwBtcUMFpjBg5qpmIAeX37Yfru+nE5AhwQzWGAGD2qmYgK6tNzTfntDOanzxL3v6di0Rdb0Z3TUMYMFZvCgZmrLloiALiob2m9vKys6T9x4WMe48k/raPozOuqYwQIzeFAzNYcU0GN3/wj0LZ0nAgIKAMNGCuip5db22/Xl3M4Tj1zfsWk8iW11/VjTrwHjm+v68aZfA8bHd9Z10y9hv4kI6Dnl2vbbz5X3dn/DXvwi0nDZUtcPN/0a8MBDdb2t6deABx6YqOumX8J+ExHQy8t7pkL6JQKK5hBQDwR0MD8syyd/Dls/vHjJowQUzSGgHgjogE4vF0zU284uF/c8T0CxPxFQDwR0QPctK0eesaS8IfBvYxouBNQCAfVAQAe16ZLjD19x+WO9TxNQ7E8E1AMBDUJAsT8RUA8ElIAOhoBaIKAeCCgBHQwBtUBAPRBQAjoYAmqBgHogoAR0MATUAgH1QEAJ6GAIqAUC6oGAEtDBEFALBNQDASWggyGgFgioBwJKQAdDQC0QUA8ElIAOhoBaIKAeCCgBHQwBtUBAPRBQAjoYAmqBgHogoAR0MATUAgH1QEAJ6GAIqAUC6oGAEtDBEFALBNQDASWggyGgFgioBwJKQAdDQC0QUA8ElIAOhoBaIKAeCCgBHQwBtUBAPRBQAjoYAmqBgHogoAR0MATUAgH1QEAJ6GAIqAUC6oGAEtDBEFALBNQDASWggyGgFgioBwJKQAdDQC0QUA8ElIAOhoBaIKAeCCgBHQwBtUBAPRBQAjoYAmqBgHogoAR0MATUAgH1QEAJ6GAIqAUC6oGABnlwYxIPjY9vavo1YOOm8fE0X3LOxsfHm34J+80+DWgaFx922D83/RpQ33HYYW9r+jWgrpccdljTL6EpBFRCQC0QUA8EFIMhoBYIqAcCisEQUAsE1AMBxWAIqAUC6oGAYjAE1AIB9UBAMRgCaoGAeiCgGMy/XX/9Q02/BtSPXX/9XU2/BtT1Lddf3/RLaAoBBQARAQUAEQEFABEBBQARAQUAEQHFcFhf3v8kH7Gm/Hi/vJJc/rF8sOmX4IyAYjgQ0GYQ0HkRUAwHAtoMAjovAjqYR5t+AWk9WUAfJaD7xKAB3bV1H70QTwR0Xj9Ye+yqSzZdUb5f118rVz924dIrJp/8/jtWLXndOZ0/ezH+4VOWLj/rul29jxFtMqCPfuCExW/4u83td8cvO23pyovuaT2cXmYyoDeefeTyd/xLo69z1EwFdNbnu+ssPlU+037qwnJDa6MvXrOsHHPuDfWGi9+09JRvdD6667uOGgI6n68vKkctK8ed0wnoVWeUo6+q6/eVsuyNR5Zy9eQHbFxelqxaVsqVPY8Rbn254I0LTzm1lLNa/w912/KyaOXh5fBr65ll1pTLxsqxC0v5cNOvdZR0Ajr78911Fj0BPbMcecZry9jVxyw5/bhSvl33fteRQ0DnsWHR4mt31bccXToBXbHqzskn/19ZMvnexD+UEybfuaic/1hdf6Ms2t79GOHWl3LS/XX9w8VlcoXtx5ePbK93fHJs8b0zy6wp5YwN9ZaPlXJL0y92hLQD2vX57jqLnoCWtdvqrWdMDjFeT5xXzql7vuvoIaDz+Nvy8daba6YC2vlXbF9demn7G5eVLXW9qvPc+avv7X6McOvL2E9ab9eWyZ8Zfrpc2H7ykvLemWXWlNe2//3bpeXMxl7l6GkHtOvz3XUWPQE9trXAP5dFk/9XV99ZTqx7vuvoIaDzOK78svVm+9JOQN8y+9seXFwmf7x5WrlsYvqZ2Y8Rbn15a/vt5eVrdX1muaP9zm1l1cwya8pH2283lIUMEaYd0K7Pd9dZ9AT0r1uPby0nt948WFbUPd919BDQPds+tqTz4KROQNdOPb/rnm9due740grot0tZvu7rv2g/Pfsxwq2f+pHMh1oBXVYuvrTlwnL4zDJrynWdDz2m3NfUqxw97YDO/nx3n0VPQC9pPb69rGm9eagd0K6pRg8B3bOft/8156TVnYC+r/PeF44tpRz9ziNbAa1vXbNo8r233FT3PEa06d/G1ArojjJjYvcya8rtnQ9989QPehCgFdCuz3f3WTxZQLunGj0EdM8eLVP/V3tyJ6CdA/5sOfKKWx6u6xXtgNb15usuO7GUm+c8RqzZAa2PGdsx8y3Ty6wp3+k8saxs2t+vbnS1fwQ6+/PdfRbTAV27px+Bdk01egjoPF5bHmi9mXjN7ICeUG6aevtYveP+Da2Huy4oF3Q9RryugJ5WOr+t8NEf3j07oO1f3Kg3liX8Xtww7YB2fb67zuJTU79t75Q9BbTru44eAjqPteUTrTfry+yALi7t38l9/9hkQMfL4vbvWfpmOa/rMeJ1BfSKsq79zmWthWYCemx7gfd3fikDIdoB7fp8d53FlZ1/f/KTsT0FtOu7jh4COo/7Dl9yXV3fdszCcuPMmZ5aPjv5vze/vpTJH3GuLOsmfyJ/38nlC92PEa4roI8eUz6wud559dgRv5gd0HL2xnrbJ8bG/q3JFzpi2gHt+nx3ncW/lNfcPfnUSWVPAe36rqOHgM7nSwvLa5eXc1aX22bO9LulrHrb68rb3lresL6+aawsesPrx8rqibrrMcJ1BbS+4agyturosrD1Z11mAnpmKScsKou+1NyrHD2dP4k0+/PddRbbTy6LTj91UXnrngLa/V1HDgGd183nHHXcR3acWu6eOdP6ptXHLD/3azt/8L+XfKau71p74pLjzvp6u5mzHyNad0DrDZecesQb3v3T1sOZgE58+ZxlK86/tamXOJKm/iz8rM9311nU45euXFiWfPnzewxo93cdNQR0HuMb27+AuOu1JdffMAPMY85Z7Lg3759eJqDzuLh8vfXmhnJa068EsMFZzEJA53HT2LHf2zp+3bLyraZfCWCDs5iFgM7ns60/WlSO4BclgBmcxQwCOq/7P/vey6/Z0PSrAKxwFrsRUAAQEVAAEBFQABARUAAQEVAAEBFQABARUAAQEVBYeW61Zu6TE1X17v3+SoAnR0BhZaCA/uy739vHLweYFwGFlYECuqZ67j5+OcC8CCisEFAMEwIKKwQUw4SAwkpcQB/hb8HGPkdAYeEfXv1bB73oxDt3B/TRC/7o2Qv+86oftd+ZCejsp1dVbevmfHi9oLr6B//lgGrByz9c1w+f9ZJnPu+V03/1WvfHAXuJgMLAjtM6MXzm56YCetMLOk8c0P5vRO8OaNfTswLa/eGTAX3Xgs4Tq+9+UefBJXO/P7DXCCgMvL6qDj7pivP+a/XMA9sB/eXBVXXkBz51xq9XVeu/8T4d0J6nd/8Uvvf5BdVTq6Ov/s5fPb064Ler13/12lMOqJ61+Qk+DthLBBTNu/Up1SE/nny7882TPzpcM/ngzdXTrmp9w92HVM+8ZyagPU/vDmjv85M//Hxn6/13TP7j3tN6cFJV/d8n+DhgLxFQNO+Iqvpu+8Gu/9AO6N0HVlP/wbJvVNXbdge09+npgM55fkH1kvZ/XPqOqnrprtaDa6vq00/wccBeIqBo3vOqP5t69MF2QP+2qn429cTvV6/cHdDep6cDOuf5BdXK9nuPVFPF/Neq+uQTfBywlwgoGvdItfv3Lt3ZfviW6vnT37aw1cipgPY+PR3QOc8vmP6l/Kmfwdf3tAM65+OAvURA0bgbq+pDUw+3tgP6v6pZnrI7oL1PTwd0zvOzAvre9oNOQOd8HLCXCCgad1tVfXj68a+02veK2aWrdkwHtPfp6YDOeX4PAZ3zccBeIqBo3NYDdv8U/pftH4G+pvrjrg+YCmjv09MBnfP8HgI65+OAvURA0bzfqf586tHX2gH9q+q3dk09MTGxc3dAe5+eDuic5/cQ0DkfB+wlAormHV1V13ce/Vk7oFdV1VWd9x941qzfxtT79HRA5zy/h4DO+ThgLxFQNO9HT60O/Unrwfmd30i/6xXVs/+p9f72Uh1w1+6A9j49GdCD6yd6fg8BnfNxwF4ioDCwoqqec+rH1/336qBD2+37zgHV05e/7+qL/qDzG96n/yRSz9P126sDPnfrfXOf30NA53wcsJcIKAxsnfodRs/49FGd9l3z/KnfbPTm1nu7/zKR7qfrL07/ZSI9z+8poL0fB+wlAgoLV7763x34/OW31lMBrR888z/92rP+8Phb2+/M/HV2XU/X9bteeNDzPzb3+T0GtPf7A3uHgAKAiIACgIiAAoCIgAKAiIACgIiAAoCIgAKAiIACgIiAAoCIgAKAiIACgIiAAoCIgAKAiIACgIiAAoCIgAKAiIACgIiAAoCIgAKAiIACgIiAAoCIgAKA6P8DhA2hCcq+1pwAAAAASUVORK5CYII=" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><em>Note</em> that tables can consist of only 1 column.</p>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href>Solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p>You learned about characters and factors in the last module. Often, you have to re-classify a single column in your table from character to factor. Can you find out how to do that?</p>
+<p>Below you find the code to create a <code>tibble</code> consisting of</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-10_6848ece1d4070dfb8e72cf2dbf09ad39">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>deleteme <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">explanatory =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>), <span class="dv">10</span>, <span class="at">replace =</span> T),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p>There are multiple ways, e.g. using <code>mutate()</code> from the <code>dplyr</code> package (<code>tidyverse</code>).</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-11_84fb602df4fa42d7e54ad4ef196f4c41">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>deleteme <span class="ot">&lt;-</span> deleteme <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">group =</span> <span class="fu">factor</span>(group))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In base R, you could e.g. use :</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-12_3dea93cb2b914ced421294818eabdacd">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>deleteme<span class="sc">$</span>group <span class="ot">&lt;-</span> <span class="fu">factor</span>(deleteme<span class="sc">$</span>group)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" role="tab" aria-controls="tabset-4-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" role="tab" aria-controls="tabset-4-2" aria-selected="false" href>Hint</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-4-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-3" role="tab" aria-controls="tabset-4-3" aria-selected="false" href>Solution</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-4-1-tab">
+<p>Use the tibble created below. Create another column called “response”. It contains values of an imaginary response variable which is related linearly to “explanatory” in group A, and exponentially (x^2) in group B.</p>
+<p>Note that you will use a new function, and you will have to find out which function is appropriate. If you don’t find, don’t hesitate to check the Hint.</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-13_02d8b4abce9cc7281ba1d00c4d80d5e1">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>deleteme <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">explanatory =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>), <span class="dv">1000</span>, <span class="at">replace =</span> T),</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">group =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>), <span class="dv">500</span>))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># the response variable in group A is linearly related to the explanatory variable</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># the response variable in group B is exponentially related to the explanatory variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Plot the result using <code>ggplot</code> to check if you have done the right thing. Think about an appropriate plot type.</p>
+</div>
+<div id="tabset-4-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-2-tab">
+<p>Try to find out what the <code>case_when()</code> function of <code>dplyr</code> does.</p>
+<p>What about a line plot with two lines of two colours, one line/colour per group?</p>
+</div>
+<div id="tabset-4-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-4-3-tab">
+<p>Use the <code>case_when()</code> function from <code>dplyr</code> to specify different functions for different cases.</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-14_7f38a62142e4fb7c88a977d7c919c9ff">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>deleteme <span class="ot">&lt;-</span> deleteme <span class="sc">|&gt;</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(group) <span class="sc">|&gt;</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">response =</span> <span class="fu">case_when</span>(</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    group <span class="sc">==</span> <span class="st">&quot;A&quot;</span> <span class="sc">~</span> explanatory <span class="sc">*</span> <span class="dv">5</span>, <span class="co"># If the row is of group A : linear relationship</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    group <span class="sc">==</span> <span class="st">&quot;B&quot;</span> <span class="sc">~</span> explanatory <span class="sc">^</span> <span class="dv">2</span>)) <span class="co"># If the row is of group B : exponential relationship</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You could visualise using a line plot. Remember to put the <code>colour</code> argument to “group”.</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-15_220f6a4999e82f8d107457faaa2ef64b">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(deleteme, <span class="fu">aes</span>(<span class="at">x =</span> explanatory, <span class="at">y =</span> response, <span class="at">colour =</span> group)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="data:image/png;base64,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B0A6HX/88SKyffv2N998s99DW7dufeuttwb0bMYccm1tbc8+++yujz711FPhcFhETjrppH4P7ToEIBaLLVu2bE87evTRRxOJRL+VW7ZsMcabn3TSSbudk29oDcEOvvSlL23cuHHGjBnGhHa9Ax7+9re/BQIBETnxxBNXrly5l5sBAAAAIHtsisYu39GQ0HURmVJeOqe6cp/fAsBMLrnkEuNe7nPnzjU6o6G7u/uqq65KJpMDerYf/vCHY8eOFZG77rrL+DC816pVq+655x4RGTNmzJQpU4yVJSUlxo3lli5d2reQ67p+6623GuPtd2vr1q0zZszoGy8QCFx00UXxeFxE7r777gHFPjB7nB5gQEpLSxcuXDhr1qw//OEPn3322aZNmwKBwKhRo8aOHXvcccdNmjSJ+ecBAAAgIqFE8qJtdW3JpIic7HE/OeZQ1YkApFt+fv4TTzxx0UUXrVu37uSTT542bdrRRx/96aefLl26dM2aNSeddNLf//53+eKWZ/tks9keeOCBc845p7m5eeLEiZdddpnxmfzKlSufeeaZaDQqIg8++GDv3HgWi2XixIm/+93vVq9efeaZZ15//fUHHXTQhg0bXnzxxTfffNNisaRSqd3uKCcnZ8mSJR9++OHkyZMPPvjg1atXv/LKK8ZV5N/+9rdPP/30oTg2+/rHDuFzjRo16qqrrhrCJwQAAICZxHV9Wm39llhMRGrs9hcPqnQO/4hTACPQD37wg2QyecUVV3z++ee33XZb7/rp06ePHj3aKPBut3s/n23y5Mnz58+fM2dOJBJZtGjRokWLeh8qLCx89tlnzz777L7bL168+Ljjjmtubn7//ffff//9vg898MADe5q77Ve/+tWFF164atUq4yZrvS6++OInn3xyP6MOEmdMAAAApMlNDU3vd3aLiM9qWXpQZfGebxYFwPR++MMf/vWvf500aVJhYaHH4znxxBOXLl362GOPNTc3i4jL5XI6BzC35cyZM9etW3fVVVeNGTPG4/F4PJ6xY8dOnz79o48+mjx5cr+Nq6urN27ceN111x1zzDEej8dYmZeX9+KLL1566aV72sVXv/rV9evXz5gx45BDDnE6nYWFhRMnTnzppZdeeuml/f9bwyAN40kzGAy+9957bW1tJ5988rhx4xhFDwAAkM0WtbS+2NomIlZNe7LKP55p54GsN2HC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Sk5OnjFjxs033ywib7/9dqf2FWqA37Jli4jceOONvXv3/qE2FovlhhtuEJEvv/wyxO4AAACi2F63Z3KRszkQFJHT46x/z8u1GEjvANANnHbaaSLS2cuohxrgDxw4ICJDhw49erMBAwaIyDfffBNidwAAANHqoNc3ochZ5w+IyBBrzLJ8e5yhs1b8BQCE1xdffCEip5xySqf2Ygrx9RaLpbW1tbGx8ejNiouLRURhABgAAMCRlPv84w+UVPj8ItLHYlnV255sNOpdFAB0rnKvb1tra8S66xcTc1JcbNjftrW19e9///vf/va3pKSke+65J+zv31GoAb5///6ffvrpBx98cP311x+l2bZt20TkKMPsAQAAeqy6QGBCkbPY5xORXLP5td72DFOoX9IAoOv7zNX2f/uLI9bdrZlpYQnwubm57RenvV5vU1OTiPTv33/16tWDBg0K/f2PItRxWePHjxeRV199de3atT/U5l//+tfy5ctF5Fe/+lWI3QEAAESZ5kBw0kHn126PiKSZjK/1tjssZr2LAgD8oNra2prvaeldRL799tu5c+fW1NR0ateh/rh7yy23PPXUU06nc/z48TNmzJgxY0Zubm77s6qqrl279tprr/X5fHa7/e677w6xOwAAgGjiVtWrip1ftLlFJMloXNnb0S/GondRABAhfWMsd2ZlRKy7sxPiw/I+brc7Jiam4+bOnTvvvvvutWvXDh8+/PPPPzebO+t32FADfHx8/Nq1ay+44IL6+vrHHnvsscceczgc2lNnn332/v37KysrRURRlL///e+9evUKtV4AAIBo4VPVacWlW1vbRCTWoCzLzz3JGvOjrwKAqDEo1np/bpbeVYTKarX+7Gc/W7du3cCBA3fv3r1q1aorr7yyk/oKw9Smp5566t69e2+77TaLxSIiJSUl2v6tW7dq6f2MM87YsmXLBRdcEHpfAAAA0SGgqjc7y99vbhURi0F5Mc9+RidMrQQAiIzExMThw4eLyM6dOzuvl/DMj5KRkfHkk0/eeeed77zzzrfffltYWFhZWVlQUDBw4MChQ4eOGTOG+ecBAADaqSIzSivWNDaLiFlRljhyzk+I07soAEBItJHzxs5cQySkAF9VVfXGG2+IyJgxY7KzswsKCm6++eYwFQYAABC1ZpdXvdrQJCIGkQX2rJG2BL0rAgCExO12b9q0SURO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wPcIO3bsEBF7fk5zdsv27dvTUBOw/2666aY22z/66CMRGTRokP2jPQkzPz//hRdeeOedd8rLy4uKigYMGHDeeecNHDiwy6oF9ks737f058gCCxcuTCaTkydPbt5I143s0M5ems4cHUaA7xHC4bCItP6m0O/3i0gkEklDTUAnWb169QsvvCAi55xzjt1ifwpcsWLFihUrNE3Lzc3dtm3btm3bli9ffumll06cODGd5QJ70M73Lf05Mt2qVavWrl170kknDRgwoHk7XTeyQzt7aTpzdBgBvkdIJBIi4vV6W7Tn5OSISDweT0NNwAGLx+OLFi168cUXk8nkxRdffPTRR9vt9qdAv99/9dVXjxw5UtO0cDj8zDPPvPzyy48++uiRRx5pbzgMdCvtfN/SnyPTPfHEEw6H46KLLmrRTteN7NDOXprOHB1GgO8RAoFAXV1dNBpt0W5/vcdWk8hEH3744SOPPFJVVeXxeKZOnXrGGWekDp122mkjRowoLS1NzUzz+XxTp06tra197733nn322ZkzZ6apamCP2vm+pT9HRluxYsXXX389evTo1quZ0HUjO7Szl6YzR4cR4HuEYDBYV1fX2NjYot1uKSgoSEdRQAeFQqEHH3zwww8/FJETTzxxypQpvXr1an7CgAEDWszMtJ1xxhnvvffepk2buqhQYH+0831Lf46M9ve//11Exo0b1/oQXTeyQzt7aTpzdBgBvkfIz88XkZqamhbttbW1IlJYWJiGmoAOqaiouP7666urq0tLS6dNmzZkyJD2P7akpEREampqLMtiS2FkihbvW/pzZK6KiorVq1cXFBS0Xnl7L+i6kVna2UvTmaPD2EauRygtLRWRVatWtWhfvXq1iLT5hTfQDUUikVtuuaW6uvq0006777772kzvkUhk6dKlr776qmVZLQ5VVVWJSGlpKR8B0d20/31Lf47M9b//+7+WZY0ZM8bhaPn5k64bWaOdvTSdOTqMAN8jHHfccSLyySefNF8SIxQKrV271uVyjRkzJn2lAfvhrbfe2r59+8iRI6+++mp77/fWvF7vs88+u2DBgpUrV7Y49Pbbb4tIWVnZQS8U2E/tf9/SnyNzffDBByJy/PHHtz5E142s0c5ems4cHUaA7xGGDRtWVlZWW1s7d+5c0zRFJB6Pz549O5FInHzyyT6fL90FAu3yj3/8Q0QmTZqU3AMRURTlrLPOEpE5c+bYX2OLSCwWe/rpp//xj38EAoHWSx8Dadf+9y39OTJUdXX11q1bVVU94ogjWh+l60bWaGcvTWeODlNaT1VCVtq5c+d1111XX1+fk5NTWlq6adMmXdf79u171113sdAlMoJpmuedd56d0tvUp0+fBQsW2Gc+8cQTixcvFpFAIOD1eisrKy3LCgQC11xzzYgRI7quaKDd2v++pT9HJlq2bNmcOXMGDx589913t3kCXTcyyyWXXBIKhRYuXNi7d+8Wh9rZS9OZo2PUW2+9Nd01oCsEAoGxY8dGIpHKysqdO3cWFBScfvrp1157rd/vT3dpQLtUVFQsWbJkLycEAoEJEyaIiMPh+P73v3/44Yc3NDTU1NREo9GBAweOGjXq+uuv56YydFvtf9/SnyMTvfTSS1u2bDnppJO+//3vt3kCXTcyy4svvhiPxydMmNC6721nL01njo5hBB4AAAAAgAzAPfAAAAAAAGQAAjwAAAAAABmAAA8AAAAAQAYgwAMAAAAAkAEI8AAAAAAAZAACPAAAAAAAGYAADwAAAABABiDAAwAAAACQAQjwAAAAAABkAAI8AAAAAAAZgAAPAAAAAEAGIMADAHDQmaapKIqiKPfcc0+6awEAAJlKS3cBAACgu9i2bdv27ds1TRsxYkS6awEAAC0xAg8AAJosWLDgP/7jP84888x0FwIAANpAgAcAAAAAIAMQ4AEAAAAAyAAEeAAAOkFjY6Npml38pIlEIhKJWJbVxc/bAaZpVlRUpLsKAAAyGwEeAJD9wuHwXXfdNWrUqMLCwkAgcMwxx1x55ZVffvll6oRoNHrEEUcoilJWVhaPx1s8/Mknn7TXkH/sscfslnnz5imKcvTRR4vIX/7yl8GDBwcCAU3TiouLTz311McffzyZTLa/vGXLll1xxRVjx47t3bt3IBA48sgjJ0yY8PLLL7e+SCAQUBTl1VdfbWxsvOyyywoLC30+n8fjOeqoo6ZOnbply5YOX//KK69UFOW2224TkaqqKvv3vf/++5tfZ9u2bdOnTx86dKjf7w8EAkOHDp0+ffqGDRtaP6PT6VQU5Y033hCRF1544dhjj/V4PIsXL162bJl95UWLFrVZ6siRIxVFOfLII9v/6gEA0INYAABktc8+++yQQw5p/RdQUZQ77rgjddq7776rKIqI3Hjjjc0fXllZWVRUJCJnnnlmqvFPf/qTiAwbNuyWW25p88/rmDFj6uvrU+cbhmG333333c0vruv6RRddtKe/0T/84Q8Nw2h+vt/vF5FFixYde+yxrc93u93Lly/v2PWvuOKK1ifMmTMndamXXnopGAy2PsfpdDY/zaZpmoi8/vrr9gtlmz9/vmEY9ot5wQUXtP6X+uqrr+wzb7/99r3+kwIA0EMR4AEA2ayioqKgoMCOhRdeeOGCBQsWLVr0u9/9Li8vz278wx/+kDr5qquushPpmjVrUo2XXHKJiOTl5W3dujXVaOdSr9drZ/6RI0fOmjXrySefnDFjRp8+fewrT5o0KXX+ngL87Nmz7fbBgwffddddixcvfvHFF2fPnj148GC7/d57721+vh3gBw4cKCJDhw7985//vGLFildfffXss8+2zx8wYMCBXP+mm24SkaKiohYv48svv2yf73K5Lr/88scee+zxxx+//PLLXS6X3b548eLm59sB/pZbblFVtW/fvnfcccezzz67Y8cOy7KmTp0qIn6/PxqNtniWWbNmiYiiKJs3b97TPygAAD0ZAR4AkM2mT58uIpqmvfTSS83bN2/eXFZWZofwLVu22I2hUKi0tFREjjvuONM0LcuyJ4GLyKOPPtr84c0HlqdOnZpIJFKHtm/fntpE/aOPPrIb9xTgDz30UBEZMmRIKBRq3l5fX3/YYYeJyMSJE5u32wFeRMaOHdviIeeee659aOPGjR2+fpsB3jCMIUOG2O0tRvg/+OADe1j+yCOPbD5ZwA7wmqaNGzeurq6u+UNee+01u86lS5da33XUUUeJyOjRoy0AANAW7oEHAGStLVu2LFiwQER+85vfpMaobYcddtif//xnEYlGow899JDdGAgEFi5cKCIff/zxAw88EIlE7InlZ5555qWXXtrmU5SWlj744IN2XrX17dv3b3/7m6qqInLrrbfupbx4PJ5MJg855JCrrroqEAg0P5Sbmzt27FgR2bRpU+sHqqo6b968Fg+57LLL7P/4+uuvD/D6LTz11FNffPGFiNxyyy2jRo1qfmj06NE33nijiHz++ed/+9vfWjwwmUzef//9qckOtnHjxuXn54vIiy++2Lx93bp169evF5GLL754nyUBANAzEeABAFnr73//u67rIjJjxozWR0899dQjjjhCRD788MNU4xlnnDFlyhQRuemmmy6//PLNmzfn5eWlEn5rM2bMcDqdLRqPOOKIn/zkJyLyzjvvWHteIt7tdv/73//eunWrPU2ghcrKyj098IQTTmi9zJs92C4iqWfs8PVbsF+f/Px8e/Z7C5dffrk9L6D5y2gbPXq0PajenNPpnDBhgogsWbKk+br9zzzzjH30ggsuaGdhAAD0NAR4AEDWshdF69evX5uL2ImIHYPXrVvXvPHee+/t06dPY2Pj008/LSL33Xffnh4uIj/4wQ/abLdHqqPR6K5du9pZrWVZ27dv/+CDDx566KHzzz//1Vdf3dOZqTvYm3M49vE3vf3Xb8Ee0h8yZIjX62191O/329+DbNy4scUh+1791s4//3wRqa6ufu+991KNdoA/88wzCwsL21kYAAA9jbbvUwAAyEx28ty+fbu91Nye1NTUNP+xoKDggQcesEPmiSeeuKfJ8zb7TvLWUtl148aNqWXt2rR+/fr58+e///77GzZsiEajezkzpXfv3u05rcPXb8F+Gff0m9qHPvvss9YBvn///m2eP378eL/f39jYuHjx4lNOOUVEPvnkE/vhzJ8HAGAvCPAAgKxVXl7entOSyaRhGM3vY1+9erX9H2vWrNm+fXu/fv329Ng9fTWQmlcfiUT28tR//OMfZ86cac8kd7lcw4cPP+KII8rKykaPHr1o0aJHH310v560s66/v09qv3SxWKxFu8fjafN8j8dz1llnLVq0aPHixffff7+iKPbweyAQmDhxYvtLAgCgp2EKPQAgaw0YMEBERo0atc81XZun988+++wPf/iDiDgcjlAoZO8ttydbtmxpsz21klyb091ty5Ytu/76603THDZs2NKlS0Oh0KeffvrMM8/8/ve/Hz9+fGqHtg7rrOsffvjhsuffVEQ2b94sIvZE+nayJzhs27btn//8p2VZixYtEpFzzjmnzVn6AADARoAHAGQte6O4TZs27WklOdM0TdNMJpOpFl3Xp0yZYhjG6NGj7777bhFZsmTJ888/v6en+PTTT9ts//jjj0XE5XLZ+9K16fHHHxcRr9f71ltv/fjHP3a73c2Ppnae67DOur4d4P/1r3+1HmMXkWg0umHDBtnrVxWt/fCHP7Sz+uLFiz/88MNt27YJ8+cBANgXAjwAIGvZ+7GXl5cvWbKk9dGqqqqCggJN026++eZU46xZs9asWeNyuRYuXHj11VfbV5g2bVptbW2bTzFnzpzWSXjTpk32nmrHH3/8XtaWs1PrwIEDS0pKWhyyLOuTTz5pz++4F511fXtBvrq6ukceeaT10YULF4ZCIRE5/vjj21+bz+c788wzReTFF1+0X6uSkpJx48a1/woAAPRABHgAQNaaOHGivUr8L3/5y3fffbf5IV3Xf/nLXzY0NCiKklqmbuXKlbNnzxaRG2644cgjj1RVdeHChaqqlpeX/+53v2vzKTZv3jx9+vTm26GVl5dffPHFiURCRP7nf/5nL+XZI9sbN26sqKho3h6LxaZPn75q1SoRaX7l/dXh67do/PnPf27PZfj9739vzyxIWbFixaxZs0Rk8ODBkydP3q/y7Fn0GzZssGcKXHTRRaqq7tcVAADoaQjwAICspSiKvUZaTU3N6aefPnny5Pnz57/66qtz5sw55phjli5dKiIzZ84cNGiQNJs8P2TIkJkzZ9pXGD58+G9+8xsReeSRR5YtW9b6Kbxe7/z580888cQ777xz0aJF11133YgRI1asWCEiP/rRj8aOHbuX8n70ox+JSCwWO/XUU5955pk1a9a88847c+fOPeqoo+bNm+fz+UTkyy+/fOONNxoaGjrw63fg+vZaAHV1dYsXL16/fv3OnTvtRvt7jcrKyjFjxkyfPv2vf/3rX//612nTpo0dO7a6ulpE/vjHPzZfR6A9UrP67XX+mD8PAMC+7XNdHwAAMtpbb73V5jLyDodj+vTpqdNuvPFGEVEU5b333mv+8MbGRvs+9kGDBkUiEbvxT3/6k32R1157LT8/v/XFL7nkknA4nLpIapr93Xff3fziU6dObbOw66677tlnn021TJo0yT7f7/eLyE033dT61/ziiy/sk19//fUOX7/FvQZz5sxJXeq+++5rM6IHg8HFixe3KMY+87bbbtv7P81ZZ51lX2Tw4MF7PxMAAFiWxQg8ACDLjRs3bu3atdddd93RRx+dm5sbCASGDx8+ZcqUNWvWzJ071z5n5cqVd955p4hcfvnlJ510UvOH+3y+efPmicjGjRtvvfXWFhc/6aST1q9fP3369IEDB7rd7mAwOGbMmCeffPLJJ5/MycnZZ20PP/zw4sWLTzvttP79+7vd7sMOO2zq1KmrVq268847zzvvvP/8z//Mz8/3er17WQmvc68/YcKE22+//dBDD3W73f369SsqKkpdasaMGevWrbvqqqsGDx7s8/l8Pl9ZWdm0adPWrFkzadKkjpV33nnn2f/B8DsAAO2hWHtYmBcAAOzJvHnzpk2bJiKNjY32XHR0wH333XfNNdeIyFdffWXfsQ8AAPaCEXgAAJAe9vJ1xx9/POkdAID2IMADAIA0WL58+Zo1a0TkkksuSXctAABkhv1bMBYAAOBA1NfXOxyOzZs3X3nllSLi8/kuuuiidBcFAEBmYAQeAAB0naeeeio3N/eYY46xh9+nT59eWFiY7qIAAMgMjMADALDfDjnkkNNOO01EVFVNdy2ZSlGUX/7yl7fddlu6CwEAIGOwCj0AAOg6sVjs448/3rZt24gRI8rKytJdDgAAmYQADwAAAABABuAeeAAAAAAAMgABHgAAAACADECABwAAAAAgAxDgAQAAAADIAAR4AAAAAAAyAAEeAAAAAIAMQIAHAAAAACADEOABAAAAAMgABHgAAAAAADIAAR4AAAAAgAxAgAcAAAAAIAMQ4AEAAAAAyAAEeAAAAAAAMgABHgAAAACADPD/ASs7POiyzXuxAAAAAElFTkSuQmCC" class="img-fluid" width="672"></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Checkpoint 4.1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
+<p>Submit the exercises via ILIAS.</p>
+<p>I will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
+</div>
+</div>
+</section>
+<section id="chapter-6-r4ds" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-6-r4ds">Chapter 6 R4DS</h2>
+<p>Read and work through Chapter 6 in R4DS.</p>
+<div class="callout callout-style-default callout-tip no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Checkpoint 4.2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.</p>
+<p>Submit the exercises via ILIAS.</p>
+<p>I will collect the exercises of everyone during the course, and provide them to you for the last module.</p>
+</div>
+</div>
+</section>
+<section id="merging-tables" class="level2">
+<h2 class="anchored" data-anchor-id="merging-tables">Merging tables</h2>
+<p>Another very useful tool is to merge tables. There are many different ways to do so. One of the simpler methods is to use the <code>merge()</code> function from base R.</p>
+<p>Imagine you have two tables, one about species counts, the other about soil pH :</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-16_e78e9f8de4ecaf21e6c842b89bb43294">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>) <span class="co"># allows you to get exactly the same values as here if using random sampling in R.</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>species_counts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">species_counts =</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">15</span>), <span class="dv">50</span>, <span class="at">replace =</span> T))</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>soil_properties <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pH =</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="fl">0.1</span>), <span class="dv">50</span>, <span class="at">replace =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Your job is to merge these two tables. They have a common identifier, the plot ID.</p>
+<p>In the ideal case, both tables have observations in all plots. You can merge those tables using the merge function. The most important thing here is that you specify the <code>by</code> argument, which identifies the common key (the common identifier) of both tables. It is good practice to also set <code>all = T</code> to keep all rows in both tables.</p>
+<div class="cell output" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-17_69faac3ecb4935476d2287c462cb5833">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(species_counts, soil_properties,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;PlotID&quot;</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PlotID species_counts  pH
+1   Plot_1              9 1.5
+2  Plot_10              2 4.8
+3  Plot_11             11 6.0
+4  Plot_12              3 5.1
+5  Plot_13              1 1.5
+6  Plot_14              5 3.3
+7  Plot_15              5 4.1
+8  Plot_16             10 2.3
+9  Plot_17              6 1.1
+10 Plot_18             14 5.4
+11 Plot_19             10 2.7
+12  Plot_2              4 6.6
+13 Plot_20              7 3.1
+14 Plot_21              9 2.3
+15 Plot_22             15 4.7
+16 Plot_23              5 1.0
+17 Plot_24              5 6.0
+18 Plot_25              9 6.0
+19 Plot_26              9 4.9
+20 Plot_27             14 1.5
+21 Plot_28              5 3.2
+22 Plot_29              5 5.3
+23  Plot_3              7 4.9
+24 Plot_30              2 1.5
+25 Plot_31             10 4.9
+26 Plot_32             14 4.8
+27 Plot_33              9 2.0
+28 Plot_34             12 2.6
+29 Plot_35             15 4.5
+30 Plot_36              1 2.2
+31 Plot_37              4 4.9
+32 Plot_38              3 3.4
+33 Plot_39              6 5.7
+34  Plot_4              1 5.3
+35 Plot_40             10 3.4
+36 Plot_41             10 3.2
+37 Plot_42              6 5.5
+38 Plot_43             15 2.9
+39 Plot_44              4 4.8
+40 Plot_45             12 3.8
+41 Plot_46              4 2.2
+42 Plot_47             10 6.9
+43 Plot_48             12 3.1
+44 Plot_49              9 3.8
+45  Plot_5              2 3.4
+46 Plot_50              7 3.7
+47  Plot_6             13 6.4
+48  Plot_7              7 6.5
+49  Plot_8             11 1.5
+50  Plot_9             14 6.7</code></pre>
+</div>
+</div>
+<p>In some cases, one of the table contains a subset of plots of the other table. Imagine soil pH was measured on all plots, but species counts were only measured in 10 of the plots.</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-18_c84f20d5e5d5fb52077521a46a4a0cac">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>species_counts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">species_counts =</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">15</span>), <span class="dv">10</span>, <span class="at">replace =</span> T))</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>soil_properties <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">50</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pH =</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="fl">0.1</span>), <span class="dv">50</span>, <span class="at">replace =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>You might still want to merge those two tables. Now you have two options :</p>
+<ol type="1">
+<li>your goal is to get a table with only 10 rows, only using the plots which are present in the species counts table :</li>
+</ol>
+<div class="cell output" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-19_72676afe65357ff26097abfbb4bad873">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(species_counts, soil_properties,</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;PlotID&quot;</span>,</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all.x =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PlotID species_counts  pH
+1   Plot_1             12 2.8
+2  Plot_10              7 4.8
+3   Plot_2              1 6.3
+4   Plot_3             13 5.9
+5   Plot_4              5 3.5
+6   Plot_5             15 5.7
+7   Plot_6              6 5.2
+8   Plot_7              1 3.9
+9   Plot_8              9 5.1
+10  Plot_9              7 4.1</code></pre>
+</div>
+</div>
+<p>By setting <code>all.x</code> to <code>TRUE</code>, you specify that you ONLY want to keep the rows present in table 1, in the first table given in the function call.</p>
+<ol start="2" type="1">
+<li>or you might want to get a table of all 50 plots, with <code>NA</code> values in the plots where there is no species count measured.</li>
+</ol>
+<div class="cell output" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-20_50c65d030b701cb16ff8af92a300f931">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(species_counts, soil_properties,</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;PlotID&quot;</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PlotID species_counts  pH
+1   Plot_1             12 2.8
+2  Plot_10              7 4.8
+3  Plot_11             NA 6.9
+4  Plot_12             NA 6.0
+5  Plot_13             NA 3.8
+6  Plot_14             NA 4.3
+7  Plot_15             NA 1.9
+8  Plot_16             NA 1.0
+9  Plot_17             NA 5.2
+10 Plot_18             NA 6.8
+11 Plot_19             NA 3.5
+12  Plot_2              1 6.3
+13 Plot_20             NA 2.4
+14 Plot_21             NA 6.7
+15 Plot_22             NA 3.8
+16 Plot_23             NA 3.3
+17 Plot_24             NA 5.1
+18 Plot_25             NA 5.7
+19 Plot_26             NA 6.2
+20 Plot_27             NA 2.1
+21 Plot_28             NA 4.8
+22 Plot_29             NA 3.3
+23  Plot_3             13 5.9
+24 Plot_30             NA 6.2
+25 Plot_31             NA 3.7
+26 Plot_32             NA 3.1
+27 Plot_33             NA 4.9
+28 Plot_34             NA 4.2
+29 Plot_35             NA 2.8
+30 Plot_36             NA 3.5
+31 Plot_37             NA 4.4
+32 Plot_38             NA 5.2
+33 Plot_39             NA 1.0
+34  Plot_4              5 3.5
+35 Plot_40             NA 3.8
+36 Plot_41             NA 2.3
+37 Plot_42             NA 3.1
+38 Plot_43             NA 1.5
+39 Plot_44             NA 3.7
+40 Plot_45             NA 6.1
+41 Plot_46             NA 5.0
+42 Plot_47             NA 4.6
+43 Plot_48             NA 7.0
+44 Plot_49             NA 5.5
+45  Plot_5             15 5.7
+46 Plot_50             NA 5.8
+47  Plot_6              6 5.2
+48  Plot_7              1 3.9
+49  Plot_8              9 5.1
+50  Plot_9              7 4.1</code></pre>
+</div>
+</div>
+<p>Here again, we use <code>all = T</code> to indicate that we want to keep all rows.</p>
+<p>Potentially, there are missing values in both tables :</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-21_815f2cae9318c680780aec4e969c1628">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>species_counts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">species_counts =</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">15</span>), <span class="dv">10</span>, <span class="at">replace =</span> T))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>soil_properties <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">50</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">pH =</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="fl">0.1</span>), <span class="dv">46</span>, <span class="at">replace =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Good practice is to keep all the rows, by setting <code>all = T</code> :</p>
+<div class="cell output" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-22_cb2c93510d3e2c2845e527253365e159">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(species_counts, soil_properties,</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;PlotID&quot;</span>,</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PlotID species_counts  pH
+1   Plot_1              3  NA
+2  Plot_10              9 5.9
+3  Plot_11             NA 6.4
+4  Plot_12             NA 5.6
+5  Plot_13             NA 3.6
+6  Plot_14             NA 1.6
+7  Plot_15             NA 5.6
+8  Plot_16             NA 2.9
+9  Plot_17             NA 6.6
+10 Plot_18             NA 3.3
+11 Plot_19             NA 6.0
+12  Plot_2              6  NA
+13 Plot_20             NA 6.2
+14 Plot_21             NA 2.5
+15 Plot_22             NA 2.8
+16 Plot_23             NA 4.5
+17 Plot_24             NA 1.1
+18 Plot_25             NA 5.7
+19 Plot_26             NA 1.0
+20 Plot_27             NA 5.3
+21 Plot_28             NA 4.8
+22 Plot_29             NA 5.0
+23  Plot_3              3  NA
+24 Plot_30             NA 6.9
+25 Plot_31             NA 6.7
+26 Plot_32             NA 2.2
+27 Plot_33             NA 3.5
+28 Plot_34             NA 4.3
+29 Plot_35             NA 1.1
+30 Plot_36             NA 2.8
+31 Plot_37             NA 2.6
+32 Plot_38             NA 4.3
+33 Plot_39             NA 2.0
+34  Plot_4              7  NA
+35 Plot_40             NA 4.0
+36 Plot_41             NA 4.4
+37 Plot_42             NA 4.4
+38 Plot_43             NA 5.5
+39 Plot_44             NA 2.8
+40 Plot_45             NA 5.4
+41 Plot_46             NA 2.0
+42 Plot_47             NA 2.5
+43 Plot_48             NA 4.9
+44 Plot_49             NA 1.8
+45  Plot_5             14 6.9
+46 Plot_50             NA 5.9
+47  Plot_6              3 5.9
+48  Plot_7              3 6.5
+49  Plot_8             12 6.3
+50  Plot_9              1 5.8</code></pre>
+</div>
+</div>
+<p>Another potential case is, that some of the rows in one, or even in both tables are duplicated :</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-23_05b20397617aaf11fae7e369b3ac266b">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>species_counts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Plot_11&quot;</span>, <span class="st">&quot;Plot_11&quot;</span>),</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">species_counts =</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">15</span>), <span class="dv">10</span>, <span class="at">replace =</span> T),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>                     <span class="dv">12</span>, <span class="dv">12</span>))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>soil_properties <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">50</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Plot_1&quot;</span>, <span class="st">&quot;Plot_1&quot;</span>),</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pH =</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="fl">0.1</span>), <span class="dv">46</span>, <span class="at">replace =</span> T),</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>         <span class="fl">3.4</span>, <span class="fl">3.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>species counts contains two measurements in Plot_11, and soil_properties in Plot_1.</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-24_d64c64d00c545170704dfb37f94e6fbc">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(species_counts, soil_properties,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;PlotID&quot;</span>,</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PlotID species_counts  pH
+1   Plot_1             12 3.4
+2   Plot_1             12 3.4
+3  Plot_10              7 6.9
+4  Plot_11             12 4.7
+5  Plot_11             12 4.7
+6  Plot_12             NA 6.1
+7  Plot_13             NA 2.5
+8  Plot_14             NA 2.4
+9  Plot_15             NA 1.1
+10 Plot_16             NA 1.0
+11 Plot_17             NA 1.2
+12 Plot_18             NA 6.5
+13 Plot_19             NA 1.8
+14  Plot_2             10  NA
+15 Plot_20             NA 4.7
+16 Plot_21             NA 2.6
+17 Plot_22             NA 2.9
+18 Plot_23             NA 1.4
+19 Plot_24             NA 5.0
+20 Plot_25             NA 3.6
+21 Plot_26             NA 5.3
+22 Plot_27             NA 4.0
+23 Plot_28             NA 6.2
+24 Plot_29             NA 1.7
+25  Plot_3              8  NA
+26 Plot_30             NA 4.5
+27 Plot_31             NA 5.8
+28 Plot_32             NA 5.0
+29 Plot_33             NA 3.8
+30 Plot_34             NA 3.0
+31 Plot_35             NA 1.0
+32 Plot_36             NA 6.2
+33 Plot_37             NA 2.9
+34 Plot_38             NA 5.1
+35 Plot_39             NA 5.5
+36  Plot_4             10  NA
+37 Plot_40             NA 5.1
+38 Plot_41             NA 6.6
+39 Plot_42             NA 3.3
+40 Plot_43             NA 6.2
+41 Plot_44             NA 6.2
+42 Plot_45             NA 3.1
+43 Plot_46             NA 4.7
+44 Plot_47             NA 5.9
+45 Plot_48             NA 2.5
+46 Plot_49             NA 3.9
+47  Plot_5             15 4.0
+48 Plot_50             NA 3.8
+49  Plot_6              4 4.6
+50  Plot_7              5 3.8
+51  Plot_8              9 2.1
+52  Plot_9              5 2.3</code></pre>
+</div>
+</div>
+<p>You see the duplicated rows in the merged table as well. You can remove duplicated values before or after merging by using the <code>unique()</code> function.</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-25_15f0858877ba1b4e4fadd927507516cd">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">merge</span>(<span class="fu">unique</span>(species_counts), <span class="fu">unique</span>(soil_properties),</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;PlotID&quot;</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> T)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PlotID species_counts  pH
+1   Plot_1             12 3.4
+2  Plot_10              7 6.9
+3  Plot_11             12 4.7
+4  Plot_12             NA 6.1
+5  Plot_13             NA 2.5
+6  Plot_14             NA 2.4
+7  Plot_15             NA 1.1
+8  Plot_16             NA 1.0
+9  Plot_17             NA 1.2
+10 Plot_18             NA 6.5
+11 Plot_19             NA 1.8
+12  Plot_2             10  NA
+13 Plot_20             NA 4.7
+14 Plot_21             NA 2.6
+15 Plot_22             NA 2.9
+16 Plot_23             NA 1.4
+17 Plot_24             NA 5.0
+18 Plot_25             NA 3.6
+19 Plot_26             NA 5.3
+20 Plot_27             NA 4.0
+21 Plot_28             NA 6.2
+22 Plot_29             NA 1.7
+23  Plot_3              8  NA
+24 Plot_30             NA 4.5
+25 Plot_31             NA 5.8
+26 Plot_32             NA 5.0
+27 Plot_33             NA 3.8
+28 Plot_34             NA 3.0
+29 Plot_35             NA 1.0
+30 Plot_36             NA 6.2
+31 Plot_37             NA 2.9
+32 Plot_38             NA 5.1
+33 Plot_39             NA 5.5
+34  Plot_4             10  NA
+35 Plot_40             NA 5.1
+36 Plot_41             NA 6.6
+37 Plot_42             NA 3.3
+38 Plot_43             NA 6.2
+39 Plot_44             NA 6.2
+40 Plot_45             NA 3.1
+41 Plot_46             NA 4.7
+42 Plot_47             NA 5.9
+43 Plot_48             NA 2.5
+44 Plot_49             NA 3.9
+45  Plot_5             15 4.0
+46 Plot_50             NA 3.8
+47  Plot_6              4 4.6
+48  Plot_7              5 3.8
+49  Plot_8              9 2.1
+50  Plot_9              5 2.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># or equally : </span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(<span class="fu">merge</span>(species_counts, soil_properties,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;PlotID&quot;</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PlotID species_counts  pH
+1   Plot_1             12 3.4
+3  Plot_10              7 6.9
+4  Plot_11             12 4.7
+6  Plot_12             NA 6.1
+7  Plot_13             NA 2.5
+8  Plot_14             NA 2.4
+9  Plot_15             NA 1.1
+10 Plot_16             NA 1.0
+11 Plot_17             NA 1.2
+12 Plot_18             NA 6.5
+13 Plot_19             NA 1.8
+14  Plot_2             10  NA
+15 Plot_20             NA 4.7
+16 Plot_21             NA 2.6
+17 Plot_22             NA 2.9
+18 Plot_23             NA 1.4
+19 Plot_24             NA 5.0
+20 Plot_25             NA 3.6
+21 Plot_26             NA 5.3
+22 Plot_27             NA 4.0
+23 Plot_28             NA 6.2
+24 Plot_29             NA 1.7
+25  Plot_3              8  NA
+26 Plot_30             NA 4.5
+27 Plot_31             NA 5.8
+28 Plot_32             NA 5.0
+29 Plot_33             NA 3.8
+30 Plot_34             NA 3.0
+31 Plot_35             NA 1.0
+32 Plot_36             NA 6.2
+33 Plot_37             NA 2.9
+34 Plot_38             NA 5.1
+35 Plot_39             NA 5.5
+36  Plot_4             10  NA
+37 Plot_40             NA 5.1
+38 Plot_41             NA 6.6
+39 Plot_42             NA 3.3
+40 Plot_43             NA 6.2
+41 Plot_44             NA 6.2
+42 Plot_45             NA 3.1
+43 Plot_46             NA 4.7
+44 Plot_47             NA 5.9
+45 Plot_48             NA 2.5
+46 Plot_49             NA 3.9
+47  Plot_5             15 4.0
+48 Plot_50             NA 3.8
+49  Plot_6              4 4.6
+50  Plot_7              5 3.8
+51  Plot_8              9 2.1
+52  Plot_9              5 2.3</code></pre>
+</div>
+</div>
+<p>It can also happen that you have two different values in the duplicated rows, because there was an error in data transformation before :</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-26_bd845fc2233961284053d8c48d3e88ab">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>species_counts <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">10</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Plot_11&quot;</span>, <span class="st">&quot;Plot_11&quot;</span>),</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">species_counts =</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">15</span>), <span class="dv">10</span>, <span class="at">replace =</span> T),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>                     <span class="dv">12</span>, <span class="dv">13</span>))</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>soil_properties <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">PlotID =</span> <span class="fu">c</span>(<span class="fu">paste</span>(<span class="st">&quot;Plot&quot;</span>, <span class="fu">seq</span>(<span class="dv">5</span>, <span class="dv">50</span>), <span class="at">sep =</span> <span class="st">&quot;_&quot;</span>),</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>             <span class="st">&quot;Plot_1&quot;</span>, <span class="st">&quot;Plot_1&quot;</span>),</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pH =</span> <span class="fu">c</span>(<span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">7</span>, <span class="fl">0.1</span>), <span class="dv">46</span>, <span class="at">replace =</span> T),</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>         <span class="fl">3.4</span>, <span class="fl">4.4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Filtering with unique does not solve this problem :</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-27_182932390aa4422d5a8c1e6fcebf4f6a">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(<span class="fu">merge</span>(species_counts, soil_properties,</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;PlotID&quot;</span>,</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> T))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    PlotID species_counts  pH
+1   Plot_1              2 4.4
+2   Plot_1              2 3.4
+3  Plot_10              8 5.1
+4  Plot_11             12 4.5
+5  Plot_11             13 4.5
+6  Plot_12             NA 6.6
+7  Plot_13             NA 1.8
+8  Plot_14             NA 3.6
+9  Plot_15             NA 5.0
+10 Plot_16             NA 2.4
+11 Plot_17             NA 6.6
+12 Plot_18             NA 4.7
+13 Plot_19             NA 1.5
+14  Plot_2              8  NA
+15 Plot_20             NA 1.3
+16 Plot_21             NA 4.4
+17 Plot_22             NA 7.0
+18 Plot_23             NA 4.4
+19 Plot_24             NA 2.2
+20 Plot_25             NA 5.0
+21 Plot_26             NA 6.6
+22 Plot_27             NA 1.6
+23 Plot_28             NA 3.4
+24 Plot_29             NA 4.0
+25  Plot_3             14  NA
+26 Plot_30             NA 5.5
+27 Plot_31             NA 4.6
+28 Plot_32             NA 3.7
+29 Plot_33             NA 4.8
+30 Plot_34             NA 3.7
+31 Plot_35             NA 6.1
+32 Plot_36             NA 2.9
+33 Plot_37             NA 3.8
+34 Plot_38             NA 5.1
+35 Plot_39             NA 6.9
+36  Plot_4             14  NA
+37 Plot_40             NA 4.9
+38 Plot_41             NA 1.0
+39 Plot_42             NA 3.7
+40 Plot_43             NA 2.3
+41 Plot_44             NA 4.0
+42 Plot_45             NA 2.1
+43 Plot_46             NA 3.8
+44 Plot_47             NA 2.5
+45 Plot_48             NA 5.3
+46 Plot_49             NA 1.9
+47  Plot_5              4 6.5
+48 Plot_50             NA 4.3
+49  Plot_6             10 1.6
+50  Plot_7              8 6.1
+51  Plot_8              5 4.5
+52  Plot_9              5 5.8</code></pre>
+</div>
+</div>
+<p>This is a frequent source of errors, and hard to find. To avoid such cases, always check the number of plots in your table to see if there are any duplicates :</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-28_063962cfe551ed415b1b3c14966c28b4">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>species_counts_soilpH <span class="ot">&lt;-</span> <span class="fu">unique</span>(<span class="fu">merge</span>(species_counts, soil_properties,</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>      <span class="at">by =</span> <span class="st">&quot;PlotID&quot;</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">all =</span> T))</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># the below code shows you the DUPLICATES, i.e. the SECOND appearance of a given element.</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>species_counts_soilpH <span class="sc">%&gt;%</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">duplicated</span>(PlotID))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   PlotID species_counts  pH
+1  Plot_1              2 3.4
+2 Plot_11             13 4.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the below code shows you ALL THE ELEMENTS THAT ARE REPEATED.</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>species_counts_soilpH <span class="sc">%&gt;%</span></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(PlotID) <span class="sc">%&gt;%</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">n</span>() <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   PlotID [2]
+  PlotID  species_counts    pH
+  &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;
+1 Plot_1               2   4.4
+2 Plot_1               2   3.4
+3 Plot_11             12   4.5
+4 Plot_11             13   4.5</code></pre>
+</div>
+</div>
+<p>Note that the same thing can be done using base R. You did not learn about it, but just to show you how it would look :</p>
+<div class="cell" data-hash="Module4_wrangling_exploration_workflow_cache/html/unnamed-chunk-29_68ca8fc2b69b846c812b9cfa2bb031e7">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show only duplicated entries</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>species_counts_soilpH[<span class="fu">duplicated</span>(species_counts_soilpH<span class="sc">$</span>PlotID), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   PlotID species_counts  pH
+2  Plot_1              2 3.4
+5 Plot_11             13 4.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># show all plots which are duplicates</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>species_counts_soilpH[<span class="fu">which</span>(species_counts_soilpH<span class="sc">$</span>PlotID <span class="sc">%in%</span> species_counts_soilpH<span class="sc">$</span>PlotID[<span class="fu">duplicated</span>(species_counts_soilpH<span class="sc">$</span>PlotID)]), ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   PlotID species_counts  pH
+1  Plot_1              2 4.4
+2  Plot_1              2 3.4
+4 Plot_11             12 4.5
+5 Plot_11             13 4.5</code></pre>
+</div>
+</div>
+<p>Note that the commands in base R can get long quite fast, but do the same job.</p>
+<section id="optional-chapter-20-r4ds" class="level3">
+<h3 class="anchored" data-anchor-id="optional-chapter-20-r4ds"><em>Optional</em> Chapter 20 R4DS</h3>
+<p>You have now learned a solid method of merging tables. If you use table merging a lot, consider to read and work through Chapter 20, which introduces you to more advanced table merging. You could also consider this for your homework assigment.</p>
+</section>
+</section>
 </section>
 <section id="data-exploration" class="level1">
 <h1>Data exploration</h1>
 <p>what is missing here? maybe add PCA? maybe even simple stats? Or importance of defining research question?</p>
+<p>TODO identify R4DS chapter</p>
 </section>
 <section id="r-code" class="level1">
 <h1>R code</h1>
@@ -3086,7 +3842,7 @@ Tip
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Checkpoint 3.3
+Checkpoint TEST
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -3096,12 +3852,12 @@ Checkpoint 3.3
 </div>
 </div>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href>Solution</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" role="tab" aria-controls="tabset-5-1" aria-selected="true" href>Exercise</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" role="tab" aria-controls="tabset-5-2" aria-selected="false" href>Solution</a></li></ul>
 <div class="tab-content">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div id="tabset-5-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-5-1-tab">
 
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div id="tabset-5-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-5-2-tab">
 
 </div>
 </div>

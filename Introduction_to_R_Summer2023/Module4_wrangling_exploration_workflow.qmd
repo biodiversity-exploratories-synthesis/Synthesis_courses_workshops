@@ -52,23 +52,344 @@ In order to learn coding, you need to code
 
 # Reproducible coding
 
+TODO
 Chapter 5 R4DS
 Chapter 7 R4DS
-maybe : Quarto : Chapter 29 R4DS
+maybe : Quarto : Chapter 29 R4DS *optional*
 
 TODO : take most important of both chapters!
 
 
 
 # Data wrangling II
+```{r}
+library(tidyverse)
+```
 
-Chapter 6 R4DS
-
-- also include reshape2 package, melt and dcast
-- merge
+TODO : 
 - find some common problems in data wrangling? see my notes
   - e.g. cbind and rbind cause problems
   - check R buddy intro
+
+## Selected methdos in data wrangling
+
+::: {.panel-tabset}
+## Exercise
+
+You have seen the `rep()` function in earlier exercises. It is a handy function to create vectors of characters. The first argument is a vector, e.g. of characters you want to see repeated. The second argument gives you the number of times a vector should be repeated.
+
+The vector c(1, 3) is repeated 3 times : 
+```{r}
+rep(x = c(1, 3), times = 3)
+```
+
+The vector c("high", "low") is repeated 10 times
+```{r}
+rep(x = c("high", "low"), 10)
+```
+
+Create a vector `deleteme` of length 10, which consists of 5 repetitions of values "A" and "B"
+
+## Solution
+
+```{r}
+deleteme <- rep(x = c("A", "B"), times = 10)
+```
+
+*Hint 1* : you do not have to give the arguments, if the order is correct. The call `rep(c("A", "B"), 10)` will lead to the same output.
+
+*Hint 2* : When you try out things, you can name the created elements something like "deleteme", to indicate that this element is not used in later code and just serves practising purposes. This will help you to keep your code clean.
+
+:::
+
+::: {.panel-tabset}
+## Exercise
+
+Above you learned about the `rep()` function. Another very handy function to create tables is the `sample()` function. Check the help function (or google, ...) yourself to find out how to create a vector `deleteme` (note that the vector you created in the previous section will be overwritten by that). `deleteme` is a vector of length 15 which contains random realisations of the categories "grass", "legume" and "herb".
+
+Convert the vector to a tibble and save it under the same name. Plot the result using ggplot.
+
+## Solution
+
+```{r}
+deleteme <- sample(x = factor(c("grass", "legume", "herb")),
+       size = 15,
+       replace = TRUE)
+```
+
+- x gives the vector from which to sample from. Note that this is a factor.
+- `size` gives the size of the final vector
+- `replace` indicate that the length of the final vector is longer than the size of the categories. We allow resampling the same element again and again.
+
+```{r}
+deleteme <- tibble(deleteme) # convert the vector to a table
+ggplot(data = deleteme, aes(x = deleteme)) +
+  geom_bar()
+```
+
+*Note* that tables can consist of only 1 column.
+
+:::
+
+
+::: {.panel-tabset}
+## Exercise
+
+You learned about characters and factors in the last module. Often, you have to re-classify a single column in your table from character to factor. Can you find out how to do that?
+
+Below you find the code to create a `tibble` consisting of 
+
+```{r}
+deleteme <- tibble(explanatory = sample(c(1:5), 10, replace = T),
+                   group = rep(c("A", "B"), 5))
+```
+
+
+## Solution
+
+There are multiple ways, e.g. using `mutate()` from the `dplyr` package (`tidyverse`). 
+```{r}
+deleteme <- deleteme |> 
+  mutate(group = factor(group))
+```
+
+In base R, you could e.g. use : 
+```{r}
+deleteme$group <- factor(deleteme$group)
+```
+
+:::
+
+
+::: {.panel-tabset}
+## Exercise
+
+Use the tibble created below. Create another column called "response". It contains values of an imaginary response variable which is related linearly to "explanatory" in group A, and exponentially (x^2) in group B.
+
+Note that you will use a new function, and you will have to find out which function is appropriate. If you don't find, don't hesitate to check the Hint.
+
+```{r}
+deleteme <- tibble(explanatory = sample(c(1:100), 1000, replace = T),
+                   group = rep(c("A", "B"), 500))
+# the response variable in group A is linearly related to the explanatory variable
+# the response variable in group B is exponentially related to the explanatory variable
+```
+
+Plot the result using `ggplot` to check if you have done the right thing. Think about an appropriate plot type.
+
+## Hint
+
+Try to find out what the `case_when()` function of `dplyr` does.
+
+What about a line plot with two lines of two colours, one line/colour per group?
+
+## Solution
+
+Use the `case_when()` function from `dplyr` to specify different functions for different cases.
+
+```{r}
+deleteme <- deleteme |> 
+  group_by(group) |> 
+  mutate(response = case_when(
+    group == "A" ~ explanatory * 5, # If the row is of group A : linear relationship
+    group == "B" ~ explanatory ^ 2)) # If the row is of group B : exponential relationship
+```
+
+You could visualise using a line plot. Remember to put the `colour` argument to "group".
+```{r}
+ggplot(deleteme, aes(x = explanatory, y = response, colour = group)) +
+  geom_line()
+```
+
+:::
+
+::: {.callout-tip icon=false}
+
+### Checkpoint 4.1
+
+Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+Submit the exercises via ILIAS.
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
+
+## Chapter 6 R4DS
+
+Read and work through Chapter 6 in R4DS.
+
+::: {.callout-tip icon=false}
+
+### Checkpoint 4.2
+
+Please invent and write down 1-2 exercises including solutions about the past section. You can slightly modify one of the above or the book exercises, or think about a new one.
+
+Submit the exercises via ILIAS.
+
+I will collect the exercises of everyone during the course, and provide them to you for the last module.
+
+:::
+
+## Merging tables
+
+Another very useful tool is to merge tables. There are many different ways to do so. One of the simpler methods is to use the `merge()` function from base R.
+
+Imagine you have two tables, one about species counts, the other about soil pH :
+```{r}
+set.seed(1) # allows you to get exactly the same values as here if using random sampling in R.
+
+species_counts <- data.frame(
+  PlotID = paste("Plot", seq(1, 50), sep = "_"),
+  species_counts = sample(seq(1, 15), 50, replace = T))
+
+soil_properties <- data.frame(
+  PlotID = paste("Plot", seq(1, 50), sep = "_"),
+  pH = sample(seq(1, 7, 0.1), 50, replace = T))
+```
+
+Your job is to merge these two tables. They have a common identifier, the plot ID.
+
+In the ideal case, both tables have observations in all plots. You can merge those tables using the merge function. The most important thing here is that you specify the `by` argument, which identifies the common key (the common identifier) of both tables. It is good practice to also set `all = T` to keep all rows in both tables.
+```{r}
+#| class: output
+merge(species_counts, soil_properties,
+      by = "PlotID",
+      all = T)
+```
+
+In some cases, one of the table contains a subset of plots of the other table. Imagine soil pH was measured on all plots, but species counts were only measured in 10 of the plots.
+```{r}
+species_counts <- data.frame(
+  PlotID = paste("Plot", seq(1, 10), sep = "_"),
+  species_counts = sample(seq(1, 15), 10, replace = T))
+
+soil_properties <- data.frame(
+  PlotID = paste("Plot", seq(1, 50), sep = "_"),
+  pH = sample(seq(1, 7, 0.1), 50, replace = T))
+```
+You might still want to merge those two tables. Now you have two options : 
+
+(1) your goal is to get a table with only 10 rows, only using the plots which are present in the species counts table : 
+```{r}
+#| class: output
+merge(species_counts, soil_properties,
+      by = "PlotID",
+      all.x = T)
+```
+By setting `all.x` to `TRUE`, you specify that you ONLY want to keep the rows present in table 1, in the first table given in the function call.
+
+(2) or you might want to get a table of all 50 plots, with `NA` values in the plots where there is no species count measured.
+```{r}
+#| class: output
+merge(species_counts, soil_properties,
+      by = "PlotID",
+      all = T)
+```
+Here again, we use `all = T` to indicate that we want to keep all rows.
+
+Potentially, there are missing values in both tables : 
+```{r}
+species_counts <- data.frame(
+  PlotID = paste("Plot", seq(1, 10), sep = "_"),
+  species_counts = sample(seq(1, 15), 10, replace = T))
+
+soil_properties <- data.frame(
+  PlotID = paste("Plot", seq(5, 50), sep = "_"),
+  pH = sample(seq(1, 7, 0.1), 46, replace = T))
+```
+Good practice is to keep all the rows, by setting `all = T` : 
+```{r}
+#| class: output
+merge(species_counts, soil_properties,
+      by = "PlotID",
+      all = T)
+```
+
+Another potential case is, that some of the rows in one, or even in both tables are duplicated : 
+```{r}
+species_counts <- data.frame(
+  PlotID = c(paste("Plot", seq(1, 10), sep = "_"),
+             "Plot_11", "Plot_11"),
+  species_counts = c(sample(seq(1, 15), 10, replace = T),
+                     12, 12))
+
+soil_properties <- data.frame(
+  PlotID = c(paste("Plot", seq(5, 50), sep = "_"),
+             "Plot_1", "Plot_1"),
+  pH = c(sample(seq(1, 7, 0.1), 46, replace = T),
+         3.4, 3.4))
+```
+species counts contains two measurements in Plot_11, and soil_properties in Plot_1.
+
+```{r}
+merge(species_counts, soil_properties,
+      by = "PlotID",
+      all = T)
+```
+You see the duplicated rows in the merged table as well. You can remove duplicated values before or after merging by using the `unique()` function.
+```{r}
+merge(unique(species_counts), unique(soil_properties),
+      by = "PlotID",
+      all = T)
+# or equally : 
+unique(merge(species_counts, soil_properties,
+      by = "PlotID",
+      all = T))
+```
+
+
+It can also happen that you have two different values in the duplicated rows, because there was an error in data transformation before : 
+```{r}
+species_counts <- data.frame(
+  PlotID = c(paste("Plot", seq(1, 10), sep = "_"),
+             "Plot_11", "Plot_11"),
+  species_counts = c(sample(seq(1, 15), 10, replace = T),
+                     12, 13))
+
+soil_properties <- data.frame(
+  PlotID = c(paste("Plot", seq(5, 50), sep = "_"),
+             "Plot_1", "Plot_1"),
+  pH = c(sample(seq(1, 7, 0.1), 46, replace = T),
+         3.4, 4.4))
+```
+Filtering with unique does not solve this problem : 
+```{r}
+unique(merge(species_counts, soil_properties,
+      by = "PlotID",
+      all = T))
+```
+This is a frequent source of errors, and hard to find. To avoid such cases, always check the number of plots in your table to see if there are any duplicates :
+```{r}
+species_counts_soilpH <- unique(merge(species_counts, soil_properties,
+      by = "PlotID",
+      all = T))
+
+# the below code shows you the DUPLICATES, i.e. the SECOND appearance of a given element.
+species_counts_soilpH %>%
+  filter(duplicated(PlotID))
+
+# the below code shows you ALL THE ELEMENTS THAT ARE REPEATED.
+species_counts_soilpH %>%
+  group_by(PlotID) %>%
+  filter(n() > 1)
+```
+Note that the same thing can be done using base R. You did not learn about it, but just to show you how it would look : 
+```{r}
+# show only duplicated entries
+species_counts_soilpH[duplicated(species_counts_soilpH$PlotID), ]
+
+# show all plots which are duplicates
+species_counts_soilpH[which(species_counts_soilpH$PlotID %in% species_counts_soilpH$PlotID[duplicated(species_counts_soilpH$PlotID)]), ]
+```
+Note that the commands in base R can get long quite fast, but do the same job.
+
+
+
+### *Optional* Chapter 20 R4DS
+
+You have now learned a solid method of merging tables. If you use table merging a lot, consider to read and work through Chapter 20, which introduces you to more advanced table merging. You could also consider this for your homework assigment.
+
 
 
 
@@ -78,6 +399,7 @@ what is missing here?
 maybe add PCA?
 maybe even simple stats? Or importance of defining research question?
 
+TODO identify R4DS chapter
 
 
 
@@ -85,7 +407,7 @@ maybe even simple stats? Or importance of defining research question?
 
 ::: {.callout-tip icon=false}
 
-### Checkpoint 3.3
+### Checkpoint TEST
 
 Please invent and write down 1-2 exercises including solutions about the past section (Data exploration in general, including correlation plots). You can slightly modify one of the above or the book exercises, or think about a new one.
 
