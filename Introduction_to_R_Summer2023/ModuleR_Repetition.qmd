@@ -24,6 +24,7 @@ if(!require(dplyr)) install.packages("tidyverse")
 library(tidyverse)
 ```
 
+
 # Repetition of Module 1
 
 This document is the collection of exercises you have submitted while solving Module 1.
@@ -192,5 +193,172 @@ If plotting does not work any more, sometimes it helps to re-start the graphics 
 dev.off()
 ```
 And trying to plot again.
+
+
+# Module 2
+
+
+# Module 3
+
+# Module 4
+
+# Outlook
+
+## writing R output
+
+After finishing an analysis or a plot, you certainly want to save some R output.
+
+For plots, you can save via the RStudio Graphical User Interface (GUI) or via code.
+
+### Saving plots via RStudio GUI
+
+(1) Create your plot (2) click on "Export" on the top of the graphic panel. Save as image or as pdf. Note that you can select the output size. For PDF, select e.g. A5 landscape or A4, or the "device size" (the size your plot has on the graphic panel). For images, select the desired type, e.g. SVG for a vectorised image (which is not pixeled), or png for a pixel image. The with and height can be given manually as numbers, or manually be changing the preview size.
+```{r}
+library(ggplot2)
+data(iris)
+plot_iris <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point()
+plot_iris
+```
+
+**Saving with code**
+
+### Saving plots using the `ggplot2` package
+
+Save **as png**
+```{r, eval = F}
+ggsave(plot_iris, 
+       filename = "plot_iris_sepallength_sepalwidth.png",
+       device = "png",
+       width = 20, height = 20, units = "cm",
+       dpi = 300)
+```
+Note that you can adjust the size of the image by setting width and height, e.g. in "cm". You can also chose inches "in" or pixels "px".
+
+Further, you can set the image resolution in dpi (dots per inch). Often, journals require 300 dpi. Note that an image of 300 dpi quality takes up more memory than a usual R plot. The image quality suitable for showing on a screen is 72 dpi.
+
+
+Save **as pdf**
+```{r, eval = F}
+ggsave(plot = plot_iris, 
+       filename = "plot_iris_sepallength_sepalwidth.pdf",
+       device = "pdf",
+       width = 14.8, height = 21, units = "cm")
+```
+By using the with and height in cm arguments, you can e.g. write to an A5 format by specifying 14.8 cm width and 21 cm height which is the size of A5. Look up other paper formats if needed.
+
+
+### Recommended : Saving plots using the `cowplot` package 
+
+The `cowplot` package is a very useful plotting package. It not only allows you to print your plots easily to files, but it also helps you arranging then on a panel.
+```{r}
+# install.packages("cowplot")
+library(cowplot)
+```
+
+Saving a plot as png, tiff or pdf
+```{r, eval = F}
+save_plot(plot = plot_iris,
+          base_width = 14.8, base_height = 14.8, units = "cm",
+          filename = "plot_iris_sepallength_sepalwidth.png",
+          dpi = 72)
+
+save_plot(plot = plot_iris,
+          base_width = 14.8, base_height = 14.8, units = "cm",
+          filename = "plot_iris_sepallength_sepalwidth.tiff",
+          dpi = 72)
+
+save_plot(plot = plot_iris,
+          base_width = 14.8, base_height = 21, units = "cm",
+          filename = "plot_iris_sepallength_sepalwidth.pdf")
+```
+
+#### various plots in one panel
+
+Not only for saving is the `cowplot` package handy, but also to combine and label multiple plots on one panel. [This tutorial](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html) gives an introduction, here you get a first impression:
+```{r}
+hist_sepallength <- ggplot(iris, aes(x = Sepal.Length)) +
+  geom_histogram() +
+  theme_half_open() # note that some people prefer a white background
+
+hist_sepalwidth <- ggplot(iris, aes(x = Sepal.Width)) +
+  geom_histogram() +
+  theme_half_open()
+
+lineplot_iris <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point() +
+  theme_half_open()
+```
+Gives you 3 individual plots.
+
+Combine them on one panel by : 
+```{r}
+plot_grid(hist_sepallength, hist_sepalwidth, lineplot_iris,
+          nrow = 2,
+          labels = c("A", "B", "C"))
+```
+
+You can even combine plots which are already combined : 
+```{r}
+iris_histograms <- plot_grid(hist_sepallength, hist_sepalwidth,
+          ncol = 2,
+          labels = c("A", "B", "C"))
+plot_grid(iris_histograms, lineplot_iris,
+          nrow = 2,
+          labels = c("", "C"))
+```
+As always, make sure you label the axes well with names and units (this is a bad example in this aspect).
+
+
+### Writing datasets with Rbase (recommended)
+
+```{r}
+data(iris)
+```
+
+If you want to extract the iris dataset to a file on your computer, the functions look a bit similar than the reading functions. 
+
+`write.csv` and `write.csv2` write csv files, either comma "," or semicolon ";" separated. These functions contains some unhandy default settings: We recommend specifying the `quote` argument to `FALSE`, to prevent quoting of all values in the output table. We also recommend setting the `row.names` argument to `FALSE`, to prevent printing a column of row numbers. Try out playing with those settings to find out exactly what they do. Remember to open the data files with your text editor to see exactly what happens. To just look at the values, you can open with Excel.
+```{r, eval = F}
+# comma-separated ","
+write.csv(x = iris, file = "iris.csv",
+          quote = F,
+          row.names = F)  
+
+# semicolon-separated ";"
+write.csv2(x = iris, file = "iris.csv",
+          quote = F,
+          row.names = F)  
+```
+
+
+You can use the more generic `write.table` function, and set the separator yourself :
+```{r, eval = F}
+write.table(x = iris, file = "iris.csv",
+            sep = ",",
+            quote = F,
+            row.names = F)
+```
+Using `sep = ","` writes a comma-separated file, using `sep = ";"` creates a semicolon-separated file. You can also use other separators, e.g. tab by setting `sep = "\t"`
+
+
+#### Writing intermediate data
+
+R has two internal data formats, which you can use : `.RData` and `.RDS`. Both of these file types are R-specific. While `.RDS` files are used to store single R objects, `.RData` files can save multiple objects. If you use those files a lot, you might want to read more about their differences. For now, I recommend using `.RDS` files because they ease a reproducible workflow (they can be assigned to a new names when reading in, see [D.4.1 Saving R Files in this book](https://rstudio-education.github.io/hopr/dataio.html)).
+
+You can save a file using `saveRDS()` and read a .RDS file using `readRDS`.
+```{r, eval = F}
+saveRDS(object = iris, file = "iris.RDS")
+rm(iris) # remove the iris object
+iris <- readRDS("iris.RDS")
+```
+Note that .RDS files are not readable with Excel or Text editors, but only with R. Why should you then bother to create .RDS files? You might consider 2 reasons (amongst others) 
+
+- (1) You can save the type of data in .RDS files, not just the values itself. If you save a tibble as .RDS, it is still a tibble when you read it in. If you save a matrix as .RDS file, it is still a matrix when you read it in.
+- (2) Probably your R script generates different types of output. Some things, you might want to save for your manuscript. Other output might just be intermediate output, which is not in table format, as e.g. the output of many statistical modelling functions. You might want to save this output as a backup, and here .RDS files are useful. In this way, you can also clearly distinguish between intermediat output (.RDS) and "final output" (.csv and .pdf/.png).
+
+
+
+
 
 
