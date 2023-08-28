@@ -30,6 +30,167 @@ library(tidyverse)
 This document is the collection of exercises you have submitted while solving Module 1.
 
 
+## Checkpoint 1.1
+
+::: {.panel-tabset}
+
+### Exercise
+
+Now create a new and much longer sequence of numbers from 111 to 222 by 0.02 steps. Save in a vector called c. 
+Now substract the previous vector a from c.
+What do you observe?
+Can you explain?
+
+```{r}
+a <- seq(from = 1, to = 5, by = 1)
+```
+
+
+### Solution
+
+```{r}
+c <- seq(from = 111, to = 222, by = 0.02)
+c - a
+```
+
+A warning message is shown, telling us that vector c is longer than vector a, and that vector c is recycled in order to do the calculation.
+
+Additionally : The console does not show all entries of the vector, because the vector is too long : 
+`[ reached getOption("max.print") -- omitted 4551 entries ]`
+```{r}
+getOption("max.print")
+```
+The option "max.print", i.e. the number of printed lines is set to 1000. This does not mean the vector can't be longer than 1000 elements long, but just that such a long vector is not shown completely in the console.
+
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+Create a vector `x` which is a sequence from 10 to 90 step size 5. Create another vector `y` from 100 to 900 with step size 50. Add those two vectors.
+
+
+### Solution
+
+```{r}
+x<- seq(from = 10, to = 90, by = 5)
+y<- seq(from = 100, to = 900, by = 50)
+x+y
+```
+
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a sequence between 40 and a 160 with iterations of 2 and save them as vector 1
+
+### Solution
+
+```{r}
+vec1=seq(from=40, to=160, by=2)
+```
+
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create two sequences of numbers. The first from 5 to 15 with iterations of 1. Save this sequence as variable a. The second sequence ranges from 0.5 to 1.5 with steps of 0.1. Save this as variable b. Then add the two variables
+
+### Solution
+
+```{r}
+a=seq(from=5, to=15, by=1)
+b=seq(from=0.5, to=1.5, by=0.1)
+a+b
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create two sequences of numbers : The first is a sequence of numbers from 1 to 5, with steps of 1. Save this sequence in a variable called a. The second sequence is a sequence of numbers from 0.1 to 0.3, with steps of 0.1. Save this sequence in a variable called b. Subtract a from b.
+
+
+### Solution
+
+```{r}
+a<-seq(from = 1, to = 5, by = 1)
+b<- seq(from = 0.1, to = 0.3, by = 0.1)
+sum_ab<- b-a # R adjusts the length of b according the sequence of a and substracts the values correspondingly from each sequence.
+sum_ab
+```
+
+:::
+
+
+
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a sequence `year` of years between 1992 and 2023 and a sequence `month` of months between 1 and 12.
+
+### Solution
+
+```{r}
+year <- seq(from = 1992,to = 2023,by = 1)
+month <- seq(from = 1,to = 12,by = 1)
+```
+
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create three sequences of numbers : The first is a sequence of numbers from 0 to 5, with steps of 1. Save this sequence in a variable called a. The second sequence is a sequence of numbers from 0 to 2.5, with steps of 0.5. Save this sequence in a variable called b. The third sequence is a sequence of numbers from 0 to 0.5, with steps of 0.1. Save this sequence in a variable called c.
+Add a the sequences a and b, then divide by sequence c.
+
+### Solution
+```{r}
+a <- seq(from = 0, to = 5, by = 1)
+b <- seq(from = 0, to = 2.5, by = 0.5)
+c <- seq(from = 0, to = 0.5, by = 0.1)
+(a+b)/c
+```
+Note that the first result is NaN which stands for "Not a number" and indicates division by zero. The first element of c is zero.
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create two vectors `a` and `b` : a is a sequence from 1 to 240 with sep size 1. `b` is the square of `a`. Plot the relation of those two vectors (1) using R base and (2) using ggplot2.
+
+### Solution
+
+```{r}
+a <- seq(from = 1, to = 240, by = 1)
+b <- a^2
+plot(a, b)
+ggplot(data.frame(a, b), aes(x = a, y = b)) + 
+  geom_line()
+```
+
+
+:::
+
 ::: {.panel-tabset}
 
 ### Exercise
@@ -133,28 +294,11 @@ c <- seq(from = 0, to = 0.5, by = 0.1)
 :::
 
 
-::: {.panel-tabset}
-
-### Exercise
-
-```{r}
-
-```
-
-### Solution
-
-```{r}
-
-```
-
-:::
-
-
-## Discussion insights
+### Discussion insights
 
 Insights discussed during the individual work or during the discussion sessions.
 
-### R recycling
+#### R recycling
 
 In module 1, a shorter vector was recycled to fit the length of a longer vector.
 ```{r}
@@ -175,24 +319,294 @@ a + b
 ```
 
 
-### overwriting vectors
+#### overwriting vectors
 
 By re-using a Vector's name, the former Vector is overwritten
 
-### Run R code without click
+#### Run R code without click
 
 Ctrl + Enter
 
 Run multiple lines at once : select the lines you want to run, Ctrl + Enter
 
 
-### Re-starting the graphics device
+#### Re-starting the graphics device
 
 If plotting does not work any more, sometimes it helps to re-start the graphics device, using : 
 ```{r}
 dev.off()
 ```
 And trying to plot again.
+
+
+## Checkpoint 1.2
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Name 3 keyboard shortcuts you feel come in very handy
+
+### Solution
+
+Move cursor between script and console „ctrl + 1“ and „ctrl + 2“
+Run the script „cmd + enter“
+Run the script without moving cursor to the end „shift + enter“
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a diagram of two vectors : `x` is a sequence of 0 to 500 with step size 50. `y` is a sequence of vectors from 0 to 5000 with step size 500.
+
+Create a diagram using (1) base R (2) the `qplot` function and (3) ggplot.
+
+### Solution
+
+```{r}
+library(ggplot2)
+
+x<- seq(from = 0, to = 500, by = 50)
+y<- seq(from = 0, to = 5000, by = 500)
+
+plot(x,y)
+
+# x y Diagramm verschönern
+qplot(x,y)
+
+# x y Daten im Diagramm verbinden
+ggplot(data.frame(x,y), aes(x,y)) + 
+  geom_line()
+```
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a new script and name it test_script4.R. Load the ggplot2 package.
+Create a vector starting at 5 and ending at 125 with step 5. Save this as v1. 
+Create a second vector named v2 that is the square root of vector1. 
+Create a line plot using ggplot2.
+
+### Solution
+```{r}
+library(ggplot2)
+v1 <- seq(from=5, to=125, by=5)
+v2=sqrt(v1)
+ggplot(x=v1, y=v2)
+ggplot(data.frame(v1,v2), aes(x=v1, y=v2)) + geom_line()
+```
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+.. (no exercise text provided, see solution for inspiration)
+
+### Solution
+```{r}
+library(tidyverse)
+c <- log10(2)+log10(4)+log10(6)+log10(8)+log10(10)
+d <- seq(1:5)*(3/4)
+plot(c)
+plot(d)
+length(c)
+length(d)
+```
+
+:::
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Explain what the `rm(list = ls())` call does.
+
+### Solution
+
+ls() inside rm(). The rm() stands for remove, and ls() stands for list. We combine them in the following way to make R 'clear' its brain.
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Creating a vector from 0 to 200 with stepsize 4, save it as a, create a second vector as the power of 3 plus 1 of vector a. Plot it.
+
+### Solution
+
+```{r}
+a <- seq(from = 0, to = 200, by = 4)
+b <- a^3 + 1
+plot(a, b)
+```
+
+:::
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Creating a vector of months and another one of temperatures. Plot it.
+
+### Solution : Vectors
+```{r}
+months <- seq(from = 1, to = 12, by = 1)
+temp <- seq(from = 29, to = 40, by = 1)
+```
+
+
+### Solution : Plots
+```{r}
+qplot(x = months, y = temp)
+ggplot(data.frame(months,temp), aes(x = months, y = temp)) + geom_line()
+```
+
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a vector from 0 to 100 with stepsize 1, and call it a. Create a second vector b, which is the logarithm of vector a.
+
+Create a plot of vector a and b, by using the package ggplot2.
+
+### Solution
+```{r}
+library(ggplot2)
+
+a <- seq(from=0, to=100, by=1)
+b <- log(a)
+
+qplot(x = a, y = b)
+ggplot(data.frame(a, b), aes(x = a, y = b)) + 
+  geom_line()
+```
+
+:::
+
+## Checkpoint 1.3
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+## Checkpoint 2.1
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+:::
+
+## Checkpoint 2.2
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+:::
+
+## Checkpoint 2.3
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+## Checkpoint 3.1
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+# Checkpoint 3.2
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+## Checkpoint 3.3
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+:::
+
+## Checkpoint 4.1
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+## Checkpoint 4.2
+
+::: {.panel-tabset}
+
+### Exercise
+
+```{r}
+
+```
+
+### Solution
+
+```{r}
+
+```
+
+:::
+
+
+
+
 
 
 # Module 2
