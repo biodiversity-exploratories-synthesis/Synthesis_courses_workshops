@@ -556,6 +556,7 @@ hist(x)
 :::
 
 
+# Repetition of Module 2
 
 ## Checkpoint 2.1
 
@@ -909,17 +910,14 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) +
 
 ### Exercise
 
-### Solution
+What about the difference between na and NA? Is there any? Try the same exercise as above, but replace any number with „na“.
 
-
-:::
-
-::: {.panel-tabset}
-
-### Exercise
+*Note* this question is abou the data reading exercises in Module 2, where you changed some values of a dataset to e.g. NA, and tested what happens in the read function.
 
 ### Solution
 
+Interesting. Excel reads it as the same. 
+But R makes a difference and doesn’t recognize na as actual missing values (like NA).
 
 :::
 
@@ -928,20 +926,169 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) +
 
 ### Exercise
 
+Import the dataset gardens.csv from the Beckerman book using read.csv and setting the working directory as the datasets folder
+
+### Solution
+```{r, eval = F}
+library(readr)
+
+getwd()
+setwd("C:/Users/Desktop/OneDrive - TUM/PhD/R_programming/Datasets/") # note this path is slightly changed to not show the name of the person writing the exercise
+gardens <- read.csv("gardens.csv")
+
+# Exercise: Import the dataset biomass.loss.csv with read_csv
+biomass_loss <- read_csv("biomass.loss.csv")
+```
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Import the dataset biomass.loss.csv from the Beckerman book with read_csv
+
 ### Solution
 
+```{r, eval = F}
+biomass_loss <- read_csv("biomass.loss.csv")
+```
+
+:::
+
+
+## Checkpoint 2.4 (Additional)
+
+::: {.panel-tabset}
+
+### Exercise
+
+Load the mtcars mtcars and tweak the following code to run smoothely
+
+```{r, eval = F}
+mtcars
+?mtcars
+libray(gglot)
+
+ggplot(mtcas, aes(x=(hp), y=mpg))+
+  geom_point()+geonm_smoooth("")
+```
+
+
+### Solution
+
+```{r}
+mtcars
+?mtcars
+library(ggplot2)
+
+ggplot(mtcars, aes(x=hp, y=mpg))+
+  geom_point()+geom_smooth()
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+saving a plot as a pdf : Create a plot (any plot you like) and save it as pdf.
+
+### Solution
+
+```{r, eval = F}
+my_scatter_plot <- ggplot(mpg, aes(x = cty, y = hwy)) + geom_point()
+
+ggsave(filename = "mpg-plot.pdf", plot = my_scatter_plot)
+```
+
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+edit the following code for it to work
+
+```{r, eval = F}
+mpg
+
+ggplot (aes (x = "displ" y = hwy) +
+
+geom_point (color = class)+
+
+geom_smooth ()
+```
+
+
+### Solution
+
+```{r}
+mpg %>%
+ggplot (aes (x = displ, y = hwy)) +
+
+geom_point (aes (color = class))+
+  geom_smooth()
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+tweak the following code to make it run correctly
+
+```{r, eval = F}
+library(palmerpenguins)
+library(ggthemes)
+ggplot(data = penguis, mapping = aes(x = body_mass_g, y = flipper_length_m)) + 
+  geom_point() +
+  geom_smooth(method = "lm")
+  scale_color_colorblind()
+
+```
+
+
+### Solution
+
+```{r}
+library(palmerpenguins)
+library(ggthemes)
+ggplot(data = penguins, mapping = aes(x = body_mass_g, y = flipper_length_mm)) + 
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_color_colorblind()
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Read the "environment.csv" file in the datasets folder (from the Beckerman book) and look at the data using glimpse(), and create a line graph of altitude.m and temperature.C
+
+### Solution
+
+```{r}
+environment <- read.csv("environment.csv")
+
+library(dplyr)
+glimpse(environment)
+
+library(ggplot2)
+ggplot(environment, aes(x = altitude.m, y = temperature.C)) +
+  geom_line()
+```
 
 :::
 
 
 
-
-
-
-
-
-
-
+# Repetition of Module 3
 
 ## Checkpoint 3.1
 
@@ -949,10 +1096,121 @@ ggplot(penguins, aes(x = species, y = body_mass_g)) +
 
 ### Exercise
 
+Now rearrange the table from back to front and then delete column a and filter for rows with 12 in c - all in one pipe.
+
+```{r}
+testdat1 <- tibble(a = c("A", "B", "B", "B", "C"), 
+                   b = c(5, 4, 4, 2, 1),
+                   c = c(12, 2, 3, 34, 12))
+```
+
+
+### Solution
+
+```{r}
+testdat1 |> 
+  arrange(c,b,a) |> 
+  select(c,b) |> 
+  filter(c == 12)
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
 ### Solution
 
 
 :::
+
+
+::: {.panel-tabset}
+
+### Exercise
+Load the data set cars and sort the cars by ascending fuel efficiency (mpg)
+### Solution
+
+```{r}
+mtcars
+
+?mtcars
+
+mtcars |>  arrange(mpg)
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a subset of the mtcars dataset that only contains data on mpg and wt. 
+
+### Solution
+```{r}
+mtcars |> count(mpg, wt)
+```
+
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+MEAN OF SPEEDS PER DAY. Flights that departed from June 1 to 3 from NYC to
+Atlanta with departure delay of less than 1 hour, taking off after 8 am. 
+Additional information: Speed in km/h instead of mph, each speed only
+mentioned once. 73 options found.
+No information on Carrier and Tail Number as well as air time through time_hour.
+
+### Solution
+```{r}
+library(nycflights13)
+flights |> 
+  mutate(
+    speed_kmh =distance / air_time * 60 *	1.61,
+    .before = carrier
+  ) |> 
+  filter(month == 6 & day %in% c(1:3)) |> 
+  filter(dest == "ATL") |> 
+  group_by(day) |> 
+  distinct(speed_kmh, .keep_all = T) |> 
+  filter(dep_delay < 60) |> 
+  arrange(dep_time < 0800) |> 
+  select(!carrier:tailnum & !air_time:time_hour)
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a data frame. The first column in is a vector with: Ga, Ka, Sa, Ka, Pa.The second column has: 5,7,9,3,6. The third column has: Za, Ba, Ma, Ba, Ta. Remove the duplicated values from the first and third columns. which one is kept. Why?
+
+### Solution
+
+```{r}
+data <- tibble (x=c("Ga","Ka","Sa","Ka","Pa"),
+                y=c(5,7,9,3,6), 
+                z=c("Za","Ba","Ma","Ba","Ta"))
+distinct (data, x,z,.keep_all=TRUE)
+```
+
+The first value of the duplicated values from x and z. Here corresponds to 7 in the second column. The row with the value 3 from second column is omitted
+
+:::
+
+
+
+
+
+
+
+
 
 # Checkpoint 3.2
 
