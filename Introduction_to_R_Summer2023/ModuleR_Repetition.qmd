@@ -1477,6 +1477,7 @@ ggplot(data=iris_sub)+
 :::
 
 
+# Repetition of Module 4
 
 ## Checkpoint 4.1
 
@@ -1484,8 +1485,32 @@ ggplot(data=iris_sub)+
 
 ### Exercise
 
-### Solution
+Load the dataset iris and set the rownames as a continues species name. 
 
+### Solution
+```{r}
+?iris
+iris
+
+iris <- tibble(Species = paste("species", seq(1, 150), sep = ""),
+                      Sepal.Length = sample(c(4:8), 150, replace = T),
+                      Sepal.Width = sample(c(2:5), 150, replace = T),
+                      Petal.Length = sample(c(1:7), 150, replace = T),
+                      Petal.Width = sample (c(0:3), 150, replace= T))
+rownames(iris) <- iris |> pull(Species)
+```
+Note that on newer versions, tibbles can not get row names.
+
+Instead, you can use data.frames : 
+```{r}
+iris <- data.frame(Species = paste("species", seq(1, 150), sep = ""),
+                      Sepal.Length = sample(c(4:8), 150, replace = T),
+                      Sepal.Width = sample(c(2:5), 150, replace = T),
+                      Petal.Length = sample(c(1:7), 150, replace = T),
+                      Petal.Width = sample (c(0:3), 150, replace= T))
+rownames(iris) <- iris |> pull(Species)
+head(iris)
+```
 
 :::
 
@@ -1495,29 +1520,80 @@ ggplot(data=iris_sub)+
 
 ### Exercise
 
-```{r}
+Check the data naming below taken from  a hypothetical folder. 
+How could you organise this more cleanly?
 
+dataNEW28Aug.xlxs
+dataCurrent29Aug.csv
+Scriptforcourse.R
+Outline.doc
+UPTODATEScriptforcourse29Aug.R
+
+### Solution
+
+data_2023_08_28.csv
+data_2023_08_29.csv
+course_script_NA.R
+course_script_2023_08_29.R
+Outline_2023_08_29.txt
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Navigating with relative filepaths. Your Working Directory is currently set in the first folder path. You want to load the data books from the second folder path. How do you go back to the folder with a relative filepath?
+
+1: /users/charliechaplin/R/R_project1/Charlies_scripts
+2: /users/charliechaplin/data/data_4_charlie
+
+### Solution
+
+`read.csv(../../../data/data_4_charlie/books.csv)`
+
+:::
+
+
+## Checkpoint 4.3
+
+::: {.panel-tabset}
+
+### Exercise
+
+Use the tibble below to create an additional column with the variable response. The values in these should be linear to the value in column X by factor three and the the cubic of the value in column Y. Show the response variable with a line graph using ggplot2
+
+```{r}
+togo <- tibble(explanatory = sample(c(1:500), 2000, replace = T),
+                   group = rep(c("X", "Y"), 1000))
 ```
+
 
 ### Solution
 
 ```{r}
+togo <- togo |> 
+  group_by(group) |> 
+  mutate(response = case_when(group == "X" ~ explanatory * 3,  group == "Y" ~ explanatory ^4))
 
+library(ggplot2)
+
+ggplot(togo, aes(x = explanatory, y = response, colour = group)) +
+  geom_line()
 ```
 
 :::
 
 
+::: {.panel-tabset}
 
+### Exercise
 
+### Solution
 
+:::
 
-# Module 2
-
-
-# Module 3
-
-# Module 4
 
 # Outlook
 
