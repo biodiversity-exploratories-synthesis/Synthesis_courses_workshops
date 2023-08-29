@@ -501,16 +501,61 @@ ggplot(data.frame(a, b), aes(x = a, y = b)) +
 
 :::
 
+
+
 ## Checkpoint 1.3
 
 ::: {.panel-tabset}
 
 ### Exercise
 
-### Solution
+Create a vector A which is a sequence from 0 to $2 * \pi$ with step size 0.01.
+Create a vector B which is the tangens of A.
 
+Plot A and B.
+
+
+### Solution
+```{r}
+A<-seq(from = 0, to = 2*pi, by = 0.01)
+B<- tan(A) #cos(A)
+plot(A,B)
+qplot(x = A, y = B) #quickplot
+ggplot(data.frame(A, B), aes(x = A, y = B)) + geom_line()
+```
 
 :::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Plot a cos graph. Create appropriate data to so so and plot it.
+
+### Solution
+
+```{r}
+x <- seq(from = -20, to = 20, by = 0.5)
+qplot(x = x, y = cos(x), geom = "line")
+```
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Plot a histogram with random numbers between 1 and 1000. Create appropriate data to so so and plot it.
+
+### Solution
+
+```{r}
+x <- sample(1:1000, 50)
+hist(x)
+```
+
+:::
+
+
 
 ## Checkpoint 2.1
 
