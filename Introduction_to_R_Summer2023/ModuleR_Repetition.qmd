@@ -769,9 +769,139 @@ ggplot(data = mtcars, aes(x = factor(cyl), y = mpg, fill= factor(cyl))) +
 
 ### Exercise
 
+Visualize the distribution of the categorial variable species of the `iris` dataset in a faceted plot. Show the relation of sepal length and width
+
 ### Solution
 
+```{r, eval = F}
+view(iris)
+?iris
+```
+
+```{r}
+ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point() +
+  facet_wrap(~Species) +
+  labs(title = "sepal shape in iris species",
+       x = "seapl length",
+       y = "sepal width")
+```
+
 :::
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a scatter plot showing the relationship between tree height and tree volume using the "trees" dataset and add a line. 
+
+### Solution
+
+```{r, eval = F}
+data("trees")
+
+?trees
+```
+
+```{r}
+ggplot(trees, aes(x = Height, y=Volume)) +
+geom_point(aes(color=Height)) + geom_smooth(color="black")
+```
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Work with the iris dataset. Visualise the relationship between the sepal width and petal length in addition to see if it is influenced by species
+
+### Solution
+
+```{r}
+iris %>%
+ggplot ( aes (x = Sepal.Width, y = Petal.Length, color = Species) )+
+geom_point()+
+geom_smooth()
+```
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a density plot of the bill length of each species of penguins, using colorblind safe. Save the image as jpeg
+
+### Solution
+
+```{r, eval = F}
+install.packages("palmerpenguins")
+install.packages("ggthemes")
+```
+
+
+```{r}
+library(tidyverse)
+library(palmerpenguins)
+library(ggthemes)
+data(penguins)
+glimpse(penguins)
+ggplot(penguins, aes(x = bill_length_mm, color = species)) +
+  geom_density(size = 1) +
+  labs(color = "Species") +
+  scale_color_colorblind()
+```
+
+```{r, eval = F}
+ggsave(filename = "Bill_length.jpeg")
+```
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a scatterplot of bill length vs body mass of the penguin dataset, differentiating species by color and island by shape. Add a trendline without confidence interval.
+
+### Solution
+
+```{r}
+ggplot(penguins, aes(x = body_mass_g, y = bill_length_mm)) +
+  geom_point(aes(color = species, shape = island)) +
+  geom_smooth(se = FALSE) +
+  labs(title = "Correlation of bill length and body mass of penguins", color = "Species", shape = "Island") +
+  scale_color_colorblind()
+```
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+From the penguin dataset, create a boxplot of species.
+
+### Solution
+
+```{r}
+ggplot(penguins, aes(x = species, y = body_mass_g)) +
+  geom_boxplot(fill = "green")
+```
+
+:::
+
+
+
+
+
+
+
+
+
 
 ## Checkpoint 2.3
 
@@ -783,6 +913,35 @@ ggplot(data = mtcars, aes(x = factor(cyl), y = mpg, fill= factor(cyl))) +
 
 
 :::
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+
+
+
+
+
+
+
+
+
 
 ## Checkpoint 3.1
 
