@@ -1218,10 +1218,86 @@ The first value of the duplicated values from x and z. Here corresponds to 7 in 
 
 ### Exercise
 
+Show only the murders and assaults within the US using the USArrests dataset. Use base R coding.
+
 ### Solution
 
+```{r}
+USArrests
+?USArrests
+
+USArrests[,c("Murder", "Assault")]
+```
 
 :::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Give a summary of the various columns in the USArrests dataset
+
+### Solution
+```{r}
+summary(USArrests)
+```
+
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Add 2 new columns called Sepal.Lengthx.Width and Petal.Lengthx.Width to the iris dataset. Sepal.Lengthx.Width is (rectangular/ square area) of the sepal, and Petal.Lengthx.Width is the (rectangular/ suqare) area of the petal.
+
+From the newly created dataset: 
+- select only new variables and species.
+- Select the subset of Data, where SLxW is greater than 23.
+
+### Solution
+
+```{r}
+# Looked it up on www.statology.org anyways
+# Adding 2 new columns called Sepal.Lengthx.Width and Petal.Lengthx.Width
+# (Sure not equal to blossom surface, but maybe a proxy)
+iris_s_p_lxw <- transform(iris, Sepal.Lengthx.Width = Sepal.Length * Sepal.Width,
+                          iris, Petal.Lengthx.Width = Petal.Length * Petal.Width
+                          )
+
+sp_lxw <- iris_s_p_lxw[ , c("Species", "Sepal.Lengthx.Width", "Petal.Lengthx.Width")]
+head(sp_lxw)
+
+subset(sp_lxw, Sepal.Lengthx.Width > 23)
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Read in the compensation dataset from the Beckerman book. Calculate the mean of root, grouped by grazing. I.e. calculate the mean of root for each grazing group.
+
+In a second step, calculate the sum of root for each grazing group.
+
+### Solution
+
+```{r}
+library(tidyverse)
+compensation <- read_csv("compensation.csv")
+glimpse(compensation)
+aggregate(compensation$Root,list(compensation$Grazing),FUN=mean)
+```
+This function is computing the mean of root and grouping by the grazing treatment. The first argument in the function is the object we to compute. and the list function lists the grouping we want to use. In this case, there are two categories in the Grazing treatment. The aggregate function compute the mean (indicated by the FUN argument).
+
+```{r}
+aggregate(compensation$Root,list(compensation$Grazing),FUN=sum)
+```
+Here the computation is changed from mean to sum.
+
+:::
+
 
 ## Checkpoint 3.3
 
@@ -1229,9 +1305,178 @@ The first value of the duplicated values from x and z. Here corresponds to 7 in 
 
 ### Exercise
 
+Load the USArrests dataset and use the spearman correlation coefficient to show the correlations between the different arrest reasons parameters
+
 ### Solution
 
+```{r}
+USArrests
+library(corrplot)
+a <- cor(USArrests, method = "spearman")
+corrplot(a, method="circle")
+```
+
 :::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a vector b ranging from 1 to 200 with 1.5 step size and create the three following vectors: 
+
+- b_3 which is a +3
+- b_square which is b to the power of 2/ squared
+- b_log 
+- b_complex  which is sin(b) * cos(4 * b)
+
+### Solution
+
+```{r}
+b <- seq(1, 200, 1.5)
+b_3 <- b+3
+b_square <- b^2
+b_log <- log(b)
+b_complex <- sin(b) * cos(4 * b)
+```
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Plot the relations of b and the above created 4 vectors in a plot with 4 panels. calculate pearson, spearman, and kendall for the four vectors.
+
+### Solution
+```{r}
+par(mfrow = c(2, 2))
+plot(b, b_3)
+plot(b, b_square)
+plot(b, b_log)
+plot(b, b_complex, type = "l")
+```
+
+Pearson
+```{r}
+cor(tibble(b, b_3, b_square, b_log, b_complex), method = "pearson") |>  round(2)
+```
+
+Spearman
+```{r}
+cor(tibble(b, b_3, b_square, b_log, b_complex), method = "spearman") |>  round(2)
+```
+
+Kendall
+```{r}
+cor(tibble(b, b_3, b_square, b_log, b_complex), method = "kendall") |>  round(2)
+```
+:::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Calculate the means of the variables from the iris data package by
+species and visualize with bar plots.
+
+### Solution
+```{r}
+install.packages("ggpubr")
+```
+
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(ggpubr)
+
+iris_sub <- iris %>%
+  group_by(Species) %>% 
+  summarise(SeL.mean=mean(Sepal.Length),SeW.mean=mean(Sepal.Width),
+            PeL.mean=mean(Petal.Length),PeW.mean=mean(Petal.Width))
+
+ggarrange(
+  ggplot(data=iris_sub)+
+    geom_bar(aes(x=Species,y=SeL.mean), stat="identity")+
+    theme_bw(),
+  ggplot(data=iris_sub)+
+    geom_bar(aes(x=Species,y=SeW.mean), stat="identity")+
+    theme_bw(),
+  ggplot(data=iris_sub)+
+    geom_bar(aes(x=Species,y=PeL.mean), stat="identity")+
+    theme_bw(),
+  ggplot(data=iris_sub)+
+    geom_bar(aes(x=Species,y=PeW.mean),
+             stat="identity")+
+    theme_bw()
+)
+```
+
+Note that the `ggpubr` creates "publication-ready" plots from ggplots. It is used to arrange the 4 plots on one panel.
+
+Another solution would be to plot individually, using : 
+```{r, eval = F}
+ggplot(data=iris_sub)+
+  geom_bar(aes(x=Species,y=SeL.mean), stat="identity")+
+  theme_bw()
+
+ggplot(data=iris_sub)+
+  geom_bar(aes(x=Species,y=SeW.mean), stat="identity")+
+  theme_bw()
+
+ggplot(data=iris_sub)+
+  geom_bar(aes(x=Species,y=PeL.mean), stat="identity")+
+  theme_bw()
+
+ggplot(data=iris_sub)+
+  geom_bar(aes(x=Species,y=PeW.mean),
+           stat="identity")+
+  theme_bw()
+```
+
+
+:::
+
+
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+### Solution
+
+
+:::
+
+
 
 ## Checkpoint 4.1
 
