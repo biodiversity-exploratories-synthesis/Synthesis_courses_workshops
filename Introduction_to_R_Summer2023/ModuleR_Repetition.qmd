@@ -563,9 +563,205 @@ hist(x)
 
 ### Exercise
 
+Choose any plot you like and start playing around. Change colours, points, titles, etc. Use the internet or any other help function you wish.
+
+Use the table `wdata` for this.
+```{r}
+set.seed(1234)
+wdata = data.frame(
+        gender = factor(rep(c("F", "M", "D"), each=200)),
+        weight = c(rnorm(200, 55), rnorm(200, 58), c(rnorm(100, 55), rnorm(100, 58))))
+head(wdata)
+```
+
+
 ### Solution
 
+Note that in order to run the below code, you need to install and load the `viridis` package : 
+
+```{r}
+# install.packages("viridis")
+library(viridis)
+```
+
+```{r}
+library(ggplot2)
+# Combine violin and boxplot. Change colour of Boxplot and make it smaler then violin plot. Choose a colour scheme.
+ggplot(data = wdata, aes(x = gender, y = weight, fill = gender)) + 
+  geom_violin(width = 1.4) +
+  geom_boxplot(width = 0.1, color="grey") +
+  scale_fill_viridis(discrete = TRUE) +
+  ggtitle("200 persons weight distribution")
+```
+
 :::
+
+
+::: {.panel-tabset}
+
+### Exercise
+
+Under Solution, you find a sequence of code to create a histogram. Follow this code and try to find out what the individual commands do.
+
+### Solution
+
+In order to run the below code, you need to install the below package.
+```{r, eval = F}
+install.packages("viridis")
+```
+
+```{r}
+#### Create Heatmap
+# Library
+library(ggplot2)
+
+# Dummy data
+# Library
+library(ggplot2)
+
+# Dummy data
+x <- LETTERS[1:26]
+y <- paste0("var", seq(1,26))
+data <- expand.grid(X=x, Y=y)
+data$Z <- runif(676, 0, 5)
+
+# Heatmap 
+ggplot(data, aes(X, Y, fill= Z)) + 
+  geom_tile()
+
+# change colour 
+library(viridis)
+ggplot(data, aes(X, Y, fill= Z)) + 
+  geom_tile() +
+  scale_fill_viridis(discrete=FALSE)
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+visualize the relation between transmission type and mpg (mtcars data)
+
+### Hint
+load the `mtcars` data : 
+```{r}
+data(mtcars)
+```
+
+
+### Solution
+```{r}
+ggplot(mtcars, aes (x = am, y = mpg))+
+  geom_boxplot() +
+  scale_x_discrete(labels = c("Automatic", "Manual"))+
+  labs (x = "Transmission Type", y = "Miles per Gallon") + theme_bw()
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+construct a basic ridgeline plot with the Orange data frame. The `Orange` dataset is provided with the `ggridges` package. Install the package, and load the `Orange` dataset after.
+
+### Hint
+
+```{r, eval = F}
+install.packages("ggridges")
+data(Orange)
+```
+
+
+### Solution
+
+```{r}
+# Libraries
+# install.packages("ggridges")
+library(ggridges)
+library(ggplot2)
+
+# Creating the ridgeline plot
+head(Orange)
+ggplot(Orange, aes(x = age, y = Tree, fill = circumference)) +
+  geom_density_ridges() +
+  theme_ridges() +
+  theme(legend.position = "none") +
+  labs(title = "Growth of orange trees") 
+```
+:::
+
+::: {.panel-tabset}
+
+### Exercise (Advanced)
+
+Note that for this exercise, you need to go to the Biodiversity Exploratories database BExIS and download a specific dataset.
+
+create a soil texture triangle from the dataset 14686 of the BE. 
+
+Creating  the texture classes triangle using ggtern
+
+### Solution
+
+```{r, eval = F}
+# install.packages("readxl")
+library(readxl)
+soil_texture <- read_excel("C:/Users/Downloads/Copy of 14686_10_data.xlsx", 
+                           sheet = "Data")
+head(soil_texture)
+
+
+# Creating subset from soil_texture
+data_points <- subset(soil_texture, Type == "G", select = c(EP_Plotid, Exploratory, Clay...12, Silt, Sand))
+head(data_points)
+
+# Changing column names
+colnames(data_points)[colnames(data_points) == "Clay...12"] <- "Clay"
+head(data_points)
+
+# Creating ternary plot
+library("ggtern")
+library("scales")
+ggtern(data=data_points, aes(x = Clay, y = Silt, z = Sand, color = Clay, shape = Exploratory)) +
+  scale_color_gradient(high = "red", low = "blue") +
+  labs(title = "Soil texture triangle") +
+  facet_grid(. ~ Exploratory) +
+  geom_point()
+```
+
+:::
+
+::: {.panel-tabset}
+
+### Exercise
+
+Create a boxplot of the "mpg" variable across the "cyl" variable using the dataset mtcars.
+
+### Solution
+
+```{r}
+# Load necessary library
+library(ggplot2)
+
+# Load mtcars dataset
+data(mtcars)
+
+# Create a boxplot
+ggplot(data = mtcars, aes(x = factor(cyl), y = mpg, fill= factor(cyl))) +
+  geom_boxplot() +
+  labs(title = "Boxplot of MPG by Number of Cylinders",
+       x = "Number of Cylinders",
+       y = "Miles per Gallon") 
+```
+
+
+:::
+
+
+
+
 
 ## Checkpoint 2.2
 
